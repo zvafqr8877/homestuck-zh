@@ -1,0 +1,14 @@
+{
+  "title": "Homestuck 繁體中文整合站",
+  "subtitle": "非官方、非營利的讀者翻譯整合專案",
+  "base_url": "/homestuck-zh",
+  "asset_base": "https://storage.homestuck.com/story/homestuck/media/",
+  "asset_fallback_base": "",
+  "official_url": "https://www.homestuck.com/{page:06d}",
+  "credits": [
+    {"name": "Homestuck 繁體中文翻譯（zhhomestuck）", "url": "https://zhhomestuck.github.io/", "note": "繁體中文譯文（至 A6I5）"},
+    {"name": "簡體中文翻譯站（linzhiyi622）", "url": "https://linzhiyi622.github.io/", "note": "簡體中文譯文來源（需取得站長同意）"},
+    {"name": "The Unofficial Homestuck Collection", "url": "https://uhca.carrd.co/", "note": "原文與素材參考"}
+  ],
+  "copyright": "Homestuck 的著作權屬於 Andrew Hussie。本站為讀者製作的非官方、非營利目的整理與翻譯，內容如有疑慮請聯絡管理員。"
+}
