@@ -54,7 +54,7 @@
 
 ## 還沒做的事
 
-- Flash 小遊戲（`manifest` 的 `type` 目前只支援 `image` 和 `video`），之後可以接 Ruffle。
+- Flash 目前用 `site.json` 的 `flash_mode` 控制：`iframe`（預設，嵌入官方頁面）、`ruffle`（自己播，需可跨站讀取的 SWF 來源）、`link`（只放連結）。
 - 全站搜尋、頁碼跳轉。
 - 校對協作流程（例如用 GitHub Issues 或 Pull Request 認領頁面）。
 
@@ -66,6 +66,6 @@
 
 ### 還沒驗證的事
 
-- Flash 從官方站載入，可能被跨站限制擋住，上線後要實測；被擋就把 SWF 放到自己的鏡像並改 `asset_base`。
+- 已實測：官方 SWF 只允許 `www.homestuck.com` 跨站讀取（CORS），所以改用 iframe 嵌入官方頁面；嵌入有效，但依賴官方站不改 X-Frame-Options。
 - 官方 `storage.homestuck.com` 之後若改版，網址可能失效。
 - 有 `-modified` 版 Flash 的頁面只驗證過 8801。

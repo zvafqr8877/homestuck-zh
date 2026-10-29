@@ -4,6 +4,7 @@
   "base_url": "/homestuck-zh",
   "asset_base": "https://storage.homestuck.com/story/homestuck/media/",
   "asset_fallback_base": "",
+  "flash_mode": "iframe",
   "official_url": "https://www.homestuck.com/{page:06d}",
   "credits": [
     {"name": "Homestuck 繁體中文翻譯（zhhomestuck）", "url": "https://zhhomestuck.github.io/", "note": "繁體中文譯文（至 A6I5）"},

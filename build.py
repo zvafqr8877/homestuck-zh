@@ -43,6 +43,8 @@ h1{font-size:1.4rem;margin:.2em 0 .4em}
 .badge.done{background:var(--c-done)}
 .assets img,.assets video{max-width:100%;height:auto;display:block;margin:0 auto 1em}
 .flash{margin:0 auto 1em;max-width:650px}
+.official-frame{margin:0 auto 1em;max-width:760px}
+.official-frame iframe{width:100%;height:660px;border:1px solid var(--line);background:#fff}
 .yt{aspect-ratio:16/9;max-width:720px;margin:0 auto 1em}
 .yt iframe{width:100%;height:100%;border:0}
 .noasset{color:var(--muted);font-size:.85rem;text-align:center;margin-bottom:1em}
@@ -143,7 +145,7 @@ def layout(site, title, inner, base):
 """
 
 
-def asset_html(page, manifest, asset_base, fallback_base=""):
+def asset_html(page, manifest, asset_base, fallback_base="", flash_mode="iframe", official_page_url=""):
     items = manifest.get(str(page), [])
     if not items:
         return '<p class="noasset">（本頁的圖片／影片尚未補上）</p>'
@@ -169,9 +171,22 @@ def asset_html(page, manifest, asset_base, fallback_base=""):
         elif kind == "video":
             parts.append(f'<video src="{url}"{onerr}controls preload="none"></video>')
         elif kind == "flash":
-            # 用開源的 Ruffle 播放 SWF；SWF 若來自官方站，可能因跨站限制無法載入，
-            # 這時把 asset_base 換成自己的鏡像
-            parts.append(f'<div class="flash" data-swf="{url}"></div>')
+            # flash_mode（site.json）：
+            #   iframe：直接嵌入官方頁面，由官方站播放（官方的 SWF 只允許 www.homestuck.com 讀取，
+            #           實測 2026-10-29 自己用 Ruffle 讀會被 CORS 擋住）
+            #   ruffle：用 Ruffle 播放 asset_base 底下的 SWF（asset_base 要能讓你的網站讀取）
+            #   link ：只顯示「請到官方頁面觀看」
+            if flash_mode == "ruffle":
+                parts.append(f'<div class="flash" data-swf="{url}"></div>')
+            elif flash_mode == "iframe" and official_page_url:
+                if not any('class="official-frame"' in p for p in parts):
+                    parts.append(
+                        f'<div class="official-frame"><iframe src="{esc(official_page_url)}" '
+                        'title="官方頁面" loading="lazy"></iframe>'
+                        '<p class="noasset">這頁是 Flash 動畫，畫面直接來自官方站。</p></div>'
+                    )
+            else:
+                parts.append('<p class="noasset">這頁是 Flash 動畫，請到上方「官方原文」連結觀看。</p>')
         else:
             parts.append(f'<p class="noasset">（尚未支援的素材類型：{esc(kind)}）</p>')
     return '<div class="assets">' + "\n".join(parts) + "</div>"
@@ -189,6 +204,7 @@ def build():
     if fallback_base and not fallback_base.endswith("/"):
         fallback_base += "/"
     official_tpl = site.get("official_url", "")
+    flash_mode = site.get("flash_mode", "iframe")
 
     pages = sorted(
         (parse_page(p) for p in CONTENT.glob("*.md")), key=lambda d: d["page"]
@@ -234,7 +250,8 @@ def build():
         elif official_tpl and pg.get("official", "").isdigit():
             links.append(("官方原文", official_tpl.format(page=int(pg["official"]))))
         official = "".join(f' · <a href="{esc(u)}">{esc(t)}</a>' for t, u in links)
-        assets = asset_html(n, manifest, asset_base, fallback_base)
+        official_link = next((u for t, u in links if t == "官方原文"), "")
+        assets = asset_html(n, manifest, asset_base, fallback_base, flash_mode, official_link)
         ruffle = RUFFLE_JS if 'class="flash"' in assets else ""
         inner = f"""<h1>{esc(pg["title"])}</h1>
 <div class="meta">第 {n} 頁 ·
