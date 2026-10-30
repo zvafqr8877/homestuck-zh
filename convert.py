@@ -5,7 +5,8 @@
     pip install opencc-python-reimplemented
     python convert.py src_sc content
 
-src_sc/ 裡放「已取得授權」的簡體純文字檔，檔名是頁碼，例如 6023.txt。
+src_sc/ 裡放簡體純文字檔，檔名是「簡中站頁碼」，例如 6059.txt（可用 fetch_sc.py 抓）。
+輸出的 content/ 檔名一律是官方頁碼（簡中 + 1900），例如 6059.txt → 007959.md。
 第一行如果以「# 」開頭，會當作標題。其餘每行是一行內文。
 
 安全設計：
@@ -17,6 +18,7 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent
+SC_OFFSET = 1900  # 官方頁碼 = 簡中頁碼 + 1900
 
 
 def make_converter():
@@ -68,6 +70,7 @@ def main():
         except ValueError:
             print(f"略過（檔名不是頁碼）：{src.name}")
             continue
+        page += SC_OFFSET  # 簡中頁碼 → 官方頁碼（本站一律用官方頁碼）
         out = out_dir / f"{page:06d}.md"
         status = existing_status(out)
         if status in ("proofreading", "done"):

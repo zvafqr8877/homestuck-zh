@@ -206,10 +206,13 @@ def build():
     official_tpl = site.get("official_url", "")
     flash_mode = site.get("flash_mode", "iframe")
 
-    pages = sorted(
+    all_pages = sorted(
         (parse_page(p) for p in CONTENT.glob("*.md")), key=lambda d: d["page"]
     )
-    nums = [p["page"] for p in pages]
+    # 隱藏頁（front matter 寫 hidden: true）：有網址，但不在上一頁／下一頁的路徑上，也不算進度
+    pages = [p for p in all_pages if p.get("hidden", "").lower() != "true"]
+    hidden_pages = [p for p in all_pages if p.get("hidden", "").lower() == "true"]
+    nums = [p["page"] for p in all_pages]
     if len(nums) != len(set(nums)):
         dup = [n for n, c in Counter(nums).items() if c > 1]
         raise SystemExit(f"頁碼重複：{dup}")
@@ -225,15 +228,17 @@ def build():
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
 
     # 各頁
-    for i, pg in enumerate(pages):
+    for pg in all_pages:
         n = pg["page"]
+        before = [p for p in pages if p["page"] < n]
+        after = [p for p in pages if p["page"] > n]
         prev_a = (
-            f'<a href="{base}/p/{pages[i-1]["page"]:06d}.html">← 上一頁</a>'
-            if i > 0 else "<span></span>"
+            f'<a href="{base}/p/{before[-1]["page"]:06d}.html">← 上一頁</a>'
+            if before else "<span></span>"
         )
         next_a = (
-            f'<a href="{base}/p/{pages[i+1]["page"]:06d}.html">下一頁 →</a>'
-            if i < len(pages) - 1 else "<span></span>"
+            f'<a href="{base}/p/{after[0]["page"]:06d}.html">下一頁 →</a>'
+            if after else "<span></span>"
         )
         text = "\n".join(
             f"<p>{esc(line)}</p>" for line in pg["body"].splitlines() if line.strip()
@@ -309,7 +314,7 @@ def build():
         layout(site, site["title"], inner, base), encoding="utf-8"
     )
 
-    print(f"完成：{len(pages)} 頁 → {OUT}")
+    print(f"完成：{len(pages)} 頁（另有隱藏頁 {len(hidden_pages)}）→ {OUT}")
 
 
 if __name__ == "__main__":

@@ -23,15 +23,20 @@
 
 ## 流程
 
-1. 先取得簡體站與繁體站管理員的同意（轉載、署名方式）。
+1. 簡體站站長已同意（條件：比照繁中站，不得營利，只能從網路抓取）。署名請保留 `site.json` 的致謝名單。
 2. 在你自己的電腦上：
 
    ```
    pip install opencc-python-reimplemented
-   python convert.py src_sc content
+   # 方法 A（建議）：git clone 簡中站的 repo，再 python fetch_sc.py --from-dir <repo資料夾>
+   # 方法 B：python fetch_sc.py，從網站抓（約 40 分鐘，可中斷續跑）
+   python convert.py src_sc content  # 簡轉繁，檔名自動 +1900 變官方頁碼
    python build.py
    python check_assets.py
    ```
+
+   注意：簡中站只翻譯「對話記錄」（Show Dialoglog）和少數內文頁；圖片裡的英文沒有翻譯。
+   沒有任何中文的頁面，轉出來的 `.md` 只有標題，圖片照常顯示。
 
 3. 用瀏覽器開 `docs/index.html` 預覽。
 4. 校對完的頁面，把 front matter 的 `status` 改成 `proofreading` 或 `done`。
@@ -58,9 +63,9 @@
 - 全站搜尋、頁碼跳轉。
 - 校對協作流程（例如用 GitHub Issues 或 Pull Request 認領頁面）。
 
-## 目前已備好的資料（官方 7959–10030，簡中 6059–8130，共 2069 頁）
+## 目前已備好的資料（官方 7959–10030，簡中 6059–8130，共 2069 頁（含隱藏頁 8270））
 
-- `sources.csv`：由 `gen_mapping.py` 產生的三方頁碼與網址對照（官方 = 簡中 + 1900；跳號 4299、4938、4988、9802–9804；別名頁 8801=`/GAMEOVER`、9305=`/shes8ack`）。簡中網址格式只驗證過 6065、6066 兩頁。
+- `sources.csv`：由 `gen_mapping.py` 產生的三方頁碼與網址對照（官方 = 簡中 + 1900；跳號 4299、4938、4988、9802–9804；官方隱藏頁 8270 另列（網址保留，但上一頁/下一頁會跳過它，簡中沒有譯文，`content/008270.md` 的 front matter 有 `hidden: true`）；別名頁 8801=`/GAMEOVER`、9305=`/shes8ack`）。簡中網址格式已用 6023–8130 多個頁碼實測可開；共 2069 頁（含隱藏頁 8270）。
 - `manifest.json`：由 `gen_manifest.py` 從 UHC 素材包的 `mspa.json`（只取素材路徑）轉成官方新網址。2026-10-29 已用瀏覽器對官方站逐檔 HEAD 檢查，全部存在。Flash 用 Ruffle 播放，YouTube 頁（9987、10027、10030）用內嵌。
 - `content/` 目前只有 6 個測試頁（7959、7966、8004、8143、8801、9987），內容是假文字，用來測試圖片、Flash、YouTube 能不能載入。正式使用前請刪掉。
 

@@ -23,6 +23,7 @@ SC_OFFSET = 1900
 SC_RANGE = (6023, 8130)          # 簡中站實際收錄的頁碼（8130 對應官方最後一頁 10030）
 TC_LAST = 7958                   # 繁中站最後翻譯到的官方頁碼
 MISSING = [4299, 4938, 4988, 9802, 9803, 9804]
+HIDDEN = [8270]  # 官方隱藏頁：網址存在，但 8269 的下一頁直接跳 8271；簡中站沒有（6370），沒有譯文
 ALIASES = {8801: "GAMEOVER", 9305: "shes8ack"}
 SC_URL = "https://linzhiyi622.github.io/homestuckjz.GitHub.io/{n}.html"  # 只驗證過 6065、6066
 TC_URL = "https://zhhomestuck.github.io/p/{n:06d}"
@@ -37,7 +38,7 @@ def rows(first, last):
         if n in MISSING:
             continue
         sc = n - SC_OFFSET
-        in_sc = SC_RANGE[0] <= sc <= SC_RANGE[1]
+        in_sc = SC_RANGE[0] <= sc <= SC_RANGE[1] and n not in HIDDEN
         yield {
             "official": n,
             "official_url": f"https://www.homestuck.com/{ALIASES.get(n, f'{n:06d}')}",
