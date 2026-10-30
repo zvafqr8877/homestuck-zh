@@ -34,14 +34,22 @@ main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:20px 12px 8px
 article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 0}
 .story h1{font:700 28px/1.25 "Courier New",CourierPrime,courier,monospace;text-align:center;margin:0 16px 12px}
 .story .assets{margin:0}
+.story .assets>*+*{margin-top:32px}
 .story .assets img,.story .assets video{width:650px;max-width:100%;height:auto;display:block;margin:0 auto}
 .flash{margin:0 auto;max-width:650px}
-.official-frame{margin:0 auto}
-.official-frame iframe{width:100%;height:700px;border:0;background:#fff;display:block}
-.hscroll{overflow-x:auto;margin:0}
-.story .hscroll img{width:auto;max-width:none;margin:0}
-.hint{color:#555;font-size:12px;text-align:center;margin:6px 16px}
+.flashwin{position:relative;width:100%;overflow:hidden;margin:0 auto;background:#fff}
+.flashwin iframe{position:absolute;left:0;top:0;width:1000px;height:1600px;border:0;transform-origin:0 0}
+.hscroll{overflow-x:scroll;margin:0 0 16px}
+.story .hscroll .assets img{width:auto;max-width:none;margin:0}
+.story .hscroll>img.hs-arrow{width:82px;height:32px;margin:0}
+body.wide main.wrap{max-width:none;margin:0 12px}
+body.wide article.story{max-width:none}
 .pw{margin:16px 28px 0;text-align:center;font:14px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
+.pw input{font:14px Verdana;padding:2px 6px;width:200px}
+.hint2{color:#a00;min-height:1.5em;margin:4px 0}
+.hintbox{margin:16px 28px 0;border:1px dashed #888;padding:6px 20px 10px;text-align:center}
+.hintbox button{font:12px/16px Geneva,"Lucida Grande",sans-serif;padding:2px 8px;cursor:pointer}
+.hintbox p{margin:8px 0 0;font:700 14px/1.6 "Courier New",monospace}
 .pw .box{display:inline-block;margin:6px 0;padding:6px 14px;border:1px dashed #888}
 .assets.ff{position:relative}
 .assets.ff canvas{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
@@ -55,6 +63,32 @@ body.collide{background:#000}
 .collide .nextlink,.collide .story-foot,.collide .plain{color:#fff}
 .collide .nextlink span{color:#fff}
 .collide .nextlink a,.collide .story-foot a{color:#8cf}
+body.act7{background:#fff}
+.act7 main.wrap{max-width:1184px;background:#e2e2e2;padding:5px}
+.act7 article.story{max-width:1174px;background:#dbdbdb;padding:0 0 18px}
+.act7 .story h1{position:absolute;left:-9999px}
+.act7 .banner{display:block;width:100%;height:auto}
+.act7 .yt{max-width:1174px;margin:0 auto;aspect-ratio:1174/660}
+body.endcredits{background:#000}
+.endcredits header.site{background:#000}
+.endcredits main.wrap{max-width:950px;background:#262626;padding:0}
+.endcredits article.story{max-width:950px;background:#262626;color:#fff;padding:0 0 18px}
+.endcredits .story h1{position:absolute;left:-9999px}
+.endcredits .yt{max-width:950px;margin:0 auto;aspect-ratio:950/650}
+.endcredits .nextlink,.endcredits .story-foot,.endcredits .plain{color:#fff}
+.endcredits .nextlink span{color:#fff}
+.endcredits .nextlink a,.endcredits .story-foot a{color:#8cf}
+body.a6a6{background:#042300}
+.a6a6 header.site{background:#042300}
+.a6a6 header.site a,.a6a6 header.site a.name{color:#2ed73a;text-decoration:underline}
+.a6a6 header.site img.tooth{vertical-align:middle;height:21px;margin:0 6px}
+.a6a6 main.wrap{background:#168500}
+.a6a6 article.story{background:#073c00;color:#2ed73a}
+.a6a6 .story h1{color:#2ed73a}
+.a6a6 .story a,.a6a6 .nextlink span{color:#2ed73a}
+.a6a6 .story .dialog{border-color:#2ed73a}
+.a6a6 .page-info{color:#cfc}
+.a6a6 .page-info a{color:#cfc}
 .yt{aspect-ratio:16/9;width:100%}
 .yt iframe{width:100%;height:100%;border:0;display:block}
 .noasset{color:#555;font-size:12px;text-align:center;margin:8px 16px}
@@ -146,11 +180,12 @@ def esc(s):
     return html.escape(s, quote=True)
 
 
-def layout(site, title, inner, base, raw=False, body_class=""):
+def layout(site, title, inner, base, raw=False, body_class="", sep_img=""):
     credits = "".join(
         f'<li><a href="{esc(c["url"])}">{esc(c["name"])}</a>：{esc(c.get("note", ""))}</li>'
         for c in site.get("credits", [])
     )
+    sep = f'<img class="tooth" src="{esc(sep_img)}" alt="|">' if (sep_img and "a6a6" in body_class) else "|"
     body = inner if raw else f'<article class="story pagebox">{inner}</article>'
     return f"""<!doctype html>
 <html lang="zh-Hant">
@@ -162,7 +197,7 @@ def layout(site, title, inner, base, raw=False, body_class=""):
 </head>
 <body class="{body_class}">
 <header class="site">
-<a class="name" href="{base}/">{esc(site["title"])}</a> |
+<a class="name" href="{base}/">{esc(site["title"])}</a> {sep}
 <a href="{base}/progress.html">翻譯進度</a>
 </header>
 <main class="wrap">
@@ -178,6 +213,17 @@ def layout(site, title, inner, base, raw=False, body_class=""):
 
 
 SPEAKER_RE = re.compile(r"^\s*([^：:]{1,40}?)\s*[：:]")
+FLASHWIN_JS = """<script>
+(function(){
+  function fit(){
+    document.querySelectorAll(".flashwin").forEach(function(w){
+      var f=w.querySelector("iframe"), s=w.clientWidth/(+w.dataset.w);
+      f.style.transform="scale("+s+") translate(-"+w.dataset.left+"px,-"+w.dataset.top+"px)";
+    });
+  }
+  fit(); window.addEventListener("resize",fit);
+})();
+</script>"""
 FIREFLY_JS = """<script>
 (function(){
   var box=document.querySelector(".assets.ff"); if(!box) return;
@@ -231,7 +277,7 @@ def body_html(body, colors):
     )
 
 
-def asset_html(page, manifest, asset_base, fallback_base="", flash_mode="iframe", official_page_url=""):
+def asset_html(page, manifest, asset_base, fallback_base="", flash_mode="iframe", official_page_url="", flash_box=None):
     items = manifest.get(str(page), [])
     if not items:
         return '<p class="noasset">（本頁的圖片／影片尚未補上）</p>'
@@ -265,11 +311,16 @@ def asset_html(page, manifest, asset_base, fallback_base="", flash_mode="iframe"
             if flash_mode == "ruffle":
                 parts.append(f'<div class="flash" data-swf="{url}"></div>')
             elif flash_mode == "iframe" and official_page_url:
-                if not any('class="official-frame"' in p for p in parts):
+                # 只露出官方頁面中間的 Flash 區塊（650x450），不顯示官方的導覽列和標題，也沒有捲軸。
+                # 做法：iframe 固定 1000px 寬（官方版面在這個寬度下，內容框左邊距是 175px），
+                # 再往左上平移到 Flash 的位置；flash_top 依標題佔幾行（每行 36px）算出。
+                if not any('class="flashwin"' in p for p in parts):
+                    left, top, fw, fh = flash_box or (175, 94, 650, 450)
                     parts.append(
-                        f'<div class="official-frame"><iframe src="{esc(official_page_url)}" '
-                        'title="官方頁面" loading="lazy"></iframe>'
-                        '<p class="noasset">這頁是 Flash 動畫，畫面直接來自官方站。</p></div>'
+                        f'<div class="flashwin" data-left="{left}" data-top="{top}" data-w="{fw}" '
+                        f'style="max-width:{fw}px;aspect-ratio:{fw}/{fh}">'
+                        f'<iframe src="{esc(official_page_url)}" title="官方頁面的動畫" scrolling="no" '
+                        'loading="lazy" allow="autoplay"></iframe></div>'
                     )
             else:
                 parts.append('<p class="noasset">這頁是 Flash 動畫，請到上方「官方原文」連結觀看。</p>')
@@ -283,6 +334,9 @@ def build():
     manifest = load_json(ROOT / "manifest.json", {})
     colors = load_json(ROOT / "speaker_colors.json", {})
     flags = load_json(ROOT / "flags.json", {})
+    flash_layout = load_json(ROOT / "flash_layout.json", {})
+    navg = load_json(ROOT / "nav.json", {})
+    pwhash = load_json(ROOT / "passwords.json", {})
     sources = load_sources(ROOT / "sources.csv")
     base =site.get("base_url", "").rstrip("/")
     asset_base = site.get("asset_base", "")
@@ -291,6 +345,7 @@ def build():
     fallback_base = site.get("asset_fallback_base", "")
     if fallback_base and not fallback_base.endswith("/"):
         fallback_base += "/"
+    tooth = asset_base.rsplit("media/", 1)[0] + "assets/a6a6_tooth2.gif" if "media/" in asset_base else ""
     official_tpl = site.get("official_url", "")
     flash_mode = site.get("flash_mode", "iframe")
 
@@ -300,6 +355,7 @@ def build():
     # 隱藏頁（front matter 寫 hidden: true）：有網址，但不在上一頁／下一頁的路徑上，也不算進度
     pages = [p for p in all_pages if p.get("hidden", "").lower() != "true"]
     hidden_pages = [p for p in all_pages if p.get("hidden", "").lower() == "true"]
+    by_num = {p["page"]: p for p in all_pages}
     nums = [p["page"] for p in all_pages]
     if len(nums) != len(set(nums)):
         dup = [n for n, c in Counter(nums).items() if c > 1]
@@ -320,14 +376,28 @@ def build():
         n = pg["page"]
         before = [p for p in pages if p["page"] < n]
         after = [p for p in pages if p["page"] > n]
-        next_html = (
-            f'<div class="nextlink"><span>&gt;</span> <a href="{base}/p/{after[0]["page"]:06d}.html">'
-            f'{esc(after[0]["title"])}</a></div>'
-            if after else ""
-        )
+        # 上一頁／下一頁：優先照官方的連結關係（nav.json，來自 UHC 資料，只有頁碼），
+        # 沒有資料或是隱藏頁才退回用頁碼前後頁
+        g = None if "hidden" in pg and pg["hidden"].lower() == "true" else navg.get(str(n))
+
+        def tlink(t, label=None):
+            if t in by_num:
+                return f'{base}/p/{t:06d}.html', label or by_num[t]["title"]
+            if t < 7959:
+                return f"https://zhhomestuck.github.io/p/{t:06d}", label or f"繁中站第 {t} 頁 ↗"
+            return None, None
+
+        targets = g["n"] if g else ([after[0]["page"]] if after else [])
+        nl = []
+        for t in targets:
+            u, lab = tlink(t)
+            if u:
+                nl.append(f'<div class="nextlink"><span>&gt;</span> <a href="{u}">{esc(lab)}</a></div>')
+        next_html = "".join(nl)
+        pv = g["p"] if g and g.get("p") else (before[-1]["page"] if before else None)
+        pu, _ = tlink(pv) if pv else (None, None)
         foot = (
-            (f'<a href="{base}/p/{before[-1]["page"]:06d}.html">← 上一頁</a>' if before
-             else '<span class="gone">← 上一頁</span>')
+            (f'<a href="{pu}">← 上一頁</a>' if pu else '<span class="gone">← 上一頁</span>')
             + f'<a href="{base}/">回首頁</a>'
         )
         text = body_html(pg["body"], colors)
@@ -344,30 +414,82 @@ def build():
             links.append(("官方原文", official_tpl.format(page=int(pg["official"]))))
         official = "".join(f' · <a href="{esc(u)}">{esc(t)}</a>' for t, u in links)
         official_link = next((u for t, u in links if t == "官方原文"), "")
-        assets = asset_html(n, manifest, asset_base, fallback_base, flash_mode, official_link)
+        # Flash 在官方頁面裡的位置和大小（flash_layout.json，用 measure_flash.js 在官方站量出來的；
+        # 沒量到的頁面用 650x450、標題一行的預設值）
+        fb = flash_layout.get(str(n))
+        assets = asset_html(n, manifest, asset_base, fallback_base, flash_mode, official_link, fb)
         ruffle = RUFFLE_JS if 'class="flash"' in assets else ""
-        js = DIALOG_JS if 'class="dialog"' in text else ""
         pflags = flags.get(str(n), [])
+        if "FIREFLY" in pflags:
+            text = ""  # 螢火蟲頁只留圖／動畫和下一頁連結，不放文字
+        js = DIALOG_JS if 'class="dialog"' in text else ""
+        if 'class="flashwin"' in assets:
+            js += FLASHWIN_JS
         body_class = ""
         extra = ""
         if "HSCROLL" in pflags:
             # 橫向捲動頁：圖片比版面寬，放在可左右捲動的容器裡
-            assets = f'<div class="hscroll">{assets}</div><p class="hint">← 這頁的圖片很寬，請用左右捲動查看 →</p>'
+            # 官方：整個內容框拉到跟版面一樣寬，圖片在可橫向捲動的容器裡，圖下方有一個 ==> 小箭頭
+            arrow = esc(asset_base + "images/inline-text/hscrollarrow.gif")
+            assets = (f'<div class="hscroll">{assets}'
+                      f'<img class="hs-arrow" src="{arrow}" alt="==&gt;"></div>')
+            body_class = "wide"
+        if fb and fb[2] > 650 and 'class="flashwin"' in assets:
+            body_class = "wide"  # 官方這幾頁的動畫比內容框寬（950px），整個內容框跟著拉寬
         if "FIREFLY" in pflags:
-            assets = assets.replace('<div class="assets">', '<div class="assets ff">', 1)
-            js += FIREFLY_JS
+            if 'class="flashwin"' not in assets:  # Flash 頁的螢火蟲由官方動畫自己畫
+                assets = assets.replace('<div class="assets">', '<div class="assets ff">', 1)
+                js += FIREFLY_JS
+        if "ACT7" in pflags:
+            banner = esc(asset_base + "images/banners/act7_header.gif")
+            assets = f'<img class="banner" src="{banner}" alt="ACT 7">' + assets
+            body_class = "act7"
+        if "ENDCREDITS" in pflags:
+            body_class = "endcredits"
+            # 官方最後一頁的「==>」連回第一頁；我們的第一頁在繁中站
+            next_html += ('<div class="nextlink"><span>&gt;</span> '
+                          '<a href="https://zhhomestuck.github.io/p/001901">==&gt;</a></div>')
         if "COLLIDE" in pflags:
             banner = esc(asset_base + "images/banners/collide_header.gif")
             assets = f'<img class="banner" src="{banner}" alt="ACT 6 ACT 6 ACT 6">' + assets
             body_class = "collide"
         if "TZPASSWORD" in pflags:
-            # 密碼頁：官方要輸入密碼才能繼續；密碼不在我們手上，輸入請到官方頁面
-            back = (f'<a href="{base}/p/{before[-1]["page"]:06d}.html">← 回上一頁</a>' if before else "")
-            extra = (
-                '<div class="pw"><p>請輸入密碼才能繼續。</p>'
-                f'<p class="box"><a href="{esc(official_link)}">到官方頁面輸入密碼</a></p>'
-                f"<p>{back}</p></div>"
+            # 密碼頁：輸入正確密碼 → 下一頁；錯誤 → 顯示訊息；「回上一頁」→ 上一頁。
+            # passwords.json 只存密碼的 SHA-256（大寫、去空白後），用 add_password.py 新增；
+            # 還沒有密碼的頁面，改成連到官方頁面輸入。
+            back = f'<a href="{pu}">← 或是回上一頁</a>' if pu else ""
+            # 官方的「PASSWORD HINT」：按下去只會顯示同一句話（每個密碼頁都一樣）
+            hintbox = (
+                '<div class="hintbox"><button type="button" id="hintbtn">密碼提示</button>'
+                '<p id="hinttext" hidden>如果你還不知道密碼，就代表你還不該知道，笨蛋！回去！！！</p></div>'
+                '<script>document.getElementById("hintbtn").addEventListener("click",function(){'
+                'var t=document.getElementById("hinttext");t.hidden=!t.hidden;});</script>'
             )
+            h = pwhash.get(str(n))
+            nu = (tlink(targets[0])[0] if targets else None)
+            if h and nu:
+                extra = (
+                    '<div class="pw"><form id="pwform"><label>請輸入密碼：<br>'
+                    '<input id="pwin" type="text" autocomplete="off" spellcheck="false"> '
+                    '<button type="submit">送出</button></label></form>'
+                    '<p id="pwmsg" class="hint2"></p>'
+                    f"<p>{back}</p></div>" + hintbox +
+                    '<script>(function(){var H="%s",U="%s";'
+                    'document.getElementById("pwform").addEventListener("submit",function(e){'
+                    'e.preventDefault();var v=document.getElementById("pwin").value.toUpperCase().replace(/\\s+/g,"");'
+                    'crypto.subtle.digest("SHA-256",new TextEncoder().encode(v)).then(function(b){'
+                    'var x=Array.from(new Uint8Array(b)).map(function(c){return c.toString(16).padStart(2,"0")}).join("");'
+                    'if(x===H){location.href=U}else{document.getElementById("pwmsg").textContent="密碼不對。"}});});})();</script>'
+                    % (h, nu)
+                )
+            else:
+                extra = (
+                    '<div class="pw"><p>請輸入密碼才能繼續。</p>'
+                    f'<p class="box"><a href="{esc(official_link)}">到官方頁面輸入密碼</a></p>'
+                    f"<p>{back}</p></div>" + hintbox
+                )
+        if "A6A6" in pflags:  # 官方 Act 6 Act 6 的綠色配色（body/外框/內容框 = #042300/#168500/#073c00，字 #2ed73a）
+            body_class = (body_class + " a6a6").strip()
         inner = f"""<article class="story">
 <h1>{esc(pg["title"])}</h1>
 {assets}{ruffle}
@@ -380,7 +502,7 @@ def build():
 <span class="badge {pg["status"]}">{STATUS_LABEL[pg["status"]]}</span>{official}</div>
 {js}"""
         (OUT / "p" / f"{n:06d}.html").write_text(
-            layout(site, f'{pg["title"]} - {site["title"]}', inner, base, raw=True, body_class=body_class),
+            layout(site, f'{pg["title"]} - {site["title"]}', inner, base, raw=True, body_class=body_class, sep_img=tooth),
             encoding="utf-8",
         )
 
