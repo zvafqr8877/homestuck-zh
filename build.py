@@ -38,10 +38,15 @@ article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 
 .story .assets img,.story .assets video{width:650px;max-width:100%;height:auto;display:block;margin:0 auto}
 .flash{margin:0 auto;max-width:650px}
 .flashwin{position:relative;width:100%;overflow:hidden;margin:0 auto;background:#fff}
+.flashwin a.pick{position:absolute;z-index:3;top:37%;height:42%;display:block;background:transparent;cursor:pointer}
+.flashwin a.pick:hover{outline:3px solid rgba(255,255,0,.6)}
 .flashwin iframe{position:absolute;left:0;top:0;width:1000px;height:1600px;border:0;transform-origin:0 0}
 .hscroll{overflow-x:scroll;margin:0 0 16px}
 .story .hscroll .assets img{width:auto;max-width:none;margin:0}
 .story .hscroll>img.hs-arrow{width:82px;height:32px;margin:0}
+body.wide950 main.wrap{max-width:950px;padding-left:0;padding-right:0}
+body.wide950 .story .assets img,body.wide950 .story .assets video{width:950px;max-width:none;margin-left:-150px}
+body.wide950 .story .assets{overflow:visible}
 body.wide main.wrap{max-width:none;margin:0 12px}
 body.wide article.story{max-width:none}
 .pw{margin:16px 28px 0;text-align:center;font:14px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
@@ -52,7 +57,7 @@ body.wide article.story{max-width:none}
 .hintbox p{margin:8px 0 0;font:700 14px/1.6 "Courier New",monospace}
 .pw .box{display:inline-block;margin:6px 0;padding:6px 14px;border:1px dashed #888}
 .assets.ff{position:relative}
-.assets.ff canvas{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+
 body.collide{background:#000}
 .collide header.site{background:#000}
 .collide main.wrap{max-width:984px;background:#454545;padding:10px}
@@ -133,7 +138,8 @@ window.addEventListener("load", function () {
   if (!R) return;
   document.querySelectorAll(".flash").forEach(function (d) {
     var p = R.createPlayer();
-    p.style.width = "650px"; p.style.maxWidth = "100%"; p.style.height = "450px";
+    var w = +d.dataset.w || 650, h = +d.dataset.h || 450;
+    p.style.width = w + "px"; p.style.maxWidth = "100%"; p.style.aspectRatio = w + "/" + h; p.style.height = "auto";
     d.appendChild(p);
     p.load(d.dataset.swf);
   });
@@ -227,23 +233,27 @@ FLASHWIN_JS = """<script>
 FIREFLY_JS = """<script>
 (function(){
   var box=document.querySelector(".assets.ff"); if(!box) return;
-  var c=document.createElement("canvas"); box.appendChild(c);
-  var x=c.getContext("2d"), flies=[], i;
-  function size(){c.width=box.clientWidth; c.height=box.clientHeight;}
-  size(); window.addEventListener("resize",size);
-  for(i=0;i<4;i++) flies.push({x:Math.random(),y:Math.random(),a:Math.random()*6.28});
-  function tick(){
-    x.clearRect(0,0,c.width,c.height);
-    flies.forEach(function(f){
-      f.a+=(Math.random()-.5)*.6;
-      f.x=(f.x+Math.cos(f.a)*.002+1)%1; f.y=(f.y+Math.sin(f.a)*.002+1)%1;
-      var px=f.x*c.width, py=f.y*c.height;
-      x.fillStyle="#000"; x.fillRect(px-2,py-2,4,4);
-      x.fillStyle="rgba(255,255,160,.9)"; x.fillRect(px+(Math.random()<.5?2:-4),py+2,2,2);
+  var base=box.getAttribute("data-sprite")||"";
+  var R=new Image(), L=new Image(); R.src=base+"firefly_sprite_opt.png"; L.src=base+"firefly_sprite_left_opt.png";
+  function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+  var flies=[0,1,2,3].map(function(){
+    var c=document.createElement("canvas"); c.width=140; c.height=140;
+    c.style.cssText="position:absolute;pointer-events:none;z-index:2;top:"+rnd(0,100)+"%;left:"+rnd(15,65)+"%";
+    box.appendChild(c);
+    return {c:c.getContext("2d"),dir:rnd(0,1),x:rnd(0,80),y:rnd(0,80),vx:rnd(1,3),vy:rnd(1,3),f:rnd(0,12),wait:0,w:0};
+  });
+  // 每格 60x60，0~12 格是翅膀拍動加白圈閃光，播完停一小段再重來；15 格/秒
+  setInterval(function(){
+    flies.forEach(function(o){
+      var x=o.c; x.clearRect(0,0,140,140);
+      var img=o.dir?R:L;
+      if(img.complete&&img.naturalWidth) x.drawImage(img,o.f*60,0,60,60,o.x,o.y,60,60);
+      if(o.wait){ if(++o.w>15){o.wait=0;o.w=0;} } else if(++o.f>12){o.f=0;o.wait=1;o.w=0;}
+      o.x+=o.dir?o.vx:-o.vx; o.y+=o.vy;
+      if(o.y>80){o.y=80;o.vy=-rnd(1,2);} if(o.y<0){o.y=0;o.vy=rnd(1,2);}
+      if(o.x>80){o.x=80;o.dir=0;o.vx=rnd(1,2);} if(o.x<0){o.x=0;o.dir=1;o.vx=rnd(1,2);}
     });
-    requestAnimationFrame(tick);
-  }
-  tick();
+  },1000/15);
 })();
 </script>"""
 DIALOG_JS = """<script>
@@ -309,7 +319,8 @@ def asset_html(page, manifest, asset_base, fallback_base="", flash_mode="iframe"
             #   ruffle：用 Ruffle 播放 asset_base 底下的 SWF（asset_base 要能讓你的網站讀取）
             #   link ：只顯示「請到官方頁面觀看」
             if flash_mode == "ruffle":
-                parts.append(f'<div class="flash" data-swf="{url}"></div>')
+                _l, _t, fw, fh = flash_box or (175, 94, 650, 450)
+                parts.append(f'<div class="flash" data-swf="{url}" data-w="{fw}" data-h="{fh}"></div>')
             elif flash_mode == "iframe" and official_page_url:
                 # 只露出官方頁面中間的 Flash 區塊（650x450），不顯示官方的導覽列和標題，也沒有捲軸。
                 # 做法：iframe 固定 1000px 寬（官方版面在這個寬度下，內容框左邊距是 175px），
@@ -370,6 +381,8 @@ def build():
     (OUT / "p").mkdir()
     (OUT / "style.css").write_text(CSS, encoding="utf-8")
     (OUT / ".nojekyll").write_text("", encoding="utf-8")
+    if (ROOT / "assets").is_dir():  # 自己放的素材（collect_assets.py 產生），site.json 的 asset_base 指到 /你的base/assets/
+        shutil.copytree(ROOT / "assets", OUT / "assets")
 
     # 各頁
     for pg in all_pages:
@@ -422,6 +435,14 @@ def build():
         pflags = flags.get(str(n), [])
         if "FIREFLY" in pflags:
             text = ""  # 螢火蟲頁只留圖／動畫和下一頁連結，不放文字
+        # 三選一動畫頁：官方只有其中一張圖點得動（其餘沒反應），在該張圖上蓋一個透明連結
+        PICK = {8282: ("l", 8283), 8297: ("m", 8298), 8301: ("l", 8302), 8305: ("r", 8306), 8316: ("l", 8317)}
+        if n in PICK and 'class="flashwin"' in assets:
+            side, tgt = PICK[n]
+            x = {"l": (3.5, 29.5), "m": (36.5, 27), "r": (69.5, 28)}[side]
+            assets = assets.replace("</iframe></div>",
+                f'</iframe><a class="pick" href="{base}/p/{tgt:06d}.html" title="下一頁" '
+                f'style="left:{x[0]}%;width:{x[1]}%"></a></div>', 1)
         js = DIALOG_JS if 'class="dialog"' in text else ""
         if 'class="flashwin"' in assets:
             js += FLASHWIN_JS
@@ -436,9 +457,11 @@ def build():
             body_class = "wide"
         if fb and fb[2] > 650 and 'class="flashwin"' in assets:
             body_class = "wide"  # 官方這幾頁的動畫比內容框寬（950px），整個內容框跟著拉寬
+        if "WIDE950" in pflags and not body_class:
+            body_class = "wide950"  # 官方這些頁的圖／動畫是 950 寬，內容框 950、文字區仍 650 置中
         if "FIREFLY" in pflags:
             if 'class="flashwin"' not in assets:  # Flash 頁的螢火蟲由官方動畫自己畫
-                assets = assets.replace('<div class="assets">', '<div class="assets ff">', 1)
+                assets = assets.replace('<div class="assets">', f'<div class="assets ff" data-sprite="{esc(asset_base.rsplit("media/",1)[0] + "assets/")}">', 1)
                 js += FIREFLY_JS
         if "ACT7" in pflags:
             banner = esc(asset_base + "images/banners/act7_header.gif")
