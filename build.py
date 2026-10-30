@@ -22,41 +22,72 @@ STATUS_LABEL = {
 }
 
 CSS = """\
-:root{--bg:#fdfdfb;--fg:#222;--muted:#777;--line:#ddd;--accent:#2a6f97;
---c-converted:#d9822b;--c-proofreading:#2a6f97;--c-done:#3a8f5c}
-@media (prefers-color-scheme:dark){:root{--bg:#17181a;--fg:#e6e6e6;--muted:#9a9a9a;
---line:#34363a;--accent:#7fb7d9}}
+:root{--c-converted:#d9822b;--c-proofreading:#2a6f97;--c-done:#3a8f5c}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);
-font:17px/1.8 -apple-system,"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif}
-a{color:var(--accent)}
-header.site,main,footer{max-width:760px;margin:0 auto;padding:0 16px}
-header.site{padding-top:14px;padding-bottom:10px;border-bottom:1px solid var(--line);
-display:flex;gap:16px;flex-wrap:wrap;align-items:baseline}
-header.site .name{font-weight:700;margin-right:auto}
-main{padding-top:20px;padding-bottom:30px}
-h1{font-size:1.4rem;margin:.2em 0 .4em}
-.meta{color:var(--muted);font-size:.85rem;margin-bottom:1em}
-.badge{display:inline-block;padding:0 .6em;border-radius:1em;font-size:.8rem;color:#fff}
+body{margin:0;background:#535353;color:#000;font:16px/1.5 Verdana,"Noto Sans TC","Microsoft JhengHei",sans-serif}
+a{color:#00f}
+header.site{background:#000;text-align:center;padding:6px 8px;font:700 11px/1.4 Verdana,"Microsoft JhengHei",sans-serif}
+header.site a{color:#fff;text-decoration:none;margin:0 6px}
+header.site a.name{color:#ff0}
+header.site a:hover{text-decoration:underline}
+main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:20px 12px 8px}
+article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 0}
+.story h1{font:700 28px/1.25 "Courier New",CourierPrime,courier,monospace;text-align:center;margin:0 16px 12px}
+.story .assets{margin:0}
+.story .assets img,.story .assets video{width:650px;max-width:100%;height:auto;display:block;margin:0 auto}
+.flash{margin:0 auto;max-width:650px}
+.official-frame{margin:0 auto}
+.official-frame iframe{width:100%;height:700px;border:0;background:#fff;display:block}
+.hscroll{overflow-x:auto;margin:0}
+.story .hscroll img{width:auto;max-width:none;margin:0}
+.hint{color:#555;font-size:12px;text-align:center;margin:6px 16px}
+.pw{margin:16px 28px 0;text-align:center;font:14px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
+.pw .box{display:inline-block;margin:6px 0;padding:6px 14px;border:1px dashed #888}
+.assets.ff{position:relative}
+.assets.ff canvas{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
+body.collide{background:#000}
+.collide header.site{background:#000}
+.collide main.wrap{max-width:984px;background:#454545;padding:10px}
+.collide article.story{max-width:950px;background:#000;color:#fff;padding:0}
+.collide .story h1{position:absolute;left:-9999px}
+.collide .banner{display:block;width:100%;max-width:950px;height:auto;margin:0 auto}
+.collide .yt{max-width:950px;margin:0 auto}
+.collide .nextlink,.collide .story-foot,.collide .plain{color:#fff}
+.collide .nextlink span{color:#fff}
+.collide .nextlink a,.collide .story-foot a{color:#8cf}
+.yt{aspect-ratio:16/9;width:100%}
+.yt iframe{width:100%;height:100%;border:0;display:block}
+.noasset{color:#555;font-size:12px;text-align:center;margin:8px 16px}
+.dialog{margin:16px 28px 0;border:1px dashed #888;padding:6px 20px 14px;text-align:center}
+.dialog button{font:12px/16px Geneva,"Lucida Grande",sans-serif;padding:2px 8px;cursor:pointer}
+.dialog .log{text-align:left;font:700 14px/20px "Courier New",CourierPrime,courier,monospace;margin-top:14px;overflow-wrap:anywhere}
+.dialog .log p{margin:0}
+.dialog .log p.gap{margin-top:12px}
+.dialog .log.off{display:none}
+.plain{margin:16px 28px 0;font:14px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
+.plain p{margin:.4em 0}
+.nextlink{margin:16px 28px 0;font:24px/32px "Courier New",CourierPrime,courier,monospace}
+.nextlink span{color:#000}
+.story-foot{margin:16px 28px 0;font:12px/1.6 Verdana,"Microsoft JhengHei",sans-serif}
+.story-foot a{margin-right:14px}
+.story-foot .gone{color:#888;margin-right:14px}
+.page-info{max-width:650px;margin:0 auto 14px;font-size:12px;color:#333;padding:0 4px}
+.badge{display:inline-block;padding:0 .6em;border-radius:1em;font-size:11px;color:#fff}
 .badge.converted{background:var(--c-converted)}
 .badge.proofreading{background:var(--c-proofreading)}
 .badge.done{background:var(--c-done)}
-.assets img,.assets video{max-width:100%;height:auto;display:block;margin:0 auto 1em}
-.flash{margin:0 auto 1em;max-width:650px}
-.official-frame{margin:0 auto 1em;max-width:760px}
-.official-frame iframe{width:100%;height:660px;border:1px solid var(--line);background:#fff}
-.yt{aspect-ratio:16/9;max-width:720px;margin:0 auto 1em}
-.yt iframe{width:100%;height:100%;border:0}
-.noasset{color:var(--muted);font-size:.85rem;text-align:center;margin-bottom:1em}
-.text p{margin:.35em 0}
-nav.pager{display:flex;justify-content:space-between;margin:2em 0;gap:12px}
-nav.pager a{padding:.4em .9em;border:1px solid var(--line);border-radius:6px;text-decoration:none}
-table{border-collapse:collapse;width:100%;font-size:.9rem}
-th,td{border-bottom:1px solid var(--line);padding:.35em .5em;text-align:right}
+.story.pagebox{padding:12px 28px 18px}
+.story.pagebox h1{margin:0 0 12px}
+.story.pagebox p,.story.pagebox ul{font-size:14px;line-height:1.8}
+table{border-collapse:collapse;width:100%;font-size:13px}
+th,td{border-bottom:1px solid #bbb;padding:.35em .5em;text-align:right}
 th:first-child,td:first-child{text-align:left}
-.bar{display:flex;height:.9em;border-radius:4px;overflow:hidden;background:var(--line);margin:.5em 0}
+.bar{display:flex;height:.9em;border-radius:4px;overflow:hidden;background:#ccc;margin:.5em 0}
 .bar span{display:block;height:100%}
-footer{color:var(--muted);font-size:.8rem;padding-bottom:40px;border-top:1px solid var(--line);padding-top:14px}
+footer.site{max-width:940px;margin:0 auto;padding:12px 16px 40px;color:#ddd;font-size:12px}
+footer.site a{color:#9cf}
+footer.site ul{margin:.4em 0;padding-left:1.2em}
+@media (max-width:560px){.story h1{font-size:22px}.dialog{margin:12px 8px 0;padding:6px 10px 12px}.nextlink,.story-foot,.plain{margin-left:12px;margin-right:12px}.nextlink{font-size:20px}main.wrap{padding:8px 0}}
 """
 
 
@@ -115,11 +146,12 @@ def esc(s):
     return html.escape(s, quote=True)
 
 
-def layout(site, title, inner, base):
+def layout(site, title, inner, base, raw=False, body_class=""):
     credits = "".join(
         f'<li><a href="{esc(c["url"])}">{esc(c["name"])}</a>：{esc(c.get("note", ""))}</li>'
         for c in site.get("credits", [])
     )
+    body = inner if raw else f'<article class="story pagebox">{inner}</article>'
     return f"""<!doctype html>
 <html lang="zh-Hant">
 <head>
@@ -128,21 +160,75 @@ def layout(site, title, inner, base):
 <title>{esc(title)}</title>
 <link rel="stylesheet" href="{base}/style.css">
 </head>
-<body>
+<body class="{body_class}">
 <header class="site">
-<a class="name" href="{base}/">{esc(site["title"])}</a>
+<a class="name" href="{base}/">{esc(site["title"])}</a> |
 <a href="{base}/progress.html">翻譯進度</a>
 </header>
-<main>
-{inner}
+<main class="wrap">
+{body}
 </main>
-<footer>
+<footer class="site">
 <p>{esc(site.get("copyright", ""))}</p>
 <ul>{credits}</ul>
 </footer>
 </body>
 </html>
 """
+
+
+SPEAKER_RE = re.compile(r"^\s*([^：:]{1,40}?)\s*[：:]")
+FIREFLY_JS = """<script>
+(function(){
+  var box=document.querySelector(".assets.ff"); if(!box) return;
+  var c=document.createElement("canvas"); box.appendChild(c);
+  var x=c.getContext("2d"), flies=[], i;
+  function size(){c.width=box.clientWidth; c.height=box.clientHeight;}
+  size(); window.addEventListener("resize",size);
+  for(i=0;i<4;i++) flies.push({x:Math.random(),y:Math.random(),a:Math.random()*6.28});
+  function tick(){
+    x.clearRect(0,0,c.width,c.height);
+    flies.forEach(function(f){
+      f.a+=(Math.random()-.5)*.6;
+      f.x=(f.x+Math.cos(f.a)*.002+1)%1; f.y=(f.y+Math.sin(f.a)*.002+1)%1;
+      var px=f.x*c.width, py=f.y*c.height;
+      x.fillStyle="#000"; x.fillRect(px-2,py-2,4,4);
+      x.fillStyle="rgba(255,255,160,.9)"; x.fillRect(px+(Math.random()<.5?2:-4),py+2,2,2);
+    });
+    requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>"""
+DIALOG_JS = """<script>
+document.querySelectorAll(".dialog button").forEach(function(b){
+  b.addEventListener("click",function(){
+    var l=b.parentNode.querySelector(".log"), off=l.classList.toggle("off");
+    b.textContent=off?"顯示對話記錄":"隱藏對話記錄";
+  });
+});
+</script>"""
+
+
+def body_html(body, colors):
+    lines = [l.strip() for l in body.splitlines() if l.strip()]
+    if not lines:
+        return ""
+    speakers = [SPEAKER_RE.match(l) for l in lines]
+    if not any(speakers):
+        return '<div class="plain">' + "".join(f"<p>{esc(l)}</p>" for l in lines) + "</div>"
+    out, last = [], None
+    for l, m in zip(lines, speakers):
+        who = m.group(1).strip() if m else None
+        color = colors.get(who.upper()) if who else None
+        style = f' style="color:{color}"' if color else ""
+        cls = ' class="gap"' if (last is not None and who != last and out) else ""
+        out.append(f"<p{cls}{style}>{esc(l)}</p>")
+        last = who
+    return (
+        '<div class="dialog"><button type="button">隱藏對話記錄</button>'
+        '<div class="log">' + "".join(out) + "</div></div>"
+    )
 
 
 def asset_html(page, manifest, asset_base, fallback_base="", flash_mode="iframe", official_page_url=""):
@@ -167,9 +253,9 @@ def asset_html(page, manifest, asset_base, fallback_base="", flash_mode="iframe"
             fb = esc(fallback_base + it["file"])
             onerr = f""" onerror="this.onerror=null;this.src='{fb}'" """
         if kind == "image":
-            parts.append(f'<img src="{url}"{onerr}alt="{esc(it.get("alt", ""))}" loading="lazy">')
+            parts.append(f'<img src="{url}"{onerr} alt="{esc(it.get("alt", ""))}" loading="lazy">')
         elif kind == "video":
-            parts.append(f'<video src="{url}"{onerr}controls preload="none"></video>')
+            parts.append(f'<video src="{url}"{onerr} controls preload="none"></video>')
         elif kind == "flash":
             # flash_mode（site.json）：
             #   iframe：直接嵌入官方頁面，由官方站播放（官方的 SWF 只允許 www.homestuck.com 讀取，
@@ -195,6 +281,8 @@ def asset_html(page, manifest, asset_base, fallback_base="", flash_mode="iframe"
 def build():
     site = load_json(ROOT / "site.json", {})
     manifest = load_json(ROOT / "manifest.json", {})
+    colors = load_json(ROOT / "speaker_colors.json", {})
+    flags = load_json(ROOT / "flags.json", {})
     sources = load_sources(ROOT / "sources.csv")
     base =site.get("base_url", "").rstrip("/")
     asset_base = site.get("asset_base", "")
@@ -232,17 +320,17 @@ def build():
         n = pg["page"]
         before = [p for p in pages if p["page"] < n]
         after = [p for p in pages if p["page"] > n]
-        prev_a = (
-            f'<a href="{base}/p/{before[-1]["page"]:06d}.html">← 上一頁</a>'
-            if before else "<span></span>"
+        next_html = (
+            f'<div class="nextlink"><span>&gt;</span> <a href="{base}/p/{after[0]["page"]:06d}.html">'
+            f'{esc(after[0]["title"])}</a></div>'
+            if after else ""
         )
-        next_a = (
-            f'<a href="{base}/p/{after[0]["page"]:06d}.html">下一頁 →</a>'
-            if after else "<span></span>"
+        foot = (
+            (f'<a href="{base}/p/{before[-1]["page"]:06d}.html">← 上一頁</a>' if before
+             else '<span class="gone">← 上一頁</span>')
+            + f'<a href="{base}/">回首頁</a>'
         )
-        text = "\n".join(
-            f"<p>{esc(line)}</p>" for line in pg["body"].splitlines() if line.strip()
-        )
+        text = body_html(pg["body"], colors)
         # 來源連結：優先用 sources.csv（gen_mapping.py 產生），
         # 沒有的話只有 front matter 寫了 official: 官方頁碼 才顯示官方連結，避免頁碼對錯
         key = int(pg["official"]) if pg.get("official", "").isdigit() else n
@@ -258,16 +346,41 @@ def build():
         official_link = next((u for t, u in links if t == "官方原文"), "")
         assets = asset_html(n, manifest, asset_base, fallback_base, flash_mode, official_link)
         ruffle = RUFFLE_JS if 'class="flash"' in assets else ""
-        inner = f"""<h1>{esc(pg["title"])}</h1>
-<div class="meta">第 {n} 頁 ·
-<span class="badge {pg["status"]}">{STATUS_LABEL[pg["status"]]}</span>{official}</div>
+        js = DIALOG_JS if 'class="dialog"' in text else ""
+        pflags = flags.get(str(n), [])
+        body_class = ""
+        extra = ""
+        if "HSCROLL" in pflags:
+            # 橫向捲動頁：圖片比版面寬，放在可左右捲動的容器裡
+            assets = f'<div class="hscroll">{assets}</div><p class="hint">← 這頁的圖片很寬，請用左右捲動查看 →</p>'
+        if "FIREFLY" in pflags:
+            assets = assets.replace('<div class="assets">', '<div class="assets ff">', 1)
+            js += FIREFLY_JS
+        if "COLLIDE" in pflags:
+            banner = esc(asset_base + "images/banners/collide_header.gif")
+            assets = f'<img class="banner" src="{banner}" alt="ACT 6 ACT 6 ACT 6">' + assets
+            body_class = "collide"
+        if "TZPASSWORD" in pflags:
+            # 密碼頁：官方要輸入密碼才能繼續；密碼不在我們手上，輸入請到官方頁面
+            back = (f'<a href="{base}/p/{before[-1]["page"]:06d}.html">← 回上一頁</a>' if before else "")
+            extra = (
+                '<div class="pw"><p>請輸入密碼才能繼續。</p>'
+                f'<p class="box"><a href="{esc(official_link)}">到官方頁面輸入密碼</a></p>'
+                f"<p>{back}</p></div>"
+            )
+        inner = f"""<article class="story">
+<h1>{esc(pg["title"])}</h1>
 {assets}{ruffle}
-<div class="text">
+{extra}
 {text}
-</div>
-<nav class="pager">{prev_a}{next_a}</nav>"""
+{next_html}
+<div class="story-foot">{foot}</div>
+</article>
+<div class="page-info">第 {n} 頁 ·
+<span class="badge {pg["status"]}">{STATUS_LABEL[pg["status"]]}</span>{official}</div>
+{js}"""
         (OUT / "p" / f"{n:06d}.html").write_text(
-            layout(site, f'{pg["title"]} - {site["title"]}', inner, base),
+            layout(site, f'{pg["title"]} - {site["title"]}', inner, base, raw=True, body_class=body_class),
             encoding="utf-8",
         )
 
