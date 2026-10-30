@@ -38,15 +38,16 @@ article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 
 .story .assets img,.story .assets video{width:650px;max-width:100%;height:auto;display:block;margin:0 auto}
 .flash{margin:0 auto;max-width:650px}
 .flashwin{position:relative;width:100%;overflow:hidden;margin:0 auto;background:#fff}
-.flashwin a.pick{position:absolute;z-index:3;top:37%;height:42%;display:block;background:transparent;cursor:pointer}
+.flashwin a.pick{position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
 .flashwin a.pick:hover{outline:3px solid rgba(255,255,0,.6)}
 .flashwin iframe{position:absolute;left:0;top:0;width:1000px;height:1600px;border:0;transform-origin:0 0}
 .hscroll{overflow-x:scroll;margin:0 0 16px}
 .story .hscroll .assets img{width:auto;max-width:none;margin:0}
 .story .hscroll>img.hs-arrow{width:82px;height:32px;margin:0}
-body.wide950 main.wrap{max-width:950px;padding-left:0;padding-right:0}
-body.wide950 .story .assets img,body.wide950 .story .assets video{width:950px;max-width:none;margin-left:-150px}
-body.wide950 .story .assets{overflow:visible}
+body.wide950 main.wrap{max-width:950px;padding:0}
+body.wide950 .assets.top950{margin:0}
+body.wide950 .assets.top950 img,body.wide950 .assets.top950 video{width:950px;max-width:none;margin:0;display:block}
+body.wide950 article.story{margin:0 auto 14px}
 body.wide main.wrap{max-width:none;margin:0 12px}
 body.wide article.story{max-width:none}
 .pw{margin:16px 28px 0;text-align:center;font:14px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
@@ -232,8 +233,9 @@ FLASHWIN_JS = """<script>
 </script>"""
 FIREFLY_JS = """<script>
 (function(){
-  var box=document.querySelector(".assets.ff"); if(!box) return;
-  var base=box.getAttribute("data-sprite")||"";
+  var ff=document.querySelector(".assets.ff"); if(!ff) return;
+  var base=ff.getAttribute("data-sprite")||"";
+  var box=ff.closest("article")||ff; box.style.position="relative"; // 官方是蓋在整個內容框上，位置百分比以內容框計算
   var R=new Image(), L=new Image(); R.src=base+"firefly_sprite_opt.png"; L.src=base+"firefly_sprite_left_opt.png";
   function rnd(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
   var flies=[0,1,2,3].map(function(){
@@ -439,7 +441,7 @@ def build():
         PICK = {8282: ("l", 8283), 8297: ("m", 8298), 8301: ("l", 8302), 8305: ("r", 8306), 8316: ("l", 8317)}
         if n in PICK and 'class="flashwin"' in assets:
             side, tgt = PICK[n]
-            x = {"l": (3.5, 29.5), "m": (36.5, 27), "r": (69.5, 28)}[side]
+            x = {"l": (4.2, 25.8), "m": (37.2, 25.7), "r": (70.2, 25.7)}[side]
             assets = assets.replace("</iframe></div>",
                 f'</iframe><a class="pick" href="{base}/p/{tgt:06d}.html" title="下一頁" '
                 f'style="left:{x[0]}%;width:{x[1]}%"></a></div>', 1)
@@ -513,9 +515,15 @@ def build():
                 )
         if "A6A6" in pflags:  # 官方 Act 6 Act 6 的綠色配色（body/外框/內容框 = #042300/#168500/#073c00，字 #2ed73a）
             body_class = (body_class + " a6a6").strip()
-        inner = f"""<article class="story">
-<h1>{esc(pg["title"])}</h1>
-{assets}{ruffle}
+        top950 = ""
+        h1 = f'<h1>{esc(pg["title"])}</h1>\n'
+        if "wide950" in body_class.split() and 'class="flashwin"' not in assets:
+            # 官方：圖貼在內容框最上面（沒有標題），文字區 650px 在圖的下面
+            top950 = assets.replace('<div class="assets">', '<div class="assets top950">', 1) + "\n"
+            assets = ""
+            h1 = ""
+        inner = f"""{top950}<article class="story">
+{h1}{assets}{ruffle}
 {extra}
 {text}
 {next_html}
