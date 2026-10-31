@@ -37,7 +37,7 @@ article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 
 .story .assets>*+*{margin-top:32px}
 .story .assets img,.story .assets video{width:650px;max-width:100%;height:auto;display:block;margin:0 auto}
 .flash{margin:0 auto;max-width:650px;position:relative}
-.flash a.pick{pointer-events:none;position:absolute;z-index:3;top:40.3%;height:27.7%;display:block;background:transparent;cursor:pointer}
+.flash a.pick{pointer-events:none;position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
 .flash a.pick.late{visibility:hidden;animation:pickshow 0s linear forwards}
 /* 測試用：把動畫上的換頁範圍用黃框標出來（確認位置後，刪掉下面這一行就好） */
 .flash a.pick{outline:3px solid #ff0;background:rgba(255,255,0,.18)}
@@ -511,7 +511,7 @@ def build():
         PICK = {8282: ("l", 8283), 8297: ("m", 8298), 8301: ("l", 8302), 8305: ("r", 8306), 8316: ("l", 8317)}
         if n in PICK and 'class="flash"' in assets:
             side, tgt = PICK[n]
-            x = {"l": (18.3, 17.8), "m": (41.3, 17.8), "r": (63.6, 18.1)}[side]
+            x = {"l": (4.2, 25.8), "m": (37.2, 25.7), "r": (70.2, 25.7)}[side]
             assets = assets.replace('class="flash" ', 'class="flash" data-pick="1" ', 1).replace("></div>",
                 f'><a class="pick" href="{base}/p/{tgt:06d}.html" title="下一頁" '
                 f'style="left:{x[0]}%;width:{x[1]}%"></a></div>', 1)
