@@ -183,7 +183,15 @@ window.addEventListener("load", function () {
   // 動畫上的換頁連結：連結本身不擋滑鼠（動畫的滑過效果才看得到），改成監聽點擊，點在連結範圍內就換頁
   document.querySelectorAll(".flash[data-pick]").forEach(function (d) {
     var links = d.querySelectorAll("a.pick");
+    // 「點擊以取消靜音」遮罩還在時不啟用連結（那一下點擊只用來取消靜音）
+    function muted() {
+      var p = d.querySelector("ruffle-player"), o = p && p.shadowRoot && p.shadowRoot.querySelector("#unmute-overlay");
+      if (!o) return false;
+      var cs = getComputedStyle(o);
+      return cs.display !== "none" && cs.visibility !== "hidden" && o.getBoundingClientRect().width > 0;
+    }
     function hit(e) {
+      if (muted()) return null;
       for (var i = 0; i < links.length; i++) {
         var a = links[i], r = a.getBoundingClientRect();
         if (getComputedStyle(a).visibility === "hidden") continue;
