@@ -39,13 +39,9 @@ article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 
 .flash{margin:0 auto;max-width:650px;position:relative}
 .flash a.pick{pointer-events:none;position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
 .flash a.pick.late{visibility:hidden;animation:pickshow 0s linear forwards}
-/* 測試用：把動畫上的換頁範圍用黃框標出來（確認位置後，刪掉下面這一行就好） */
-.flash a.pick{outline:3px solid #ff0;background:rgba(255,255,0,.18)}
-.flash a.pick.late{visibility:visible!important}
 @keyframes pickshow{to{visibility:visible}}
 .flashwin{position:relative;width:100%;overflow:hidden;margin:0 auto;background:#fff}
 .flashwin a.pick{position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
-.flashwin a.pick:hover{outline:3px solid rgba(255,255,0,.6)}
 .flashwin iframe{position:absolute;left:0;top:0;width:1000px;height:1600px;border:0;transform-origin:0 0}
 .hscroll{overflow-x:scroll;margin:0 0 16px}
 .story .hscroll .assets img{width:auto;max-width:none;margin:0}
