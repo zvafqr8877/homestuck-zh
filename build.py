@@ -56,9 +56,11 @@ body.wide950 .assets.top950 .flashwin,body.wide950 .assets.top950 .flash{max-wid
 body.wide950 .assets.top950 img,body.wide950 .assets.top950 video{width:950px;max-width:none;margin:0;display:block}
 body.wide950 article.story{margin:0 auto 14px}
 body.bare,body.bare main.wrap{background:#fff}
+body.bare header.site{display:none}
 body.bare article.story{background:#fff}
 body.wide main.wrap{max-width:none;margin:0 12px}
 body.wide article.story{max-width:none}
+.branchrow{margin:14px 28px;text-align:center;font:16px/1.8 "Courier New",monospace}
 .pw{margin:16px 28px 0;text-align:center;font:14px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
 .pw input{font:14px Verdana;padding:2px 6px;width:200px}
 .hint2{color:#a00;min-height:1.5em;margin:4px 0}
@@ -324,6 +326,7 @@ document.querySelectorAll(".dialog button").forEach(function(b){
 
 def body_html(body, colors):
     lines = [l.strip() for l in body.splitlines() if l.strip()]
+    lines = [l for l in lines if not re.match(r"^原[網网]址\s*[：:]", l)]  # 簡中頁面開頭的「原網址：舊 MSPA 網址」是來源紀錄，不是內文
     if not lines:
         return ""
     speakers = [SPEAKER_RE.match(l) for l in lines]
@@ -514,7 +517,7 @@ def build():
                 f'style="left:{x[0]}%;width:{x[1]}%"></a></div>', 1)
         # 角色選擇頁：Flash 裡三個星球各自連到不同的頁面（8199：左 Dave→8200、中 Jade→8224、右 Rose→8243）
         # 頁碼: [(目標頁, 左%, 上%, 寬%, 高%), ...]，百分比是相對 650x450 的動畫
-        MULTI = {8199: [(8200, 15.1, 23.6, 22.6, 32.7), (8224, 38.9, 23.6, 22.6, 32.7), (8243, 62.8, 23.6, 22.6, 32.7)]}
+        MULTI = {8199: [(8200, 15.1, 23.6, 22.6, 32.7), (8224, 38.9, 23.6, 22.6, 32.7), (8243, 62.8, 23.6, 22.6, 32.7)], 9386: [(9387, 2.6, 4.2, 23.4, 23.1), (9393, 26.9, 4.2, 23.4, 23.1), (9397, 51.2, 4.2, 23.4, 23.1), (9400, 75.5, 4.2, 23.4, 23.1), (9402, 2.6, 77.2, 23.4, 22.8), (9408, 26.9, 77.2, 23.4, 22.8), (9410, 51.2, 77.2, 23.4, 22.8), (9413, 75.5, 77.2, 23.4, 22.8)]}
         if n in MULTI and ('class="flash"' in assets or 'class="flashwin"' in assets):
             links = "".join(
                 f'<a class="pick" href="{base}/p/{t:06d}.html" title="第 {t} 頁" '
@@ -524,6 +527,11 @@ def build():
                 assets = assets.replace("</iframe></div>", "</iframe>" + links + "</div>", 1)
             else:
                 assets = assets.replace('class="flash" ', 'class="flash" data-pick="1" ', 1).replace("></div>", ">" + links + "</div>", 1)
+        # 官方文字區的分支連結列（例如 9386 的 ONE | TWO | ... | EIGHT，分別連到八條故事線的起點）
+        BRANCH = {9386: [("一", 9387), ("二", 9393), ("三", 9397), ("四", 9400), ("五", 9402), ("六", 9408), ("七", 9410), ("八", 9413)]}
+        branch = ""
+        if n in BRANCH:
+            branch = '<p class="branchrow">' + " | ".join(f'<a href="{base}/p/{t:06d}.html">{lab}</a>' for lab, t in BRANCH[n]) + "</p>"
         # 動畫裡自己帶連結的頁（官方是動畫內的連結換頁）：本站播放時在連結位置蓋透明連結，並拿掉下方的「下一頁」按鈕
         # 頁碼: (下一頁, 左%, 上%, 寬%, 高%)
         INLINK = {8105: (8106, 3, 92, 92, 8, 0), 8143: (8144, 3, 89, 42, 8, 108)}  # 最後一項：幾秒後才可點（0=馬上）
@@ -622,6 +630,7 @@ def build():
 {h1}{assets}{ruffle}
 {extra}
 {text}
+{branch}
 {next_html}
 <div class="story-foot">{foot}</div>
 </article>
