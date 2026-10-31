@@ -357,7 +357,8 @@ def body_html(body, colors):
 def local_swf(item):
     """assets/ 底下有放這個 SWF 就回傳相對路徑（優先 assets/<manifest 路徑>，其次 assets/flashes/<檔名>），否則回傳 None"""
     f = item.get("file", "")
-    for rel in (f, "flashes/" + f.rsplit("/", 1)[-1]):
+    # 有翻譯過的版本（tools/swf_zh.py 產生）就優先用 assets/zh/ 底下的
+    for rel in ("zh/" + f, "zh/flashes/" + f.rsplit("/", 1)[-1], f, "flashes/" + f.rsplit("/", 1)[-1]):
         if rel and (ROOT / "assets" / rel).exists():
             return rel
     return None
