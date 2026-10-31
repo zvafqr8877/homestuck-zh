@@ -48,6 +48,7 @@ article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 
 .story .hscroll>img.hs-arrow{width:82px;height:32px;margin:0}
 body.wide950 main.wrap{max-width:950px;padding:0}
 body.wide950 .assets.top950{margin:0}
+body.wide950 .assets.top950 .flashwin,body.wide950 .assets.top950 .flash{max-width:950px}
 body.wide950 .assets.top950 img,body.wide950 .assets.top950 video{width:950px;max-width:none;margin:0;display:block}
 body.wide950 article.story{margin:0 auto 14px}
 body.wide main.wrap{max-width:none;margin:0 12px}
@@ -133,8 +134,29 @@ footer.site ul{margin:.4em 0;padding-left:1.2em}
 """
 
 
-RUFFLE_JS = """
+RUFFLE_JS = r"""
 <script>window.RufflePlayer=window.RufflePlayer||{};window.RufflePlayer.config={autoplay:"on",unmuteOverlay:"hidden",splashScreen:false,letterbox:"on",contextMenu:"off"};</script>
+<script>
+// Ruffle 設定（照官方站實測的設定：腳本權限、透明、字型、舊 MSPA 連結改寫）。
+// Flash 裡的連結是舊網址 http://www.mspaintadventures.com/?s=6&p=008106，這裡改成本站頁面。
+(function () {
+  var base = location.pathname.replace(/\/p\/[^\/]*$/, "");
+  window.RufflePlayer = window.RufflePlayer || {};
+  window.RufflePlayer.config = {
+    allowScriptAccess: true, wmode: "transparent", letterbox: "on", autoplay: "on", splashScreen: false,
+    unmuteOverlay: "visible", scale: "showall", upgradeToHttps: true,
+    fontSources: [base + "/assets/ruffle/homestuck-fonts.swf", base + "/assets/ruffle/courier-new-pixel.swf"],
+    defaultFonts: {sans: ["Arial"], serif: ["Times New Roman"], typewriter: ["Courier New"]},
+    urlRewriteRules: [
+      [/^http:\/\/www\.mspaintadventures\.com\/\?s=6&p=(\d+)/, base + "/p/$1.html"],
+      [/^http:\/\/www\.mspaintadventures\.com\/\?s=4/, "https://zhhomestuck.github.io/"],
+      [/^http:\/\/www\.mspaintadventures\.com\/(soundcredits|artcredits)\.html/, base + "/"],
+      [/^http:\/\/www\.mspaintadventures\.com\/storyfiles\/hs2\/(\d+)\/([^\/]+)\.(\w+)/, "https://storage.homestuck.com/story/homestuck/media/audio/$1/$2.$3"],
+      [/^http:\/\/www\.mspaintadventures\.com\/storyfiles\/hs2\/songs\/alterniaboundsongs\/([^\/]+)\.(\w+)/, "https://storage.homestuck.com/story/homestuck/media/audio/004692/$1.$2"]
+    ]
+  };
+})();
+</script>
 <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
 <script>
 window.addEventListener("load", function () {
@@ -468,6 +490,27 @@ def build():
             assets = assets.replace('class="flash" ', 'class="flash" data-pick="1" ', 1).replace("></div>",
                 f'><a class="pick" href="{base}/p/{tgt:06d}.html" title="下一頁" '
                 f'style="left:{x[0]}%;width:{x[1]}%"></a></div>', 1)
+        # 角色選擇頁：Flash 裡三個星球各自連到不同的頁面（8199：左 Dave→8200、中 Jade→8224、右 Rose→8243）
+        # 頁碼: [(目標頁, 左%, 上%, 寬%, 高%), ...]，百分比是相對 650x450 的動畫
+        MULTI = {8199: [(8200, 15.1, 23.6, 22.6, 32.7), (8224, 38.9, 23.6, 22.6, 32.7), (8243, 62.8, 23.6, 22.6, 32.7)]}
+        if n in MULTI and ('class="flash"' in assets or 'class="flashwin"' in assets):
+            links = "".join(
+                f'<a class="pick" href="{base}/p/{t:06d}.html" title="第 {t} 頁" '
+                f'style="left:{l}%;top:{tp}%;width:{w}%;height:{h}%"></a>'
+                for t, l, tp, w, h in MULTI[n])
+            if 'class="flashwin"' in assets:
+                assets = assets.replace("</iframe></div>", "</iframe>" + links + "</div>", 1)
+            else:
+                assets = assets.replace('class="flash" ', 'class="flash" data-pick="1" ', 1).replace("></div>", ">" + links + "</div>", 1)
+        # 動畫裡自己帶連結的頁（官方是動畫內的連結換頁）：本站播放時在連結位置蓋透明連結，並拿掉下方的「下一頁」按鈕
+        # 頁碼: (下一頁, 左%, 上%, 寬%, 高%)
+        INLINK = {8105: (8106, 3, 92, 92, 8), 8143: (8144, 3, 88, 20, 10)}
+        if n in INLINK and 'class="flash"' in assets:
+            tgt, il, it_, iw, ih = INLINK[n]
+            assets = assets.replace('class="flash" ', 'class="flash" data-pick="1" ', 1).replace("></div>",
+                f'><a class="pick" href="{base}/p/{tgt:06d}.html" title="下一頁" '
+                f'style="left:{il}%;top:{it_}%;width:{iw}%;height:{ih}%"></a></div>', 1)
+            next_html = ""
         elif n in PICK and 'class="flashwin"' in assets:
             side, tgt = PICK[n]
             x = {"l": (4.2, 25.8), "m": (37.2, 25.7), "r": (70.2, 25.7)}[side]
@@ -487,7 +530,7 @@ def build():
                       f'<img class="hs-arrow" src="{arrow}" alt="==&gt;"></div>')
             body_class = "wide"
         if fb and fb[2] > 650 and ('class="flashwin"' in assets or 'class="flash"' in assets):
-            body_class = "wide"  # 官方這幾頁的動畫比內容框寬（950px），整個內容框跟著拉寬
+            body_class = "wide950"  # 官方這幾頁的動畫是 950 寬、貼在內容框最上面（標題在動畫裡面），下面才是 650 的文字區
         if "WIDE950" in pflags and not body_class:
             body_class = "wide950"  # 官方這些頁的圖／動畫是 950 寬，內容框 950、文字區仍 650 置中
         if "FIREFLY" in pflags:
@@ -546,7 +589,7 @@ def build():
             body_class = (body_class + " a6a6").strip()
         top950 = ""
         h1 = f'<h1>{esc(pg["title"])}</h1>\n'
-        if "wide950" in body_class.split() and 'class="flashwin"' not in assets:
+        if "wide950" in body_class.split():
             # 官方：圖貼在內容框最上面（沒有標題），文字區 650px 在圖的下面
             top950 = assets.replace('<div class="assets">', '<div class="assets top950">', 1) + "\n"
             assets = ""
