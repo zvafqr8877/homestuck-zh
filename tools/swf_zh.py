@@ -92,10 +92,13 @@ def patch(page, glyphs):
     tc = make_tc() if not NO_CONVERT else (lambda t: t)
     texts = {int(k): tc(v) for k, v in cfg["sc"].items()}
     chars = set(chr(c) for c in range(32, 127)) | set("".join(texts.values()).replace("\r", ""))
-    try:
-        fbody, advs = define_font3(FONT_ID, "NotoSansTCBold", chars, glyphs)
-    except KeyError as e:
-        print(f"[{page}] {e}"); return False
+    missing = sorted(c for c in chars if glyphs.get(c) is None)
+    if missing:
+        print(f"[{page}] ！！字型缺這些字，已先用 □ 代替：{''.join(missing)}  （請回報給 Claude，或加 --font 補字）")
+        for k in texts:
+            for c in missing: texts[k] = texts[k].replace(c, "□")
+        chars = (chars - set(missing)) | {"□"}
+    fbody, advs = define_font3(FONT_ID, "NotoSansTCBold", chars, glyphs)
     done = set(); first_edit = None
     for i, (code, data) in enumerate(tags):
         if code in (11, 33):
@@ -106,7 +109,8 @@ def patch(page, glyphs):
             line = texts[sid].replace("\r", " ")
             wtw = int(sum(advs.get(c, 20480 * 0.55) for c in line) * fh / 20480) + 120
             ymin = st["ty"] + st["yo"] - int(fh * 0.88) - 40
-            r = dict(id=sid, bounds=rect_bytes(st["tx"] + st["xo"] - 40, st["tx"] + st["xo"] - 40 + wtw, ymin, ymin + int(fh * 1.3) + 80),
+            cx = (st["bd"][0] + st["bd"][1]) // 2          # 官方是整行置中：以原本英文文字的中心為中心
+            r = dict(id=sid, bounds=rect_bytes(cx - wtw // 2, cx + wtw // 2, ymin, ymin + int(fh * 1.3) + 80),
                      f1=0x8D, f2=0x11, font=FONT_ID, fclass=None, fh=fh, color=st["color"] + b"\xff",
                      maxlen=None, layout=None, var="", text=line)
             tags[i] = [37, build_edit(r)]

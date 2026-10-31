@@ -107,6 +107,11 @@ def parse_static(d, code):
     """DefineText(11)/DefineText2(33) -> 第一段文字的位置/顏色/大小（用來換成 DefineEditText）"""
     cid = struct.unpack_from("<H", d, 0)[0]
     q = rect_end(d, 2)
+    rn = d[2] >> 3
+    rbits = "".join(f"{b:08b}" for b in d[2:q])[5:5 + rn * 4]
+    def _sv(x):
+        v = int(x, 2); return v - (1 << rn) if x[0] == "1" else v
+    bd = [_sv(rbits[i * rn:(i + 1) * rn]) for i in range(4)]
     bits = "".join(f"{b:08b}" for b in d[q:q + 40])
     pos = 0
     def rb(n):
@@ -129,4 +134,4 @@ def parse_static(d, code):
     if f & 1: xo = struct.unpack_from("<h", d, q)[0]; q += 2
     if f & 2: yo = struct.unpack_from("<h", d, q)[0]; q += 2
     h = struct.unpack_from("<H", d, q)[0]
-    return dict(id=cid, tx=tx, ty=ty, color=bytes(col), xo=xo, yo=yo, h=h)
+    return dict(id=cid, bd=bd, tx=tx, ty=ty, color=bytes(col), xo=xo, yo=yo, h=h)
