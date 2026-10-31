@@ -36,7 +36,9 @@ article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 
 .story .assets{margin:0}
 .story .assets>*+*{margin-top:32px}
 .story .assets img,.story .assets video{width:650px;max-width:100%;height:auto;display:block;margin:0 auto}
-.flash{margin:0 auto;max-width:650px}
+.flash{margin:0 auto;max-width:650px;position:relative}
+.flash a.pick{position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
+.flash a.pick:hover{outline:3px solid rgba(255,255,0,.6)}
 .flashwin{position:relative;width:100%;overflow:hidden;margin:0 auto;background:#fff}
 .flashwin a.pick{position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
 .flashwin a.pick:hover{outline:3px solid rgba(255,255,0,.6)}
@@ -162,6 +164,10 @@ def load_json(path, default):
     return default
 
 
+_tf = ROOT / "title_fix.json"
+TITLE_FIX = json.loads(_tf.read_text(encoding="utf-8")) if _tf.exists() else {}
+
+
 def parse_page(path):
     text = path.read_text(encoding="utf-8")
     m = re.match(r"---\n(.*?)\n---\n?(.*)", text, re.S)
@@ -179,6 +185,8 @@ def parse_page(path):
     meta.setdefault("status", "converted")
     if meta["status"] not in STATUS_LABEL:
         raise ValueError(f"{path.name}: status 必須是 {sorted(STATUS_LABEL)} 其中之一")
+    if meta["status"] == "converted" and str(meta["page"]) in TITLE_FIX:
+        meta["title"] = TITLE_FIX[str(meta["page"])]  # 簡中標題缺漏或和官方不同的頁，改用官方標題
     meta["body"] = m.group(2).strip("\n")
     return meta
 
@@ -289,6 +297,15 @@ def body_html(body, colors):
     )
 
 
+def local_swf(item):
+    """assets/ 底下有放這個 SWF 就回傳相對路徑（優先 assets/<manifest 路徑>，其次 assets/flashes/<檔名>），否則回傳 None"""
+    f = item.get("file", "")
+    for rel in (f, "flashes/" + f.rsplit("/", 1)[-1]):
+        if rel and (ROOT / "assets" / rel).exists():
+            return rel
+    return None
+
+
 def asset_html(page, manifest, asset_base, fallback_base="", flash_mode="iframe", official_page_url="", flash_box=None):
     items = manifest.get(str(page), [])
     if not items:
@@ -314,6 +331,10 @@ def asset_html(page, manifest, asset_base, fallback_base="", flash_mode="iframe"
             parts.append(f'<img src="{url}"{onerr} alt="{esc(it.get("alt", ""))}" loading="lazy">')
         elif kind == "video":
             parts.append(f'<video src="{url}"{onerr} controls preload="none"></video>')
+        elif kind == "flash" and local_swf(it):
+            # 本站自己放的 SWF：用 Ruffle 直接播，滑鼠可以互動；沒放檔案的頁面維持下面的嵌入官方頁面
+            _l, _t, fw, fh = flash_box or (175, 94, 650, 450)
+            parts.append(f'<div class="flash" data-swf="../assets/{local_swf(it)}" data-w="{fw}" data-h="{fh}" style="max-width:{fw}px"></div>')
         elif kind == "flash":
             # flash_mode（site.json）：
             #   iframe：直接嵌入官方頁面，由官方站播放（官方的 SWF 只允許 www.homestuck.com 讀取，
@@ -439,7 +460,13 @@ def build():
             text = ""  # 螢火蟲頁只留圖／動畫和下一頁連結，不放文字
         # 三選一動畫頁：官方只有其中一張圖點得動（其餘沒反應），在該張圖上蓋一個透明連結
         PICK = {8282: ("l", 8283), 8297: ("m", 8298), 8301: ("l", 8302), 8305: ("r", 8306), 8316: ("l", 8317)}
-        if n in PICK and 'class="flashwin"' in assets:
+        if n in PICK and 'class="flash"' in assets:
+            side, tgt = PICK[n]
+            x = {"l": (4.2, 25.8), "m": (37.2, 25.7), "r": (70.2, 25.7)}[side]
+            assets = assets.replace('class="flash" ', 'class="flash" data-pick="1" ', 1).replace("></div>",
+                f'><a class="pick" href="{base}/p/{tgt:06d}.html" title="下一頁" '
+                f'style="left:{x[0]}%;width:{x[1]}%"></a></div>', 1)
+        elif n in PICK and 'class="flashwin"' in assets:
             side, tgt = PICK[n]
             x = {"l": (4.2, 25.8), "m": (37.2, 25.7), "r": (70.2, 25.7)}[side]
             assets = assets.replace("</iframe></div>",
@@ -457,7 +484,7 @@ def build():
             assets = (f'<div class="hscroll">{assets}'
                       f'<img class="hs-arrow" src="{arrow}" alt="==&gt;"></div>')
             body_class = "wide"
-        if fb and fb[2] > 650 and 'class="flashwin"' in assets:
+        if fb and fb[2] > 650 and ('class="flashwin"' in assets or 'class="flash"' in assets):
             body_class = "wide"  # 官方這幾頁的動畫比內容框寬（950px），整個內容框跟著拉寬
         if "WIDE950" in pflags and not body_class:
             body_class = "wide950"  # 官方這些頁的圖／動畫是 950 寬，內容框 950、文字區仍 650 置中
