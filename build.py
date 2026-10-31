@@ -147,12 +147,6 @@ window.addEventListener("load", function () {
     d.appendChild(p);
     // 設定和官方一致：載入後直接播放（不顯示橘色播放鈕），瀏覽器擋自動出聲時顯示「點擊以取消靜音」
     p.load({url: d.dataset.swf, autoplay: "on", unmuteOverlay: "visible", splashScreen: false, letterbox: "on"});
-    // 瀏覽器規定要點一下才能出聲：左上角放一個小喇叭，點下去才取消靜音（官方也是小喇叭）
-    var b = document.createElement("button");
-    b.type = "button"; b.title = "點擊以開啟聲音"; b.textContent = "🔇";
-    b.style.cssText = "position:absolute;left:4px;top:4px;z-index:4;background:rgba(0,0,0,.45);color:#fff;border:0;border-radius:3px;font-size:16px;line-height:1;padding:3px 5px;cursor:pointer";
-    b.onclick = function () { try { p.play(); } catch (e) {} b.remove(); };
-    d.appendChild(b);
   });
 });
 </script>"""
