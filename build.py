@@ -184,9 +184,13 @@ window.addEventListener("load", function () {
   document.querySelectorAll(".flash[data-pick]").forEach(function (d) {
     var links = d.querySelectorAll("a.pick");
     // 「點擊以取消靜音」遮罩還在時不啟用連結（那一下點擊只用來取消靜音）
+    // 找得到遮罩就看它有沒有顯示；找不到（版本不同）就當作第一下點擊是取消靜音
+    var unlocked = false;
     function muted() {
-      var p = d.querySelector("ruffle-player"), o = p && p.shadowRoot && p.shadowRoot.querySelector("#unmute-overlay");
-      if (!o) return false;
+      var p = d.querySelector("ruffle-player"), sr = p && p.shadowRoot;
+      var o = sr && sr.querySelector('#unmute-overlay,[id*="unmute"],[class*="unmute"]');
+      if (unlocked) return false;
+      if (!o) return true;
       var cs = getComputedStyle(o);
       return cs.display !== "none" && cs.visibility !== "hidden" && o.getBoundingClientRect().width > 0;
     }
@@ -199,7 +203,7 @@ window.addEventListener("load", function () {
       }
       return null;
     }
-    d.addEventListener("click", function (e) { var a = hit(e); if (a) location.href = a.href; }, true);
+    d.addEventListener("click", function (e) { var a = hit(e); unlocked = true; if (a) location.href = a.href; }, true);
     d.addEventListener("mousemove", function (e) { d.style.cursor = hit(e) ? "pointer" : ""; });
   });
 });
