@@ -37,14 +37,14 @@ article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 
 .story .assets>*+*{margin-top:32px}
 .story .assets img,.story .assets video{width:650px;max-width:100%;height:auto;display:block;margin:0 auto}
 .flash{margin:0 auto;max-width:650px;position:relative}
-.flash a.pick{pointer-events:none;position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
+.flash a.pick{pointer-events:none;position:absolute;z-index:3;top:40.3%;height:27.7%;display:block;background:transparent;cursor:pointer}
 .flash a.pick.late{visibility:hidden;animation:pickshow 0s linear forwards}
 /* 測試用：把動畫上的換頁範圍用黃框標出來（確認位置後，刪掉下面這一行就好） */
 .flash a.pick{outline:3px solid #ff0;background:rgba(255,255,0,.18)}
 .flash a.pick.late{visibility:visible!important}
 @keyframes pickshow{to{visibility:visible}}
 .flashwin{position:relative;width:100%;overflow:hidden;margin:0 auto;background:#fff}
-.flashwin a.pick{position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
+.flashwin a.pick{position:absolute;z-index:3;top:40.3%;height:27.7%;display:block;background:transparent;cursor:pointer}
 .flashwin a.pick:hover{outline:3px solid rgba(255,255,0,.6)}
 .flashwin iframe{position:absolute;left:0;top:0;width:1000px;height:1600px;border:0;transform-origin:0 0}
 .hscroll{overflow-x:scroll;margin:0 0 16px}
@@ -511,13 +511,13 @@ def build():
         PICK = {8282: ("l", 8283), 8297: ("m", 8298), 8301: ("l", 8302), 8305: ("r", 8306), 8316: ("l", 8317)}
         if n in PICK and 'class="flash"' in assets:
             side, tgt = PICK[n]
-            x = {"l": (4.2, 25.8), "m": (37.2, 25.7), "r": (70.2, 25.7)}[side]
+            x = {"l": (18.3, 17.8), "m": (41.3, 17.8), "r": (63.6, 18.1)}[side]
             assets = assets.replace('class="flash" ', 'class="flash" data-pick="1" ', 1).replace("></div>",
                 f'><a class="pick" href="{base}/p/{tgt:06d}.html" title="下一頁" '
                 f'style="left:{x[0]}%;width:{x[1]}%"></a></div>', 1)
         # 角色選擇頁：Flash 裡三個星球各自連到不同的頁面（8199：左 Dave→8200、中 Jade→8224、右 Rose→8243）
         # 頁碼: [(目標頁, 左%, 上%, 寬%, 高%), ...]，百分比是相對 650x450 的動畫
-        MULTI = {8199: [(8200, 15.1, 23.6, 22.6, 32.7), (8224, 38.9, 23.6, 22.6, 32.7), (8243, 62.8, 23.6, 22.6, 32.7)], 9386: [(9387, 2.6, 4.2, 23.4, 23.1), (9393, 26.9, 4.2, 23.4, 23.1), (9397, 51.2, 4.2, 23.4, 23.1), (9400, 75.5, 4.2, 23.4, 23.1), (9402, 2.6, 77.2, 23.4, 22.8), (9408, 26.9, 77.2, 23.4, 22.8), (9410, 51.2, 77.2, 23.4, 22.8), (9413, 75.5, 77.2, 23.4, 22.8)]}
+        MULTI = {8199: [(8200, 15.1, 23.6, 22.6, 32.7), (8224, 38.9, 23.6, 22.6, 32.7), (8243, 62.8, 23.6, 22.6, 32.7)], 9386: [(9387, 2.9, 4.4, 22.8, 22.4), (9393, 27.2, 4.4, 22.8, 22.4), (9397, 51.5, 4.4, 22.8, 22.4), (9400, 75.8, 4.4, 22.8, 22.4), (9402, 2.9, 75.2, 22.8, 22.6), (9408, 27.2, 75.2, 22.8, 22.6), (9410, 51.5, 75.2, 22.8, 22.6), (9413, 75.8, 75.2, 22.8, 22.6)]}
         if n in MULTI and ('class="flash"' in assets or 'class="flashwin"' in assets):
             links = "".join(
                 f'<a class="pick" href="{base}/p/{t:06d}.html" title="第 {t} 頁" '
@@ -543,7 +543,7 @@ def build():
             next_html = ""
         elif n in PICK and 'class="flashwin"' in assets:
             side, tgt = PICK[n]
-            x = {"l": (4.2, 25.8), "m": (37.2, 25.7), "r": (70.2, 25.7)}[side]
+            x = {"l": (18.3, 17.8), "m": (41.3, 17.8), "r": (63.6, 18.1)}[side]
             assets = assets.replace("</iframe></div>",
                 f'</iframe><a class="pick" href="{base}/p/{tgt:06d}.html" title="下一頁" '
                 f'style="left:{x[0]}%;width:{x[1]}%"></a></div>', 1)
