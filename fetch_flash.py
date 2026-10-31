@@ -28,6 +28,19 @@ def main():
             if it.get("type") == "flash" and (not only or int(p) in only)]
     ok = skip = 0
     failed = []
+    # Ruffle 要用的字型檔（官方動畫文字顯示靠它們，沒有的話 8300、9001 這類有文字的動畫會是空白）
+    for name in ("homestuck-fonts.swf", "courier-new-pixel.swf"):
+        dest = ROOT / "assets" / "ruffle" / name
+        if dest.exists() and dest.stat().st_size > 0:
+            continue
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            req = urllib.request.Request("https://www.homestuck.com/assets/ruffle/" + name, headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=120) as r:
+                dest.write_bytes(r.read())
+            print(f"字型：{name}")
+        except Exception as e:
+            print(f"字型 {name} 下載失敗：{e}")
     for page, f in sorted(todo):
         dest = ROOT / "assets" / f
         if dest.exists() and dest.stat().st_size > 0:
@@ -47,6 +60,19 @@ def main():
             failed.append(page)
             print(f"{page}: 失敗 {e}")
         time.sleep(0.5)
+    # Ruffle 要用的字型（官方站用的兩個字型 SWF），放在 assets/ruffle/
+    for name in ("homestuck-fonts.swf", "courier-new-pixel.swf"):
+        dest = ROOT / "assets" / "ruffle" / name
+        if dest.exists() and dest.stat().st_size > 0:
+            continue
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            req = urllib.request.Request("https://www.homestuck.com/assets/ruffle/" + name, headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=60) as r:
+                dest.write_bytes(r.read())
+            print(f"字型：{name}")
+        except Exception as e:
+            print(f"字型 {name} 失敗 {e}")
     print(f"完成：新下載 {ok}，略過 {skip}，失敗 {len(failed)} {failed if failed else ''}")
 
 

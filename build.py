@@ -37,8 +37,12 @@ article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 
 .story .assets>*+*{margin-top:32px}
 .story .assets img,.story .assets video{width:650px;max-width:100%;height:auto;display:block;margin:0 auto}
 .flash{margin:0 auto;max-width:650px;position:relative}
-.flash a.pick{position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
-.flash a.pick:hover{outline:3px solid rgba(255,255,0,.6)}
+.flash a.pick{pointer-events:none;position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
+.flash a.pick.late{visibility:hidden;animation:pickshow 0s linear forwards}
+/* 測試用：把動畫上的換頁範圍用黃框標出來（確認位置後，刪掉下面這一行就好） */
+.flash a.pick{outline:3px solid #ff0;background:rgba(255,255,0,.18)}
+.flash a.pick.late{visibility:visible!important}
+@keyframes pickshow{to{visibility:visible}}
 .flashwin{position:relative;width:100%;overflow:hidden;margin:0 auto;background:#fff}
 .flashwin a.pick{position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
 .flashwin a.pick:hover{outline:3px solid rgba(255,255,0,.6)}
@@ -51,6 +55,8 @@ body.wide950 .assets.top950{margin:0}
 body.wide950 .assets.top950 .flashwin,body.wide950 .assets.top950 .flash{max-width:950px}
 body.wide950 .assets.top950 img,body.wide950 .assets.top950 video{width:950px;max-width:none;margin:0;display:block}
 body.wide950 article.story{margin:0 auto 14px}
+body.bare,body.bare main.wrap{background:#fff}
+body.bare article.story{background:#fff}
 body.wide main.wrap{max-width:none;margin:0 12px}
 body.wide article.story{max-width:none}
 .pw{margin:16px 28px 0;text-align:center;font:14px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
@@ -147,12 +153,14 @@ RUFFLE_JS = r"""
     unmuteOverlay: "visible", scale: "showall", upgradeToHttps: true,
     fontSources: [base + "/assets/ruffle/homestuck-fonts.swf", base + "/assets/ruffle/courier-new-pixel.swf"],
     defaultFonts: {sans: ["Arial"], serif: ["Times New Roman"], typewriter: ["Courier New"]},
+    // 格式和官方站一致：[ "/正規表示式/", "取代成" ]
     urlRewriteRules: [
-      [/^http:\/\/www\.mspaintadventures\.com\/\?s=6&p=(\d+)/, base + "/p/$1.html"],
-      [/^http:\/\/www\.mspaintadventures\.com\/\?s=4/, "https://zhhomestuck.github.io/"],
-      [/^http:\/\/www\.mspaintadventures\.com\/(soundcredits|artcredits)\.html/, base + "/"],
-      [/^http:\/\/www\.mspaintadventures\.com\/storyfiles\/hs2\/(\d+)\/([^\/]+)\.(\w+)/, "https://storage.homestuck.com/story/homestuck/media/audio/$1/$2.$3"],
-      [/^http:\/\/www\.mspaintadventures\.com\/storyfiles\/hs2\/songs\/alterniaboundsongs\/([^\/]+)\.(\w+)/, "https://storage.homestuck.com/story/homestuck/media/audio/004692/$1.$2"]
+      ["/^http:\\/\\/www\\.mspaintadventures\\.com\\/\\?s=6&p=(\\d+)/", base + "/p/$1.html"],
+      ["/^http:\\/\\/www\\.mspaintadventures\\.com\\/\\?s=4/", "https://zhhomestuck.github.io/"],
+      ["/^http:\\/\\/www\\.mspaintadventures\\.com\\/(soundcredits|artcredits)\\.html/", base + "/"],
+      ["/^http:\\/\\/www\\.mspaintadventures\\.com\\/storyfiles\\/hs2\\/(\\d+)\\/([^\\/]+)\\.(\\w+)/", "https://storage.homestuck.com/story/homestuck/media/audio/$1/$2.$3"],
+      ["/^http:\\/\\/www\\.mspaintadventures\\.com\\/storyfiles\\/hs2\\/songs\\/alterniaboundsongs\\/([^\\/]+)\\.(\\w+)/", "https://storage.homestuck.com/story/homestuck/media/audio/004692/$1.$2"],
+      ["/^http:\\/\\/www\\.timelesschaos\\.com\\/transferFiles\\/618heircut.mp3/", "https://storage.homestuck.com/story/homestuck/media/audio/005221/618heircut.mp3"]
     ]
   };
 })();
@@ -169,6 +177,20 @@ window.addEventListener("load", function () {
     d.appendChild(p);
     // 設定和官方一致：載入後直接播放（不顯示橘色播放鈕），瀏覽器擋自動出聲時顯示「點擊以取消靜音」
     p.load({url: d.dataset.swf, autoplay: "on", unmuteOverlay: "visible", splashScreen: false, letterbox: "on"});
+  });
+  // 動畫上的換頁連結：連結本身不擋滑鼠（動畫的滑過效果才看得到），改成監聽點擊，點在連結範圍內就換頁
+  document.querySelectorAll(".flash[data-pick]").forEach(function (d) {
+    var links = d.querySelectorAll("a.pick");
+    function hit(e) {
+      for (var i = 0; i < links.length; i++) {
+        var a = links[i], r = a.getBoundingClientRect();
+        if (getComputedStyle(a).visibility === "hidden") continue;
+        if (e.clientX >= r.left && e.clientX <= r.right && e.clientY >= r.top && e.clientY <= r.bottom) return a;
+      }
+      return null;
+    }
+    d.addEventListener("click", function (e) { var a = hit(e); if (a) location.href = a.href; }, true);
+    d.addEventListener("mousemove", function (e) { d.style.cursor = hit(e) ? "pointer" : ""; });
   });
 });
 </script>"""
@@ -504,12 +526,12 @@ def build():
                 assets = assets.replace('class="flash" ', 'class="flash" data-pick="1" ', 1).replace("></div>", ">" + links + "</div>", 1)
         # 動畫裡自己帶連結的頁（官方是動畫內的連結換頁）：本站播放時在連結位置蓋透明連結，並拿掉下方的「下一頁」按鈕
         # 頁碼: (下一頁, 左%, 上%, 寬%, 高%)
-        INLINK = {8105: (8106, 3, 92, 92, 8), 8143: (8144, 3, 88, 20, 10)}
+        INLINK = {8105: (8106, 3, 92, 92, 8, 0), 8143: (8144, 3, 89, 42, 8, 108)}  # 最後一項：幾秒後才可點（0=馬上）
         if n in INLINK and 'class="flash"' in assets:
-            tgt, il, it_, iw, ih = INLINK[n]
+            tgt, il, it_, iw, ih, delay = INLINK[n]
+            late = f' class="pick late" style="animation-delay:{delay}s;' if delay else ' class="pick" style="'
             assets = assets.replace('class="flash" ', 'class="flash" data-pick="1" ', 1).replace("></div>",
-                f'><a class="pick" href="{base}/p/{tgt:06d}.html" title="下一頁" '
-                f'style="left:{il}%;top:{it_}%;width:{iw}%;height:{ih}%"></a></div>', 1)
+                f'><a{late}left:{il}%;top:{it_}%;width:{iw}%;height:{ih}%" href="{base}/p/{tgt:06d}.html" title="下一頁"></a></div>', 1)
             next_html = ""
         elif n in PICK and 'class="flashwin"' in assets:
             side, tgt = PICK[n]
@@ -585,6 +607,8 @@ def build():
                     f'<p class="box"><a href="{esc(official_link)}">到官方頁面輸入密碼</a></p>'
                     f"<p>{back}</p></div>" + hintbox
                 )
+        if n == 9305:  # 官方 /shes8ack：整頁純白，只有一個 950x650 的動畫（沒有標題、外框、連結），動畫自己播完換頁
+            body_class = (body_class + " bare").strip()
         if "A6A6" in pflags:  # 官方 Act 6 Act 6 的綠色配色（body/外框/內容框 = #042300/#168500/#073c00，字 #2ed73a）
             body_class = (body_class + " a6a6").strip()
         top950 = ""
