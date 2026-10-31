@@ -9,7 +9,7 @@ except ImportError:
     BasePen = object
     curve_to_quadratic = None
 
-S = 20.48  # 1000 upem -> 20480 EM（DefineFont3 的座標系）
+EM = 20480  # DefineFont3 的座標系
 
 
 class _BW:
@@ -48,6 +48,7 @@ class _P(BasePen):
 
 
 def glyph_shape(font, ch):
+    S = EM / font['head'].unitsPerEm
     """回傳 (shape bytes, advance) ；字型沒有這個字回傳 None"""
     cmap = font.getBestCmap()
     if ord(ch) not in cmap: return None
@@ -92,10 +93,16 @@ class GlyphSource:
         self.cache_path = cache_path
         self.cache = json.load(open(cache_path, encoding="utf-8")) if os.path.exists(cache_path) else {}
         self.font = None
+        meta = self.cache.pop("_meta", None)
         if font_path:
             from fontTools.ttLib import TTFont, TTCollection
             self.font = TTCollection(font_path).fonts[ttc_index] if font_path.lower().endswith(".ttc") else TTFont(font_path)
-        self.asc = 880; self.desc = 120  # 單位：1000 upem
+        self.asc = 0.88; self.desc = 0.12  # 佔字高比例（有字型檔時會用字型自己的值）
+        if self.font is not None:
+            hh = self.font['hhea']; u = self.font['head'].unitsPerEm
+            self.asc, self.desc = hh.ascent / u, -hh.descent / u
+        elif meta:
+            self.asc, self.desc = meta
 
     def get(self, ch):
         if ch in self.cache:
@@ -106,7 +113,9 @@ class GlyphSource:
         return r
 
     def save(self):
+        self.cache["_meta"] = [self.asc, self.desc]
         json.dump(self.cache, open(self.cache_path, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+        self.cache.pop("_meta", None)
 
 
 def define_font3(font_id, name, chars, src):
@@ -121,8 +130,8 @@ def define_font3(font_id, name, chars, src):
         raise KeyError("字型缺這些字（快取裡沒有、也沒給字型檔）：" + "".join(missing))
     n = len(shapes)
     body = struct.pack("<H", font_id)
-    # flags: HasLayout | WideOffsets | WideCodes | Bold
-    body += bytes([0x80 | 0x08 | 0x04 | 0x01, 0x03])      # language 3 = 繁中
+    # flags: HasLayout | WideOffsets | WideCodes
+    body += bytes([0x80 | 0x08 | 0x04, 0x03])      # language 3 = 繁中
     nm = name.encode(); body += bytes([len(nm)]) + nm
     body += struct.pack("<H", n)
     offs_size = 4 * n + 4
@@ -132,7 +141,7 @@ def define_font3(font_id, name, chars, src):
     body += b"".join(struct.pack("<I", o) for o in offs) + struct.pack("<I", pos)
     body += b"".join(sh for _, sh in shapes)
     body += b"".join(struct.pack("<H", ord(ch)) for ch, _ in shapes)
-    asc, desc = int(src.asc * S), int(src.desc * S)
+    asc, desc = int(src.asc * EM), int(src.desc * EM)
     body += struct.pack("<hhh", asc, desc, 0)
     body += b"".join(struct.pack("<h", min(a, 32767)) for a in advs)
     body += b"".join(bytes([0x00]) + b"\0" * 0 + b"" for _ in range(0))   # placeholder (no-op)

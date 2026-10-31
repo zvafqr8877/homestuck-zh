@@ -6,9 +6,9 @@
     python tools/swf_zh.py 9001 8300  # 只處理指定頁
 
 原始 SWF 要先用 fetch_flash.py 下載到 assets/（assets/<manifest 路徑> 或 assets/flashes/<檔名>）。
-字型：嵌入思源黑體粗體（SIL OFL），只含用到的字；字形放在 swf_zh/glyph_cache.json。
+字型：嵌入文泉驛正黑（WenQuanYi Zen Hei，GPLv2＋字型嵌入例外），只含用到的字；字形放在 swf_zh/glyph_cache.json。
 如果譯文新增了快取裡沒有的字，工具會列出缺的字；請把缺字回報，或用 --font 指定
-一個 .ttc/.ttf 字型檔（例如思源黑體）讓它自己補。
+一個 .ttc/.ttf 字型檔（例如文泉驛正黑）讓它自己補。
 """
 import argparse, json, struct, sys
 from pathlib import Path
@@ -98,7 +98,7 @@ def patch(page, glyphs):
         for k in texts:
             for c in missing: texts[k] = texts[k].replace(c, "□")
         chars = (chars - set(missing)) | {"□"}
-    fbody, advs = define_font3(FONT_ID, "NotoSansTCBold", chars, glyphs)
+    fbody, advs = define_font3(FONT_ID, "WenQuanYiZenHei", chars, glyphs)
     done = set(); first_edit = None
     for i, (code, data) in enumerate(tags):
         if code in (11, 33):
@@ -108,7 +108,7 @@ def patch(page, glyphs):
             fh = st["h"]
             line = texts[sid].replace("\r", " ")
             wtw = int(sum(advs.get(c, 20480 * 0.55) for c in line) * fh / 20480) + 120
-            ymin = st["ty"] + st["yo"] - int(fh * 0.88) - 40
+            ymin = st["ty"] + st["yo"] - int(fh * glyphs.asc) - 40
             cx = (st["bd"][0] + st["bd"][1]) // 2          # 官方是整行置中：以原本英文文字的中心為中心
             r = dict(id=sid, bounds=rect_bytes(cx - wtw // 2, cx + wtw // 2, ymin, ymin + int(fh * 1.3) + 80),
                      f1=0x8D, f2=0x11, font=FONT_ID, fclass=None, fh=fh, color=st["color"] + b"\xff",
@@ -148,7 +148,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("pages", nargs="*")
     ap.add_argument("--font", help="補字用的字型檔（.ttc/.ttf），沒有缺字就不需要")
-    ap.add_argument("--ttc-index", type=int, default=3, help="TTC 裡的第幾個字型（思源黑體 TC 是 3）")
+    ap.add_argument("--ttc-index", type=int, default=0, help="TTC 裡的第幾個字型（文泉驛正黑是 0）")
     ap.add_argument("--no-convert", action="store_true", help="測試用：不做簡轉繁")
     a = ap.parse_args()
     global NO_CONVERT
