@@ -44,7 +44,7 @@ article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 
 .flash a.pick.late{visibility:visible!important}
 @keyframes pickshow{to{visibility:visible}}
 .flashwin{position:relative;width:100%;overflow:hidden;margin:0 auto;background:#fff}
-.flashwin a.pick{position:absolute;z-index:3;top:40.3%;height:27.7%;display:block;background:transparent;cursor:pointer}
+.flashwin a.pick{position:absolute;z-index:3;top:34.7%;height:40.5%;display:block;background:transparent;cursor:pointer}
 .flashwin a.pick:hover{outline:3px solid rgba(255,255,0,.6)}
 .flashwin iframe{position:absolute;left:0;top:0;width:1000px;height:1600px;border:0;transform-origin:0 0}
 .hscroll{overflow-x:scroll;margin:0 0 16px}
@@ -512,9 +512,11 @@ def build():
         if n in PICK and 'class="flash"' in assets:
             side, tgt = PICK[n]
             x = {"l": (4.2, 25.8), "m": (37.2, 25.7), "r": (70.2, 25.7)}[side]
+            # 各頁微調 (左, 上, 寬, 高)：依使用者截圖，讓黃框貼齊那張圖
+            ADJ = {8282: (0.5, 0.7, -1.0, -1.4), 8316: (0.3, 0.5, -1.4, -1.2)}.get(n, (0, 0, 0, 0))
             assets = assets.replace('class="flash" ', 'class="flash" data-pick="1" ', 1).replace("></div>",
                 f'><a class="pick" href="{base}/p/{tgt:06d}.html" title="下一頁" '
-                f'style="left:{x[0]}%;width:{x[1]}%"></a></div>', 1)
+                f'style="left:{x[0]+ADJ[0]:.1f}%;top:{34.7+ADJ[1]:.1f}%;width:{x[1]+ADJ[2]:.1f}%;height:{40.5+ADJ[3]:.1f}%"></a></div>', 1)
         # 角色選擇頁：Flash 裡三個星球各自連到不同的頁面（8199：左 Dave→8200、中 Jade→8224、右 Rose→8243）
         # 頁碼: [(目標頁, 左%, 上%, 寬%, 高%), ...]，百分比是相對 650x450 的動畫
         MULTI = {8199: [(8200, 15.1, 23.6, 22.6, 32.7), (8224, 38.9, 23.6, 22.6, 32.7), (8243, 62.8, 23.6, 22.6, 32.7)], 9386: [(9387, 2.5, 3.5, 22.8, 22.6), (9393, 26.3, 3.5, 22.8, 22.6), (9397, 50.2, 3.5, 22.8, 22.6), (9400, 74.0, 3.5, 22.8, 22.6), (9402, 2.5, 74.3, 22.8, 22.6), (9408, 26.3, 74.3, 22.8, 22.6), (9410, 50.2, 74.3, 22.8, 22.6), (9413, 74.0, 74.3, 22.8, 22.6)]}
@@ -543,7 +545,7 @@ def build():
             next_html = ""
         elif n in PICK and 'class="flashwin"' in assets:
             side, tgt = PICK[n]
-            x = {"l": (18.3, 17.8), "m": (41.3, 17.8), "r": (63.6, 18.1)}[side]
+            x = {"l": (4.2, 25.8), "m": (37.2, 25.7), "r": (70.2, 25.7)}[side]
             assets = assets.replace("</iframe></div>",
                 f'</iframe><a class="pick" href="{base}/p/{tgt:06d}.html" title="下一頁" '
                 f'style="left:{x[0]}%;width:{x[1]}%"></a></div>', 1)
