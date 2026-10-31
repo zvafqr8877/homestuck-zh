@@ -1,5 +1,4 @@
 # 簡體來源稿與本機素材不要進版控（授權與容量考量）
 src_sc/
-assets/
 docs/
 __pycache__/
