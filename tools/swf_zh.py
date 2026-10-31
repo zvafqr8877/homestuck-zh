@@ -6,9 +6,9 @@
     python tools/swf_zh.py 9001 8300  # 只處理指定頁
 
 原始 SWF 要先用 fetch_flash.py 下載到 assets/（assets/<manifest 路徑> 或 assets/flashes/<檔名>）。
-字型：嵌入文泉驛正黑（WenQuanYi Zen Hei，GPLv2＋字型嵌入例外），只含用到的字；字形放在 swf_zh/glyph_cache.json。
+字型：嵌入文泉驛正黑（WenQuanYi Zen Hei，GPLv2＋字型嵌入例外），只含用到的字；字形放在 swf_zh/glyph_cache.json.gz。
 如果譯文新增了快取裡沒有的字，工具會列出缺的字；請把缺字回報，或用 --font 指定
-一個 .ttc/.ttf 字型檔（例如文泉驛正黑）讓它自己補。
+一個 .ttc/.ttf 字型檔（例如 C:\\Windows\\Fonts\\msjhbd.ttc）改用該字型產生。
 """
 import argparse, json, struct, sys
 from pathlib import Path
@@ -98,7 +98,7 @@ def patch(page, glyphs):
         for k in texts:
             for c in missing: texts[k] = texts[k].replace(c, "□")
         chars = (chars - set(missing)) | {"□"}
-    fbody, advs = define_font3(FONT_ID, "WenQuanYiZenHei", chars, glyphs)
+    fbody, advs = define_font3(FONT_ID, "ZhFont", chars, glyphs)
     done = set(); first_edit = None
     for i, (code, data) in enumerate(tags):
         if code in (11, 33):
@@ -147,16 +147,29 @@ def patch(page, glyphs):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("pages", nargs="*")
-    ap.add_argument("--font", help="補字用的字型檔（.ttc/.ttf），沒有缺字就不需要")
+    ap.add_argument("--font", help="改用這個字型檔（.ttc/.ttf）產生字形，不用內建快取；需要 pip install fonttools")
     ap.add_argument("--ttc-index", type=int, default=0, help="TTC 裡的第幾個字型（文泉驛正黑是 0）")
+    ap.add_argument("--cache", action="store_true", help="不用系統字型，改用內建字形快取（文泉驛正黑）")
     ap.add_argument("--no-convert", action="store_true", help="測試用：不做簡轉繁")
     a = ap.parse_args()
     global NO_CONVERT
     NO_CONVERT = a.no_convert
-    g = GlyphSource(str(ROOT / "swf_zh" / "glyph_cache.json"), a.font, a.ttc_index)
+    # 預設：Windows 上找得到微軟正黑體粗體（msjhbd.ttc）就直接用它現場產生字形（需要 pip install fonttools）。
+    # --cache 強制改用內建字形快取（文泉驛正黑）。有給 --font 就用指定的字型檔。
+    if not a.font and not a.cache:
+        for cand in (r"C:\Windows\Fonts\msjhbd.ttc", r"C:\Windows\Fonts\msjh.ttc"):
+            if Path(cand).exists():
+                a.font, a.ttc_index = cand, 0
+                break
+    if a.font:
+        try:
+            import fontTools  # noqa
+        except ImportError:
+            raise SystemExit("要用字型檔產生字形，請先執行：pip install fonttools")
+        print("使用字型：", a.font)
+    g = GlyphSource(None if a.font else str(ROOT / "swf_zh" / "glyph_cache.json.gz"), a.font, a.ttc_index)
     pages = a.pages or sorted(p.stem for p in (ROOT / "swf_zh").glob("*.json") if p.stem.isdigit())
     ok = all([patch(p, g) for p in pages])
-    if a.font: g.save()
     sys.exit(0 if ok else 1)
 
 

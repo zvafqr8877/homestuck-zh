@@ -7,9 +7,21 @@
   "flash_mode": "iframe",
   "official_url": "https://www.homestuck.com/{page:06d}",
   "credits": [
-    {"name": "Homestuck 繁體中文翻譯（zhhomestuck）", "url": "https://zhhomestuck.github.io/", "note": "繁體中文譯文（至 A6I5）"},
-    {"name": "簡體中文翻譯站（linzhiyi622）", "url": "https://linzhiyi622.github.io/", "note": "簡體中文譯文來源（需取得站長同意）"},
-    {"name": "The Unofficial Homestuck Collection", "url": "https://uhca.carrd.co/", "note": "原文與素材參考"}
+    {
+      "name": "Homestuck 繁體中文翻譯（zhhomestuck）",
+      "url": "https://zhhomestuck.github.io/",
+      "note": "繁體中文譯文（至 A6I5）"
+    },
+    {
+      "name": "簡體中文翻譯站（linzhiyi622）",
+      "url": "https://linzhiyi622.github.io/",
+      "note": "簡體中文譯文來源（需取得站長同意）"
+    },
+    {
+      "name": "The Unofficial Homestuck Collection",
+      "url": "https://uhca.carrd.co/",
+      "note": "原文與素材參考"
+    }
   ],
-  "copyright": "Homestuck 的著作權屬於 Andrew Hussie。本站為讀者製作的非官方、非營利目的整理與翻譯，內容如有疑慮請聯絡管理員。"
+  "copyright": "Homestuck 的著作權屬於 Andrew Hussie。本站為讀者製作的非官方、非營利目的整理與翻譯，內容如有疑慮請聯絡管理員。 部分 Flash 動畫內的中文譯文字形取自 Microsoft JhengHei（微軟正黑體）Bold，該字型著作權屬 Microsoft Corporation 所有，僅用於顯示本站的非營利翻譯文字。"
 }

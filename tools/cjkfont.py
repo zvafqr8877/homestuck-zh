@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """把字型輪廓轉成 SWF 的 DefineFont3 tag。glyph 資料可快取（glyph_cache.json），
 這樣在沒有字型檔的電腦上也能重新產生（只要字都在快取裡）。"""
-import base64, json, os, struct
+import base64, gzip, json, os, struct
 try:                       # 只有「補字」才需要 fontTools；用快取產生字型時不需要安裝
     from fontTools.pens.basePen import BasePen
     from fontTools.cu2qu.cu2qu import curve_to_quadratic
@@ -91,7 +91,7 @@ def glyph_shape(font, ch):
 class GlyphSource:
     def __init__(self, cache_path, font_path=None, ttc_index=3):
         self.cache_path = cache_path
-        self.cache = json.load(open(cache_path, encoding="utf-8")) if os.path.exists(cache_path) else {}
+        self.cache = json.load(gzip.open(cache_path, "rt", encoding="utf-8")) if cache_path and os.path.exists(cache_path) else {}
         self.font = None
         meta = self.cache.pop("_meta", None)
         if font_path:
@@ -113,8 +113,9 @@ class GlyphSource:
         return r
 
     def save(self):
+        if not self.cache_path: return
         self.cache["_meta"] = [self.asc, self.desc]
-        json.dump(self.cache, open(self.cache_path, "w", encoding="utf-8"), ensure_ascii=False, separators=(",", ":"))
+        json.dump(self.cache, gzip.open(self.cache_path, "wt", encoding="utf-8", compresslevel=9), ensure_ascii=False, separators=(",", ":"))
         self.cache.pop("_meta", None)
 
 

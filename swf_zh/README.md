@@ -17,7 +17,9 @@ python tools/swf_zh.py                       # 產生 assets/zh/ 底下的翻譯
 ```
 然後 `git add -A`、commit、push（`.gitignore` 裡不能有 `assets/`）。build.py 會優先使用 `assets/zh/` 裡的版本。
 
-字型是思源黑體粗體（OFL），字形放在 `glyph_cache.json`（涵蓋 Big5 常用字），只把用到的字嵌進每個 SWF。
+字型：Windows 上預設直接用系統的微軟正黑體粗體（C:\\Windows\\Fonts\\msjhbd.ttc，需 `pip install fonttools`）；加 `--cache` 則改用內建的文泉驛正黑字形快取。版權頁已註明字型來源。
+
+（內建快取）字型是文泉驛正黑，字形放在 `glyph_cache.json.gz`（涵蓋整個 Big5＋港字集約 1.7 萬字），只把用到的字嵌進每個 SWF。
 若出現「字型缺這些字」，把缺字告訴我，或用 `--font C:\Windows\Fonts\xxx.ttc` 指定字型檔補字。
 
 ## 修改譯文
