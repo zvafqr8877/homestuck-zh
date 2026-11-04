@@ -199,7 +199,17 @@ window.addEventListener("load", function () {
       }
       return null;
     }
-    d.addEventListener("click", function (e) { var a = hit(e); unlocked = true; if (a) location.href = a.href; }, true);
+    // 點在連結範圍內時，不讓滑鼠按下/放開/點擊傳給動畫（否則動畫自己的 getURL 會另外開官方舊網址 mspaintadventures.com）
+    ["pointerdown", "mousedown", "pointerup", "mouseup", "touchstart", "touchend"].forEach(function (t) {
+      d.addEventListener(t, function (e) {
+        var x = e.touches && e.touches[0] || e.changedTouches && e.changedTouches[0] || e;
+        if (hit({clientX: x.clientX, clientY: x.clientY})) { e.stopImmediatePropagation(); e.stopPropagation(); }
+      }, true);
+    });
+    d.addEventListener("click", function (e) {
+      var a = hit(e); unlocked = true;
+      if (a) { e.preventDefault(); e.stopImmediatePropagation(); e.stopPropagation(); location.href = a.href; }
+    }, true);
     d.addEventListener("mousemove", function (e) { d.style.cursor = hit(e) ? "pointer" : ""; });
   });
 });
