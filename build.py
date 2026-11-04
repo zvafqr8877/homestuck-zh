@@ -61,7 +61,7 @@ body.wide article.story{max-width:none}
 .branchrow{margin:14px 28px;text-align:center;font:16px/1.8 "Courier New",monospace}
 .pw{margin:16px 28px 0;text-align:center;font:14px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
 @font-face{font-family:Homestuck;src:url("assets/fonts/homestuck.woff2") format("woff2");font-display:swap}
-.pw input{font:16px/24px Homestuck,monospace;padding:2px 6px;width:200px}
+.pw input{text-transform:uppercase;font:16px/24px Homestuck,monospace;padding:2px 6px;width:200px}
 .hint2{color:#a00;min-height:1.5em;margin:4px 0}
 .hintbox{margin:16px 28px 0;border:1px dashed #888;padding:6px 20px 10px;text-align:center}
 .hintbox button{font:12px/16px Geneva,"Lucida Grande",sans-serif;padding:2px 8px;cursor:pointer}
@@ -621,7 +621,7 @@ def build():
             if h and nu:
                 extra = (
                     '<div class="pw"><form id="pwform"><label>請輸入密碼：<br>'
-                    '<input id="pwin" type="text" autocomplete="off" spellcheck="false"> '
+                    '<input id="pwin" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false"> '
                     '<button type="submit">送出</button></label></form>'
                     '<p id="pwmsg" class="hint2"></p>'
                     f"<p>{back}</p></div>" + hintbox +
