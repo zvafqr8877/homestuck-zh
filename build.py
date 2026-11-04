@@ -53,12 +53,15 @@ body.wide950 .assets.top950 img,body.wide950 .assets.top950 video{width:950px;ma
 body.wide950 article.story{margin:0 auto 14px}
 body.bare,body.bare main.wrap{background:#fff}
 body.bare header.site{display:none}
+body.gameover header.site,body.gameover article.story,body.gameover .page-info,body.gameover footer{display:none}
+body.gameover main.wrap{margin-bottom:0}
 body.bare article.story{background:#fff}
 body.wide main.wrap{max-width:none;margin:0 12px}
 body.wide article.story{max-width:none}
 .branchrow{margin:14px 28px;text-align:center;font:16px/1.8 "Courier New",monospace}
 .pw{margin:16px 28px 0;text-align:center;font:14px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
-.pw input{font:14px Verdana;padding:2px 6px;width:200px}
+@font-face{font-family:Homestuck;src:url("assets/fonts/homestuck.woff2") format("woff2");font-display:swap}
+.pw input{font:16px/24px Homestuck,monospace;padding:2px 6px;width:200px}
 .hint2{color:#a00;min-height:1.5em;margin:4px 0}
 .hintbox{margin:16px 28px 0;border:1px dashed #888;padding:6px 20px 10px;text-align:center}
 .hintbox button{font:12px/16px Geneva,"Lucida Grande",sans-serif;padding:2px 8px;cursor:pointer}
@@ -636,6 +639,8 @@ def build():
                     f'<p class="box"><a href="{esc(official_link)}">到官方頁面輸入密碼</a></p>'
                     f"<p>{back}</p></div>" + hintbox
                 )
+        if n == 8801:  # 官方 /GAMEOVER：整頁只有一個 950x786 的動畫（沒有標題、導覽列、文字、下一頁），背景是 Act 6 Act 6 綠色
+            body_class = (body_class + " gameover").strip()
         if n == 9305:  # 官方 /shes8ack：整頁純白，只有一個 950x650 的動畫（沒有標題、外框、連結），動畫自己播完換頁
             body_class = (body_class + " bare").strip()
         if "A6A6" in pflags:  # 官方 Act 6 Act 6 的綠色配色（body/外框/內容框 = #042300/#168500/#073c00，字 #2ed73a）

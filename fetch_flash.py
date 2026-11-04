@@ -41,6 +41,17 @@ def main():
             print(f"字型：{name}")
         except Exception as e:
             print(f"字型 {name} 下載失敗：{e}")
+    # 密碼頁輸入框用的官方 Homestuck 字型（woff2，約 7 KB）
+    fdest = ROOT / "assets" / "fonts" / "homestuck.woff2"
+    if not (fdest.exists() and fdest.stat().st_size > 0):
+        fdest.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            req = urllib.request.Request("https://www.homestuck.com/assets/Regular-CBYKS2MD.woff2", headers={"User-Agent": UA})
+            with urllib.request.urlopen(req, timeout=60) as r:
+                fdest.write_bytes(r.read())
+            print("字型：homestuck.woff2")
+        except Exception as e:
+            print(f"字型 homestuck.woff2 下載失敗：{e}")
     for page, f in sorted(todo):
         dest = ROOT / "assets" / f
         if dest.exists() and dest.stat().st_size > 0:
