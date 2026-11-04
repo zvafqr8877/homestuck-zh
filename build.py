@@ -545,7 +545,7 @@ def build():
             branch = '<p class="branchrow">' + " | ".join(f'<a href="{base}/p/{t:06d}.html">{lab}</a>' for lab, t in BRANCH[n]) + "</p>"
         # 動畫裡自己帶連結的頁（官方是動畫內的連結換頁）：本站播放時在連結位置蓋透明連結，並拿掉下方的「下一頁」按鈕
         # 頁碼: (下一頁, 左%, 上%, 寬%, 高%)
-        INLINK = {8105: (8106, 3, 92, 92, 8, 0), 8143: (8144, 3, 89, 42, 8, 108)}  # 最後一項：幾秒後才可點（0=馬上）
+        INLINK = {8105: (8106, 3, 92, 92, 8, 0), 8143: (8144, 3, 89, 42, 8, 108), 9305: (9306, 41.5, 46.0, 17.6, 12.2, 80)}  # 最後一項：幾秒後才可點（0=馬上）
         if n in INLINK and 'class="flash"' in assets:
             tgt, il, it_, iw, ih, delay = INLINK[n]
             late = f' class="pick late" style="animation-delay:{delay}s;' if delay else ' class="pick" style="'
