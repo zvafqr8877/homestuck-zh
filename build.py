@@ -119,6 +119,17 @@ body.a6a6{background:#042300}
 .nextlink{margin:16px 28px 0;font:24px/32px "Courier New",CourierPrime,courier,monospace}
 .nextlink span{color:#000}
 .story-foot{margin:16px 28px 0;font:12px/1.6 Verdana,"Microsoft JhengHei",sans-serif}
+.savebar{display:flex;justify-content:flex-end;position:relative;margin:16px 28px 0;font:700 11px/16px Verdana,"Microsoft JhengHei",sans-serif}
+.savebar.first{justify-content:flex-start}
+.savebar ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap}
+.savebar li{padding:0 4px}
+.savebar li+li:before{content:"|";margin-right:8px;font-weight:400}
+.savebar button{font:inherit;background:none;border:0;padding:0;margin:0;color:#0000ee;text-decoration:underline;cursor:pointer}
+.savebar .tip{margin-left:3px;color:#0000ee;text-decoration:underline;cursor:pointer;position:relative}
+.savebar .tipbox{position:absolute;bottom:100%;right:0;width:260px;background:#eee;border:4px solid #ccc;padding:8px 10px;margin-bottom:6px;font:400 12px/1.6 Verdana,"Microsoft JhengHei",sans-serif;color:#000;text-align:left;z-index:20}
+.savebar .toast{position:absolute;bottom:100%;right:0;background:#eee;border:4px solid #ccc;padding:6px 14px;margin-bottom:6px;font:400 14px/1.6 Verdana,"Microsoft JhengHei",sans-serif;color:#000;z-index:21}
+.a6a6 .savebar button,.a6a6 .savebar .tip{color:#2ed73a}
+.collide .savebar button,.collide .savebar .tip,.endcredits .savebar button,.endcredits .savebar .tip{color:#8cf}
 .story-foot a{margin-right:14px}
 .story-foot .gone{color:#888;margin-right:14px}
 .page-info{max-width:650px;margin:0 auto 14px;font-size:12px;color:#333;padding:0 4px}
@@ -217,6 +228,44 @@ window.addEventListener("load", function () {
   });
 });
 </script>"""
+
+
+SAVE_JS = r"""<script>
+(function () {
+  var bar = document.querySelector(".savebar"); if (!bar) return;
+  var P = bar.dataset.page, base = bar.dataset.base, K = "homestuck-zh-current-page", A = "homestuck-zh-autosave";
+  function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
+  function set(k, v) { try { localStorage.setItem(k, v); return true; } catch (e) { return false; } }
+  function del(k) { try { localStorage.removeItem(k); } catch (e) {} }
+  var box = null, timer = null;
+  function say(t, ms) { clear(); box = document.createElement("div"); box.className = "toast"; box.textContent = t; bar.appendChild(box); timer = setTimeout(clear, ms || 1500); }
+  function tip(t) { clear(); box = document.createElement("div"); box.className = "tipbox"; box.innerHTML = t; bar.appendChild(box); }
+  function clear() { if (timer) { clearTimeout(timer); timer = null; } if (box) { box.remove(); box = null; } }
+  var TIPS = {
+    1: "如果瀏覽器允許儲存資料，你可以記下目前讀到的位置。按「存檔」，下次回到本站時按「讀檔」就會回到這一頁。",
+    2: "按下後，無論你讀到哪一頁都會自動記錄位置！下次回到本站首頁時，會自動帶你回到上次讀到的地方。如果覺得煩，按「刪除遊戲資料」就能清掉。"
+  };
+  function refresh() { var t = document.getElementById("autotip"); if (t) t.textContent = get(A) === "1" ? "(✓)" : "(?)"; }
+  bar.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    var a = b.dataset.act;
+    if (a === "save") { say(set(K, P) ? "已存檔！" : "無法存檔（瀏覽器擋住了儲存功能）。"); }
+    else if (a === "auto") { var on = get(A) !== "1"; if (on) { set(A, "1"); set(K, P); } else del(A); refresh(); say(on ? "自動存檔已開啟。" : "自動存檔已關閉。"); }
+    else if (a === "load") { var p = get(K); if (p) location.href = base + "/p/" + ("000000" + p).slice(-6) + ".html"; else say("找不到存檔。"); }
+    else if (a === "del") { del(K); del(A); refresh(); say("遊戲資料已刪除。"); }
+  });
+  bar.querySelectorAll(".tip").forEach(function (t) {
+    t.addEventListener("mouseenter", function () { tip(TIPS[t.dataset.tip]); });
+    t.addEventListener("mouseleave", clear);
+  });
+  if (get(A) === "1") set(K, P);
+  refresh();
+})();
+</script>"""
+
+
+INDEX_JS = r"""<script>(function(){var K="homestuck-zh-current-page",A="homestuck-zh-autosave",p=null,a=null;try{p=localStorage.getItem(K);a=localStorage.getItem(A);}catch(e){}
+if(!p)return;var u="BASE/p/"+("000000"+p).slice(-6)+".html";var r=document.getElementById("resume");r.hidden=false;r.firstChild.href=u;if(a==="1")location.replace(u);})();</script>"""
 
 
 def load_sources(path):
@@ -503,9 +552,16 @@ def build():
         next_html = "".join(nl)
         pv = g["p"] if g and g.get("p") else (before[-1]["page"] if before else None)
         pu, _ = tlink(pv) if pv else (None, None)
+        # 官方的存檔列（Save Game／Auto-Save!／Load Game／Delete Game Data）：放在內容框最下面，
+        # 第一頁靠左，其他頁靠右（和官方一樣）；存檔記在這台瀏覽器的 localStorage，不用登入
+        first_cls = " first" if pages and n == pages[0]["page"] else ""
         foot = (
-            (f'<a href="{pu}">← 上一頁</a>' if pu else '<span class="gone">← 上一頁</span>')
-            + f'<a href="{base}/">回首頁</a>'
+            f'<div class="savebar{first_cls}" data-page="{n}" data-base="{base}"><ul>'
+            '<li><button type="button" data-act="save">存檔</button><span class="tip" data-tip="1">(?)</span></li>'
+            '<li><button type="button" data-act="auto">自動存檔！</button><span class="tip" data-tip="2" id="autotip">(?)</span></li>'
+            '<li><button type="button" data-act="load">讀檔</button></li>'
+            '<li><button type="button" data-act="del">刪除遊戲資料</button></li>'
+            '</ul></div>' + SAVE_JS
         )
         text = body_html(pg["body"], colors)
         # 來源連結：優先用 sources.csv（gen_mapping.py 產生），
@@ -706,7 +762,8 @@ def build():
     inner = f"""<h1>{esc(site["title"])}</h1>
 <p>{esc(site.get("subtitle", ""))}</p>
 {start}
-<p><a href="{base}/progress.html">查看翻譯進度</a></p>"""
+<p id="resume" hidden><a href="#">繼續上次讀到的地方 →</a></p>
+<p><a href="{base}/progress.html">查看翻譯進度</a></p>""" + INDEX_JS.replace("BASE", base)
     (OUT / "index.html").write_text(
         layout(site, site["title"], inner, base), encoding="utf-8"
     )
