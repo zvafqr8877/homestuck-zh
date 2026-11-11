@@ -26,16 +26,27 @@ CSS = """\
 *{box-sizing:border-box}
 body{margin:0;background:#535353;color:#000;font:16px/1.5 Verdana,"Noto Sans TC","Microsoft JhengHei",sans-serif}
 a{color:#00f}
-header.site{background:#333;text-align:center;padding:6px 8px;font:700 12px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
-header.site a{color:#fff;text-decoration:underline;margin:0 3px}
-header.site a.c1{color:#fff}
-header.site a.c2{color:#29ff4a}
-header.site a.c3{color:#39d5f6}
-header.site a.c4{color:#f7f72a}
-header.site a.c5{color:#ffb529}
-header.site .sep{margin:0 4px}
-header.site img.candy{vertical-align:middle;height:16px;margin:0 6px}
-header.site a:hover{text-decoration:none}
+header.site{background:#535353;padding:0 8px;font:10px/1 Verdana,"Microsoft JhengHei",sans-serif}
+header.site .navin{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;max-width:896px;margin:0 auto;padding:2px 0;white-space:nowrap}
+header.site .grp{display:block}
+header.site ul{display:flex;margin:0;padding:0;list-style:none}
+header.site li{position:relative}
+header.site li+li:before{content:"|";color:#fff;margin:0 2px}
+header.site a{color:#fff;font-weight:700;text-decoration:underline}
+header.site .g1 a{color:#fff}
+header.site .g2 a{color:#29ff4a}
+header.site .g3 a{color:#39d5f6}
+header.site .g4 a{color:#f7f72a}
+header.site .g5 a{color:#ffb529}
+header.site img{margin:2px 6px 0;height:16px;vertical-align:top}
+header.site .menu{position:absolute;left:0;top:100%;width:220px;background:#c6c6c6;box-shadow:4px 4px rgba(0,0,0,.3);font-size:16px;line-height:24px;opacity:0;pointer-events:none;transition:opacity 1s;z-index:50;text-align:left}
+header.site li:hover>.menu,header.site li:focus-within>.menu{opacity:1;pointer-events:auto}
+header.site .menu ul{display:block}
+header.site .menu li{border-bottom:1px solid #000}
+header.site .menu li+li:before{content:none}
+header.site .menu a{display:flex;padding-left:4px;color:#00f;font-weight:700;text-decoration:underline}
+header.site .menu a:hover,header.site .menu a:focus{color:#fff;background:#61d8ff}
+header.site .dd>a{cursor:pointer}
 main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:20px 12px 8px}
 article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 0}
 .story h1{font:700 28px/1.25 "Courier New",CourierPrime,courier,monospace;text-align:center;margin:0 16px 12px}
@@ -334,13 +345,15 @@ def layout(site, title, inner, base, raw=False, body_class="", sep_img=""):
         [("Homestuck 繁中", base + "/", "c1"), ("翻譯進度", base + "/progress.html", "c1")],
         [("目錄", HS + "/archive", "c2"), ("新讀者？", HS + "/newreader", "c2")],
         [("地圖", HS + "/viewmap", "c3"), ("紀錄", HS + "/viewlog", "c3"), ("搜尋", HS + "/search", "c3")],
-        [("商店", "https://homestuckofficial.store/", "c4"), ("音樂", "https://homestuck.bandcamp.com", "c4")],
-        [("論壇", "https://www.fruityrumpus.com/forums", "c5"), ("秘密", HS + "/unlock", "c5"), ("致謝", "#credits", "c5")],
+        [("商店", "https://homestuckofficial.store/", "c4", [("官方商店", "https://homestuckofficial.store/"), ("Topatoco", "https://topatoco.com/collections/hussie"), ("粉絲周邊", "https://shop.fruityrumpus.com/")]), ("音樂", "https://homestuck.bandcamp.com", "c4")],
+        [("論壇", "https://www.fruityrumpus.com/forums", "c5", [("論壇", "https://www.fruityrumpus.com/forums"), ("Discord", "https://discord.com/invite/homestuck")]), ("秘密", HS + "/unlock", "c5"), ("致謝", "#credits", "c5")],
     ]
-    nav = f" {sep} ".join(
-        ' <span class="sep">|</span> '.join(f'<a class="{c}" href="{esc(u)}">{esc(t)}</a>' for t, u, c in g)
-        for g in nav_groups
-    )
+    def li(it):
+        if len(it) > 3:
+            return (f'<li class="dd"><a class="{it[2]}" href="{esc(it[1])}">{esc(it[0])}</a><div class="menu"><ul>'
+                    + "".join(f'<li><a href="{esc(mu)}">{esc(mt)}</a></li>' for mt, mu in it[3]) + '</ul></div></li>')
+        return f'<li><a class="{it[2]}" href="{esc(it[1])}">{esc(it[0])}</a></li>'
+    nav = f"{sep}".join(f'<div class="grp g{gi + 1}"><ul>' + "".join(li(it) for it in g) + '</ul></div>' for gi, g in enumerate(nav_groups))
     body = inner if raw else f'<article class="story pagebox">{inner}</article>'
     return f"""<!doctype html>
 <html lang="zh-Hant">
@@ -351,9 +364,9 @@ def layout(site, title, inner, base, raw=False, body_class="", sep_img=""):
 <link rel="stylesheet" href="{base}/style.css">
 </head>
 <body class="{body_class}">
-<header class="site">
+<header class="site"><nav class="navin">
 {nav}
-</header>
+</nav></header>
 <main class="wrap">
 {body}
 </main>
