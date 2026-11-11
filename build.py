@@ -26,10 +26,16 @@ CSS = """\
 *{box-sizing:border-box}
 body{margin:0;background:#535353;color:#000;font:16px/1.5 Verdana,"Noto Sans TC","Microsoft JhengHei",sans-serif}
 a{color:#00f}
-header.site{background:#000;text-align:center;padding:6px 8px;font:700 11px/1.4 Verdana,"Microsoft JhengHei",sans-serif}
-header.site a{color:#fff;text-decoration:none;margin:0 6px}
-header.site a.name{color:#ff0}
-header.site a:hover{text-decoration:underline}
+header.site{background:#333;text-align:center;padding:6px 8px;font:700 12px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
+header.site a{color:#fff;text-decoration:underline;margin:0 3px}
+header.site a.c1{color:#fff}
+header.site a.c2{color:#29ff4a}
+header.site a.c3{color:#39d5f6}
+header.site a.c4{color:#f7f72a}
+header.site a.c5{color:#ffb529}
+header.site .sep{margin:0 4px}
+header.site img.candy{vertical-align:middle;height:16px;margin:0 6px}
+header.site a:hover{text-decoration:none}
 main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:20px 12px 8px}
 article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 0}
 .story h1{font:700 28px/1.25 "Courier New",CourierPrime,courier,monospace;text-align:center;margin:0 16px 12px}
@@ -145,9 +151,12 @@ th,td{border-bottom:1px solid #bbb;padding:.35em .5em;text-align:right}
 th:first-child,td:first-child{text-align:left}
 .bar{display:flex;height:.9em;border-radius:4px;overflow:hidden;background:#ccc;margin:.5em 0}
 .bar span{display:block;height:100%}
-footer.site{max-width:940px;margin:0 auto;padding:12px 16px 40px;color:#ddd;font-size:12px}
-footer.site a{color:#9cf}
+footer.site{max-width:940px;margin:12px auto 0;padding:14px 20px 24px;background:#ececec;color:#000;font:12px/1.7 Verdana,"Microsoft JhengHei",sans-serif}
+footer.site a{color:#00f}
+footer.site .line{font-weight:700;margin:0 0 6px}
+footer.site p{margin:.4em 0}
 footer.site ul{margin:.4em 0;padding-left:1.2em}
+footer.site h2{font:700 13px/1.6 Verdana,"Microsoft JhengHei",sans-serif;margin:10px 0 2px}
 @media (max-width:560px){.story h1{font-size:22px}.dialog{margin:12px 8px 0;padding:6px 10px 12px}.nextlink,.story-foot,.plain{margin-left:12px;margin-right:12px}.nextlink{font-size:20px}main.wrap{padding:8px 0}}
 """
 
@@ -318,7 +327,20 @@ def layout(site, title, inner, base, raw=False, body_class="", sep_img=""):
         f'<li><a href="{esc(c["url"])}">{esc(c["name"])}</a>：{esc(c.get("note", ""))}</li>'
         for c in site.get("credits", [])
     )
-    sep = f'<img class="tooth" src="{esc(sep_img)}" alt="|">' if (sep_img and "a6a6" in body_class) else "|"
+    candy = esc(sep_img) if (sep_img and "a6a6" in body_class) else "https://storage.homestuck.com/media/assets/candycorn.gif"
+    sep = f'<img class="{"tooth" if (sep_img and "a6a6" in body_class) else "candy"}" src="{candy}" alt="|">'
+    HS = "https://www.homestuck.com"
+    nav_groups = [
+        [("Homestuck 繁中", base + "/", "c1"), ("翻譯進度", base + "/progress.html", "c1")],
+        [("目錄", HS + "/archive", "c2"), ("新讀者？", HS + "/newreader", "c2")],
+        [("地圖", HS + "/viewmap", "c3"), ("紀錄", HS + "/viewlog", "c3"), ("搜尋", HS + "/search", "c3")],
+        [("商店", "https://homestuckofficial.store/", "c4"), ("音樂", "https://homestuck.bandcamp.com", "c4")],
+        [("論壇", "https://www.fruityrumpus.com/forums", "c5"), ("秘密", HS + "/unlock", "c5"), ("致謝", "#credits", "c5")],
+    ]
+    nav = f" {sep} ".join(
+        ' <span class="sep">|</span> '.join(f'<a class="{c}" href="{esc(u)}">{esc(t)}</a>' for t, u, c in g)
+        for g in nav_groups
+    )
     body = inner if raw else f'<article class="story pagebox">{inner}</article>'
     return f"""<!doctype html>
 <html lang="zh-Hant">
@@ -330,14 +352,15 @@ def layout(site, title, inner, base, raw=False, body_class="", sep_img=""):
 </head>
 <body class="{body_class}">
 <header class="site">
-<a class="name" href="{base}/">{esc(site["title"])}</a> {sep}
-<a href="{base}/progress.html">翻譯進度</a>
+{nav}
 </header>
 <main class="wrap">
 {body}
 </main>
 <footer class="site">
+<p class="line">Homestuck © Andrew Hussie ｜ 本站為非官方、非營利的讀者翻譯整合站 ｜ <a href="https://www.homestuck.com">官方網站</a></p>
 <p>{esc(site.get("copyright", ""))}</p>
+<h2 id="credits">致謝與來源</h2>
 <ul>{credits}</ul>
 </footer>
 </body>
