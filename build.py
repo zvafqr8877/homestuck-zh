@@ -50,7 +50,7 @@ header.site .dd>a{cursor:pointer}
 .logbox{padding:8px 12px;font-size:12px}
 .logbox h1{text-align:center;font-size:24px;margin:4px 0}
 .logbox ul{list-style:none;margin:0;padding:0}
-.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
+.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.arch{display:flex;gap:12px;align-items:center;margin:14px 0}.arch img{width:110px;height:auto;flex:none}.arch h2{font-size:16px;margin:0 0 4px}.arch p{margin:0 0 4px;font-size:13px}.arch ul{display:flex;gap:12px;margin:0;padding:0;list-style:none;flex-wrap:wrap;font-size:12px;font-weight:700}.arch span{font-weight:700}.mapbox{overflow-x:auto}.mapbox h1{margin-bottom:24px}@font-face{font-family:Homestuck;src:url("assets/fonts/homestuck.woff2") format("woff2");font-display:swap}.mside,.mpart{display:flex}.msb{display:flex;flex-direction:column;align-items:flex-end;flex:none}.mlab{margin-top:32px;padding-top:4px;min-width:30px;color:#fff;font-family:Homestuck,Verdana,sans-serif;writing-mode:vertical-rl;text-orientation:upright}.mlab .a{font-size:14px;margin-bottom:8px}.mlab .b{font-size:30px;line-height:1}.msb img{margin-top:8px}.mbar{width:16px;margin-right:12px;border-top:8px solid;border-bottom:8px solid;flex:none}.mbody{display:flex;flex-direction:column;justify-content:center;margin:0 auto}.mcol{display:flex;flex-direction:column;align-items:center}.mcol img{display:block}.mrow{display:flex}.mcode{font:12px monospace;text-align:center;margin:12px 0}.mside{margin:12px auto;justify-content:center;width:max-content;max-width:100%}.mdisc{text-align:center;margin:20px 0}.mdisc h2{font:20px Homestuck,Verdana,sans-serif}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
 main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:20px 12px 8px}
 article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 0}
 .story h1{font:700 28px/1.25 "Courier New",CourierPrime,courier,monospace;text-align:center;margin:0 16px 12px}
@@ -347,10 +347,10 @@ def layout(site, title, inner, base, raw=False, body_class="", sep_img=""):
     HS = "https://www.homestuck.com"
     nav_groups = [
         [("Homestuck 繁中", base + "/", "c1"), ("翻譯進度", base + "/progress.html", "c1")],
-        [("目錄", HS + "/archive", "c2"), ("新讀者？", HS + "/newreader", "c2")],
-        [("地圖", HS + "/viewmap", "c3"), ("紀錄", base + "/log.html", "c3"), ("搜尋", HS + "/search", "c3")],
+        [("目錄", base + "/archive.html", "c2"), ("新讀者？", base + "/newreader.html", "c2")],
+        [("地圖", base + "/map.html", "c3"), ("紀錄", base + "/log.html", "c3"), ("搜尋", base + "/search.html", "c3")],
         [("商店", "https://homestuckofficial.store/", "c4", [("官方商店", "https://homestuckofficial.store/"), ("Topatoco", "https://topatoco.com/collections/hussie"), ("粉絲周邊", "https://shop.fruityrumpus.com/")]), ("音樂", "https://homestuck.bandcamp.com", "c4")],
-        [("論壇", "https://www.fruityrumpus.com/forums", "c5", [("論壇", "https://www.fruityrumpus.com/forums"), ("Discord", "https://discord.com/invite/homestuck")]), ("秘密", HS + "/unlock", "c5"), ("致謝", "#credits", "c5")],
+        [("論壇", "https://www.fruityrumpus.com/forums", "c5", [("論壇", "https://www.fruityrumpus.com/forums"), ("Discord", "https://discord.com/invite/homestuck")]), ("秘密", HS + "/unlock", "c5"), ("致謝", base + "/credits.html", "c5")],
     ]
     def li(it):
         if len(it) > 3:
@@ -819,6 +819,193 @@ def build():
     )
     (OUT / "log.html").write_text(
         layout(site, f"紀錄 - {site['title']}", inner, base), encoding="utf-8"
+    )
+
+    # 搜尋（對應官方 /search）：把全站文字做成 search_index.json，在瀏覽器裡搜尋，不需要伺服器
+    idx = []
+    for p in pages:
+        txt = re.sub(r"\s*\n\s*", " ", re.sub(r"[ \t]+", " ", p["body"])).strip()
+        idx.append([p["page"], p["title"], txt])
+    (OUT / "search_index.json").write_text(
+        json.dumps(idx, ensure_ascii=False, separators=(",", ":")), encoding="utf-8"
+    )
+    inner = (
+        '<div class="logbox"><h1>搜尋</h1>'
+        '<p>輸入關鍵字（多個詞用空格隔開，須全部出現），搜尋標題與對話文字。</p>'
+        '<form id="sf"><input id="sq" type="search" placeholder="例：約翰 烤肉" autocomplete="off" '
+        'style="width:70%;font:16px Verdana,sans-serif;padding:2px 6px"> <button type="submit">搜尋</button></form>'
+        '<p id="ss" style="font-weight:700"></p><ul id="sr"></ul></div>'
+        "<script>(function(){var D=null,f=document.getElementById('sf'),q=document.getElementById('sq'),"
+        "ss=document.getElementById('ss'),sr=document.getElementById('sr');"
+        "function E(s){return s.replace(/[&<>\"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]})}"
+        "function run(){var w=q.value.toLowerCase().split(/\\s+/).filter(Boolean);sr.innerHTML='';if(!w.length){ss.textContent='';return}"
+        "var out=[],i,r,h,k,p,t;for(i=0;i<D.length&&out.length<200;i++){r=D[i];h=(r[1]+' '+r[2]).toLowerCase();"
+        "if(w.every(function(x){return h.indexOf(x)>=0}))out.push(r)}"
+        "ss.textContent=out.length?('找到 '+(out.length>=200?'200+':out.length)+' 頁'):'找不到符合的頁面';"
+        "sr.innerHTML=out.map(function(r){p=r[2].toLowerCase().indexOf(w[0]);t=p<0?r[2].slice(0,80):r[2].slice(Math.max(0,p-30),p+60);"
+        "return '<li style=\"margin:6px 0\"><a href=\"BASE/p/'+('00000'+r[0]).slice(-6)+'.html\">'+r[0]+' 「'+E(r[1])+'」</a><br><span>…'+E(t)+'…</span></li>'}).join('')}"
+        "f.onsubmit=function(e){e.preventDefault();if(D)return run();ss.textContent='載入索引中…';"
+        "fetch('BASE/search_index.json').then(function(x){return x.json()}).then(function(d){D=d;run()})"
+        ".catch(function(){ss.textContent='索引載入失敗'})};})();</script>"
+    ).replace("BASE", base)
+    (OUT / "search.html").write_text(
+        layout(site, f"搜尋 - {site['title']}", inner, base), encoding="utf-8"
+    )
+
+    # 新讀者（對應官方 /newreader）：中文翻譯
+    first = pages[0]["page"] if pages else 1901
+    inner = f"""<div class="logbox newreader"><h1>嘿！</h1><h2>歡迎來到 MSPA！</h2>
+<p>Homestuck.com（前身為 MSPaintAdventures.com）是安德魯・赫西（Andrew Hussie）創作的各部冒險作品的存檔。這些網路漫畫是為了展現那個年代敘事與技術的結合而做的——那時網路上滿是 Flash 和 Shockwave 遊戲，螢幕是橫向的，解析度高達 1024 像素，網路的蠻荒西部可以用無窮無盡、令人驚嘆的方式玩壞。這個存檔盡力重現當時的體驗，不過 Homestuck「作者原本的意圖」，用電腦讀會比用手機讀好得多。</p>
+<p>在開始讀 Homestuck（或任何一部冒險）之前，有兩件事要先知道。</p>
+<p><b>1) MSPA 的故事是以「模擬遊戲」的形式呈現</b>，更準確地說，是文字冒險遊戲。你要點擊一些聽起來像是在文字提示列輸入的指令的連結，來推進故事的頁面，讓角色去做某件事。通常，角色會在下一頁回應那個指令。</p>
+<p><b>2) MSPA 的故事大多是「讀者驅動」的</b>，也就是大部分的文字指令都是讀者透過建議箱提供的。安德魯會從清單中選一個指令，然後把執行的結果畫出來。對 Homestuck 來說，這個功能用得不多，但被拿來做了許多有趣的變化。</p>
+<p>不過話說回來，歸根結底，Homestuck 只是一個關於四個朋友和他們一起玩的遊戲的簡單故事。</p>
+<p>那是瓶中的閃電。再也沒有別的作品像它。它會毀掉你的人生。</p>
+<p><a href="{base}/p/{first:06d}.html"><button type="button" style="font:700 16px Verdana,sans-serif;padding:4px 12px">開始讀 HOMESTUCK</button></a></p>
+<hr>
+<p>想繼續看的話，可以到<a href="{base}/archive.html">目錄</a>頁，查看 Homestuck.com 目前收錄的各部冒險。</p>
+<p>想看安德魯・赫西的另一部作品，可以試試 <a href="https://store.steampowered.com/app/1529810/Psycholonials/">Psycholonials</a>，這是一款講述疫情時代的網紅如何建立小丑邪教的遊戲。</p>
+<p>如果你是 Homestuck 食人魔（trolls）的忠實粉絲，可以看看 <a href="https://www.hiveswap.com/">Hiveswap 遊戲與延伸宇宙</a>，包括 <a href="https://store.steampowered.com/agecheck/app/833040/">Friendsim 視覺小說</a>。</p>
+<p>想和 Homestuck 的一些角色一起玩，Steam 上有視覺小說 <a href="https://store.steampowered.com/app/1144030/Pesterquest/">Pesterquest</a>。</p>
+<p>如果你是老讀者（你來這一頁做什麼？？），可以看看 <a href="https://beyondcanon.com/">Homestuck: Beyond Canon</a>，這是接續 Homestuck 後記的故事續作，持續更新中！</p>
+<p>2017 年左右的舊版「新讀者」頁面，請<a href="https://www.homestuck.com/oldreader">點這裡</a>（官方英文）。</p>
+<p>當然，還有 Homestuck 目前的社群連結：</p>
+<ul><li><a href="https://discord.com/invite/homestuck">Discord</a></li><li><a href="https://x.com/homestuck">Twitter</a></li><li><a href="https://bsky.app/profile/homestuck.com">Bluesky</a></li></ul>
+<p style="font-size:10px">以上為本站讀者翻譯，原文見<a href="https://www.homestuck.com/newreader">官方新讀者頁</a>。</p></div>"""
+    (OUT / "newreader.html").write_text(
+        layout(site, f"新讀者 - {site['title']}", inner, base), encoding="utf-8"
+    )
+
+    # 目錄（對應官方 /archive）：Homestuck 連本站頁面，其他作品連官方英文站
+    O = "https://www.homestuck.com"
+    IM = "https://storage.homestuck.com/media/images/"
+    arch = [
+        ("PSYCHOLONIALS", O + "/psycholonials", "archive_psy.gif", "兩位網紅在與超自然力量溝通的同時，推出了一個大膽的新社群媒體品牌。", "已完結", []),
+        ("THE HOMESTUCK EPILOGUES", O + "/epilogues/prologue", "archive_ep.gif", "真實性有待商榷的故事。", "已完結", [("紀錄", O + "/epilogues/viewlog")]),
+        ("HOMESTUCK", f"{base}/p/{first:06d}.html", "archive_hs.gif", "一個關於男孩、他的朋友們，以及他們一起玩的遊戲的故事。約 8,000 頁。（本站繁體中文版）", "已完結",
+         [("地圖", base + "/map.html"), ("紀錄", base + "/log.html"), ("搜尋", base + "/search.html"), ("致謝", base + "/credits.html")]),
+        ("PROBLEM SLEUTH", O + "/problemsleuth/000219", "archive_ps.gif", "一個關於硬漢偵探在他辦公室裡的冒險。22 章，約 1700 頁。", "已完結",
+         [("地圖", O + "/problemsleuth/viewmap"), ("紀錄", O + "/problemsleuth/viewlog"), ("搜尋", O + "/problemsleuth/search"), ("科學問答", O + "/faqs/science")]),
+        ("JESTER QUEST", O + "/jesterquest/000001", "archive_jq.gif", "一個單純的小丑，從 2007 年起就一直耐心等待《吟遊詩人任務》更新。30,000 頁。", "已完結",
+         [("紀錄", O + "/jesterquest/viewlog"), ("搜尋", O + "/jesterquest/search")]),
+        ("BARD QUEST", O + "/bardquest/000136", "archive_bq.gif", "一位年輕吟遊詩人屠龍的努力。分支式的「自選冒險」風格。47 頁。", "已完結？",
+         [("紀錄", O + "/bardquest/viewlog"), ("搜尋", O + "/bardquest/search")]),
+        ("JAILBREAK", O + "/jailbreak/000002", "archive_jb.gif", "一個傢伙想要越獄。134 頁。", "已完結？",
+         [("紀錄", O + "/jailbreak/viewlog"), ("搜尋", O + "/jailbreak/search")]),
+        ("SWEET BRO AND HELLA JEFF", O + "/sweetbroandhellajeff/001", "archive_sbahj.gif", "它一直在發生。頁數不明。", "",
+         [("紀錄", O + "/sweetbroandhellajeff/001#log")]),
+    ]
+    secs = ""
+    for name, url, img, desc, st, links in arch:
+        lk = "".join(f'<li><a href="{esc(u)}">{esc(t)}</a></li>' for t, u in links)
+        secs += (
+            f'<section class="arch"><a href="{esc(url)}"><img src="{IM}{img}" alt="{esc(name)}"></a>'
+            f'<div><h2><a href="{esc(url)}">{esc(name)}</a></h2><p>{esc(desc)} {("<span>［" + st + "］</span>") if st else ""}</p>'
+            + (f"<ul>{lk}</ul>" if lk else "") + "</div></section>"
+        )
+    inner = (
+        '<div class="logbox"><h1>目錄</h1><p style="text-align:center">冒險作品依我們高興的順序排列。</p>'
+        + secs + '<p style="font-size:10px">除 Homestuck 外，其餘作品連到官方英文站。</p></div>'
+    )
+    (OUT / "archive.html").write_text(
+        layout(site, f"目錄 - {site['title']}", inner, base), encoding="utf-8"
+    )
+
+    # 地圖（對應官方 /viewmap）：map_data.txt 取自官方（S/T=側欄標籤、A/R=地圖圖片連結、P=程式碼文字、H=光碟圖）
+    MAPB = "https://storage.homestuck.com/story/homestuck/assets/map/"
+    SIDEC = {"1": "#b7b7b7", "2": "#4be24f", "3": "#7638e7", "4": "#f40c0c", "5": "#0b4100"}
+    mp = ROOT / "map_data.txt"
+    mapcode = [
+        "bifurcate Act_5[Act_1, Act_2];",
+        "split Act_6[Act_1, Act_2, Act_3, Act_4, Act_5, Act_6];",
+        "split Act_6_6[Act_1, Act_2, Act_3, Act_4, Act_5, Act_6];",
+    ]
+
+    def mlink(pg_, img):
+        im = f'<img src="{MAPB}map_{img}.gif" alt="第 {pg_} 頁" loading="lazy">'
+        if pg_ == "-":
+            return im
+        u = f"{base}/p/{int(pg_):06d}.html" if int(pg_) in by_num else f"https://www.homestuck.com/{int(pg_):06d}"
+        return f'<a href="{u}">{im}</a>'
+
+    def mlabel(kind, num, col, img, cls):
+        c = SIDEC.get(col, "#b7b7b7")
+        return (
+            f'<div class="msb" style="border-right:8px solid {c}"><div class="mlab" style="background:{c}">'
+            f'<span class="a">{kind}</span><span class="b">{num}</span></div><img src="{MAPB}{img}" alt=""></div>'
+            f'<div class="mbar" style="border-color:{c}"></div>'
+        )
+
+    mh = ""
+    if mp.exists():
+        pi = 0
+        opened_side = opened_part = False
+        for ln in mp.read_text(encoding="utf-8").splitlines():
+            t = ln.split()
+            if not t:
+                continue
+            k = t[0]
+            if k in ("S", "T", "A", "R", "P") and k != "S" and k != "T" and not opened_part and k != "P":
+                mh += '<div class="mcol">'
+                opened_part = "col"
+            if k == "S":
+                if opened_part:
+                    mh += "</div></div>" if opened_part == "col" else ""
+                    opened_part = False
+                if opened_side:
+                    mh += "</div></div>"
+                mh += '<div class="mside">' + mlabel("SIDE", t[1], t[2], t[3], "s") + '<div class="mbody">'
+                opened_side = True
+            elif k == "T":
+                if opened_part == "col":
+                    mh += "</div></div>"
+                    opened_part = False
+                mh += '<div class="mpart">' + mlabel("PART", t[1], t[2], t[3], "t")
+                opened_part = False
+            elif k == "A":
+                mh += mlink(t[1], t[2])
+            elif k == "R":
+                mh += '<div class="mrow">' + "".join(mlink(t[i], t[i + 1]) for i in range(1, len(t), 2)) + "</div>"
+            elif k == "P":
+                if opened_part == "col":
+                    mh += "</div></div>"
+                    opened_part = False
+                mh += f'<p class="mcode">{mapcode[min(pi, 2)]}</p>'
+                pi += 1
+            elif k == "H":
+                if opened_part == "col":
+                    mh += "</div></div>"
+                    opened_part = False
+                if opened_side:
+                    mh += "</div></div>"
+                    opened_side = False
+                nm = {"DISC 1": "光碟 1", "DISC 2": "光碟 2", "SUPERCARTRIDGE": "超級卡匣"}.get(" ".join(t[1:-1]), " ".join(t[1:-1]))
+                mh += f'<div class="mdisc"><h2>{nm}</h2><img src="{MAPB}{t[-1]}" alt="{nm}"></div>'
+        if opened_part == "col":
+            mh += "</div></div>"
+        if opened_side:
+            mh += "</div></div>"
+    inner = '<div class="logbox mapbox"><h1>冒險地圖</h1>' + mh + "</div>"
+    (OUT / "map.html").write_text(
+        layout(site, f"地圖 - {site['title']}", inner, base), encoding="utf-8"
+    )
+
+    # 致謝（對應官方 /credits）：官方的音樂／美術／程式致謝有近千條外部連結，這裡先連到官方；本站自己的致謝列在下面
+    credits_li = "".join(
+        '<li><a href="%s">%s</a>：%s</li>' % (esc(c["url"]), esc(c["name"]), esc(c.get("note", "")))
+        for c in site.get("credits", [])
+    )
+    inner = (
+        '<div class="logbox newreader"><h1>致謝</h1>'
+        "<h2>官方致謝</h2>"
+        "<p>Homestuck 的音樂與音效、美術、程式的完整致謝名單（逐頁列出曲目、作者與連結），請見官方英文頁面：</p>"
+        '<ul><li><a href="https://www.homestuck.com/credits">音效致謝／美術致謝／程式致謝（官方 Credits）</a></li></ul>'
+        "<h2>本站致謝</h2>"
+        f"<p>{esc(site.get('copyright', ''))}</p>"
+        f"<ul>{credits_li}</ul></div>"
+    )
+    (OUT / "credits.html").write_text(
+        layout(site, f"致謝 - {site['title']}", inner, base), encoding="utf-8"
     )
 
     # 首頁
