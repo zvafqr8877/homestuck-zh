@@ -47,6 +47,10 @@ header.site .menu li+li:before{content:none}
 header.site .menu a{display:flex;padding-left:4px;color:#00f;font-weight:700;text-decoration:underline}
 header.site .menu a:hover,header.site .menu a:focus{color:#fff;background:#61d8ff}
 header.site .dd>a{cursor:pointer}
+.logbox{padding:8px 12px;font-size:12px}
+.logbox h1{text-align:center;font-size:24px;margin:4px 0}
+.logbox ul{list-style:none;margin:0;padding:0}
+.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
 main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:20px 12px 8px}
 article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 0}
 .story h1{font:700 28px/1.25 "Courier New",CourierPrime,courier,monospace;text-align:center;margin:0 16px 12px}
@@ -344,7 +348,7 @@ def layout(site, title, inner, base, raw=False, body_class="", sep_img=""):
     nav_groups = [
         [("Homestuck 繁中", base + "/", "c1"), ("翻譯進度", base + "/progress.html", "c1")],
         [("目錄", HS + "/archive", "c2"), ("新讀者？", HS + "/newreader", "c2")],
-        [("地圖", HS + "/viewmap", "c3"), ("紀錄", HS + "/viewlog", "c3"), ("搜尋", HS + "/search", "c3")],
+        [("地圖", HS + "/viewmap", "c3"), ("紀錄", base + "/log.html", "c3"), ("搜尋", HS + "/search", "c3")],
         [("商店", "https://homestuckofficial.store/", "c4", [("官方商店", "https://homestuckofficial.store/"), ("Topatoco", "https://topatoco.com/collections/hussie"), ("粉絲周邊", "https://shop.fruityrumpus.com/")]), ("音樂", "https://homestuck.bandcamp.com", "c4")],
         [("論壇", "https://www.fruityrumpus.com/forums", "c5", [("論壇", "https://www.fruityrumpus.com/forums"), ("Discord", "https://discord.com/invite/homestuck")]), ("秘密", HS + "/unlock", "c5"), ("致謝", "#credits", "c5")],
     ]
@@ -788,6 +792,33 @@ def build():
 <table><tr><th>頁碼範圍</th>{head}<th>合計</th></tr>{rows}</table>"""
     (OUT / "progress.html").write_text(
         layout(site, f"翻譯進度 - {site['title']}", inner, base), encoding="utf-8"
+    )
+
+    # 紀錄（對應官方 /viewlog）：日期資料 log_dates.txt 取自官方，格式 起始頁:YYMMDD:頁數
+    dates = {}
+    lf = ROOT / "log_dates.txt"
+    if lf.exists():
+        for run in lf.read_text(encoding="utf-8").strip().split(","):
+            st, d, c = run.split(":")
+            for k in range(int(c)):
+                dates[int(st) + k] = f"{d[2:4]}/{d[4:6]}/{d[0:2]}"
+    items = []
+    for p in pages:
+        d = dates.get(p["page"], "")
+        items.append(
+            f'<li><span>{d + " - " if d else ""}<a href="{base}/p/{p["page"]:06d}.html">'
+            f'「{esc(p["title"])}」</a></span></li>'
+        )
+    inner = (
+        '<div class="logbox"><h1>冒險紀錄</h1>'
+        '<a href="#" id="logtoggle">由舊到新排列</a><ul id="loglist">' + "".join(items) + "</ul></div>"
+        "<script>(function(){var u=document.getElementById('loglist'),t=document.getElementById('logtoggle'),"
+        "n=false;u.style.display='flex';u.style.flexDirection='column-reverse';"
+        "t.onclick=function(e){e.preventDefault();n=!n;u.style.flexDirection=n?'column':'column-reverse';"
+        "t.textContent=n?'由新到舊排列':'由舊到新排列'}})();</script>"
+    )
+    (OUT / "log.html").write_text(
+        layout(site, f"紀錄 - {site['title']}", inner, base), encoding="utf-8"
     )
 
     # 首頁
