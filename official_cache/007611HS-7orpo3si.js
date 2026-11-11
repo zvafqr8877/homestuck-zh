@@ -1,0 +1,5 @@
+import{_ as n}from"./ComicFlash.vue_vue_type_script_setup_true_lang-mJfD_zwu.js";import{e as s,o as t,c as r,d as e,w as o,b as i,J as l,u as c,S as d,a3 as m,F as f}from"./index-Bd5ug0Z9.js";import"./MobileController.vue_vue_type_script_setup_true_lang-RDmZkGHC.js";const _=s({__name:"007611HS",setup(p){return(h,a)=>(t(),r(f,null,[e(l,null,{default:o(()=>[...a[0]||(a[0]=[i("[S] Jane: Engage.",-1)])]),_:1}),e(n,{story:c(d).Homestuck,"flash-file":"act-6-act-5/05708.swf",alt:`Jane engages trickster mode.
+    Suddenly, she's not rendered all monochrome and stubby anymore.
+    Her skin is peach-colored, her hair is bright pink, and she's wearing this wacky colorful princess outfit.
+    She's manically dancing all over the fucking place and swinging her giant swirly lollipop with a crazed, wide-eyed smile.
+    Rainbows and sparkles, everywhere. She's doing some crazy footwork. Happy feet, bitch!!! Gamzee is deeply disturbed by this.`},null,8,["story"]),e(m,{"next-page-link":"/007612","link-text":"[S] Jane: Blast off."})],64))}});export{_ as default};

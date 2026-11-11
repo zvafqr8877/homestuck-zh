@@ -1,0 +1,9 @@
+import{_ as e}from"./ComicFlash.vue_vue_type_script_setup_true_lang-mJfD_zwu.js";import{e as t,o as s,c as n,d as a,w as r,b as l,J as i,u,S as h,a3 as d,F as c}from"./index-Bd5ug0Z9.js";import"./MobileController.vue_vue_type_script_setup_true_lang-RDmZkGHC.js";const k=t({__name:"006441HS",setup(m){return(y,o)=>(s(),n(c,null,[a(i,null,{default:r(()=>[...o[0]||(o[0]=[l("[S] RAP-OFF!!!!!!!!!!",-1)])]),_:1}),a(e,{story:u(h).Homestuck,"flash-file":"act-6-act-2/04538.swf",alt:`Dirk and Squarewave face off. Squarewave is up first.
+Squarewave: 'Yo yo D-Strizzle I couldn't help but check you loadin up on your sylladilly! Can't fool me homes I know what that's about! So I just got one can of surprise noodles left to bust open here and I know how you love your noodles! Do you want to place a game????' (followed by the face of Jigsaw from Saw...)
+Dirk: 'Man, no. I already told you, I don't have time to disgrace you with my rhymes today. Sorry, dude.'
+Squarewave: 'That's so whack! I been watching you waste nothin but time all lookin at your horse pictures and shit! So I'm like... that shit's as whack as I'm a guy made of metal! Sit your ass back down cause we got shit to settle! Just park it on my grill, you be whistlin like a kettle! If rap's a one wheel device your foot don't reach the pedal! Word!'
+Dirk: 'God dammit. Alright, this is all you get. Rap off? Man, I gotta nap off your sad rap ambush. Shoosh your ass down while I pap you with plush.'
+The Geromy plush is thrown at Squarewave.
+Dirk: 'I push mad facts on the hapless, shit's practically axiomatic; you don't talk smack with Orange Crush.'
+The Orange Crush is splashed onto Squarewave.
+Squarewave: 'Damn dogg why as a robot I got to be so predictably susceptible to liquid like this. It ain't cool!!!'`},null,8,["story"]),a(d,{"next-page-link":"/006442","link-text":"==>"})],64))}});export{k as default};
