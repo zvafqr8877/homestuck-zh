@@ -50,7 +50,7 @@ header.site .dd>a{cursor:pointer}
 .logbox{padding:8px 12px;font-size:12px}
 .logbox h1{text-align:center;font-size:24px;margin:4px 0}
 .logbox ul{list-style:none;margin:0;padding:0}
-.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.archive{font-weight:700;font-size:16px;padding:8px;font-family:Verdana,"Microsoft JhengHei",sans-serif}.archive header{display:flex;flex-direction:column;align-items:center;gap:16px;margin:16px 0}.logbox.archive h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;margin:0}.archive header p{font-weight:400;text-align:center;margin:0;line-height:24px}.arch{display:flex;align-items:center;align-self:center;width:100%;max-width:512px;margin:0 auto;padding:16px 0}.arch>a{display:contents}.arch img{display:block;width:164px;height:164px;max-width:100%;flex:none}.arch>div{display:flex;flex-direction:column;align-items:center;padding:16px 24px}.arch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;padding:0 0 16px;margin:0}.arch p{font-weight:400;text-align:center;line-height:24px;padding:0 0 16px;margin:0}.arch p span{font-weight:700}.arch li span.off{text-decoration:line-through}.arch ul{display:flex;gap:12px;margin:0;padding:0;font-weight:400;list-style:none;line-height:24px}.arch li{padding-left:4px}.arch li+li{list-style:"|" outside;margin-left:0}@media (max-width:767px){.arch{flex-direction:column}}body.offi main.wrap{max-width:940px;padding:0;display:flow-root}.logbox.archive{margin:8px;background:#eee;padding:8px}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
+.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.archive{font-weight:700;font-size:16px;padding:8px;font-family:Verdana,"Microsoft JhengHei",sans-serif}.archive header{display:flex;flex-direction:column;align-items:center;gap:16px;margin:16px 0}.logbox.archive h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;margin:0}.archive header p{font-weight:400;text-align:center;margin:0;line-height:24px}.arch{display:flex;align-items:center;align-self:center;width:100%;max-width:650px;margin:0 auto;padding:16px 0}.arch>a{display:contents}.arch img{display:block;width:164px;height:164px;max-width:100%;flex:none}.arch>div{display:flex;flex-direction:column;align-items:center;padding:16px 24px}.arch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;padding:0 0 16px;margin:0}.arch p{font-weight:400;text-align:center;line-height:24px;padding:0 0 16px;margin:0}.arch p span{font-weight:700}.arch li span.off{text-decoration:line-through}.arch ul{display:flex;gap:12px;margin:0;padding:0;font-weight:400;list-style:none;line-height:24px}.arch li{padding-left:4px}.arch li+li{list-style:"|" outside;margin-left:0}@media (max-width:767px){.arch{flex-direction:column}}body.offi main.wrap{max-width:940px;padding:0;display:flow-root}.logbox.archive{margin:8px;background:#eee;padding:8px}body.owhite main.wrap{max-width:650px;padding:0;background:#fff;display:flow-root;margin:0 auto 40px}.oc{margin:8px;background:#eee;padding:8px;display:flex;flex-direction:column;font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000}.oc h1{font:700 30px/36px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:0}.oc ul{list-style:none;margin:0;padding:0}.oclog .tg{display:block;font:700 10px/15px Verdana,"Microsoft JhengHei",sans-serif;padding:0 0 8px;color:#00f;text-decoration:underline}.oclog li span{font-size:12px;line-height:16px}.ocmap h1{padding:16px 0 40px}.ocsearch h1{font-size:36px;line-height:40px;margin-top:8px}.ocsearch input[type=search]{display:block;width:100%;background:#fff;color:#000;border:1px solid #000;padding:4px;font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;margin:8px 0}.ocsearch label{display:block;font-weight:400}.ocsearch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:8px 0 0}.ocsearch #ss{margin:8px 0;font-weight:400}.ocsearch #sr li{margin:8px 0;font-weight:400}.ocsearch #sr span{font-size:12px}.ocnr{flex-direction:row;justify-content:center}.ocnr>div{max-width:750px;width:100%;display:flex;flex-direction:column;gap:28px;margin:32px 0;font-weight:400}.ocnr p{text-align:center;margin:0}.ocnr h2{font-size:16px;font-weight:400;align-self:center;margin:0}.ocnr button{font:400 48px/48px Homestuck,"Microsoft JhengHei",monospace;border:5px solid #000;background:#fff;color:#000;padding:16px 24px;cursor:pointer;max-width:100%}.ocnr button:hover{background:#000;color:#fff}.ocnr section{display:flex;flex-direction:column;gap:32px}.ocnr section p{text-align:left}.ocnr section ul{list-style:disc;margin:0 0 0 40px;padding:0;display:flex;flex-direction:column}.ow{font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000;background:#fff}.ow header{display:flex;flex-direction:column;gap:16px;margin:16px 0}.ow h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;margin:0}.ow section{display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px;text-align:center}.ow h2{font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;margin:16px 0 0}.ow p{margin:0}.ow ul{list-style:none;padding:0;margin:0}.ow ol{display:flex;flex-direction:column;gap:16px;margin:0;padding:0;list-style-position:inside}.ow ul.left,.ow .left{text-align:left}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
 main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:20px 12px 8px}
 article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 0}
 .story h1{font:700 28px/1.25 "Courier New",CourierPrime,courier,monospace;text-align:center;margin:0 16px 12px}
@@ -813,15 +813,15 @@ def build():
             f'「{esc(p["title"])}」</a></span></li>'
         )
     inner = (
-        '<div class="logbox"><h1>冒險紀錄</h1>'
-        '<a href="#" id="logtoggle">由舊到新排列</a><ul id="loglist">' + "".join(items) + "</ul></div>"
+        '<nav class="oc oclog"><h1>冒險紀錄</h1>'
+        '<a href="#" id="logtoggle" class="tg">由舊到新排列</a><ul id="loglist">' + "".join(items) + "</ul></nav>"
         "<script>(function(){var u=document.getElementById('loglist'),t=document.getElementById('logtoggle'),"
         "n=false;u.style.display='flex';u.style.flexDirection='column-reverse';"
         "t.onclick=function(e){e.preventDefault();n=!n;u.style.flexDirection=n?'column':'column-reverse';"
         "t.textContent=n?'由新到舊排列':'由舊到新排列'}})();</script>"
     )
     (OUT / "log.html").write_text(
-        layout(site, f"紀錄 - {site['title']}", inner, base), encoding="utf-8"
+        layout(site, f"紀錄 - {site['title']}", inner, base, raw=True, body_class="offi"), encoding="utf-8"
     )
 
     # 搜尋（對應官方 /search）：把全站文字做成 search_index.json，在瀏覽器裡搜尋，不需要伺服器
@@ -833,50 +833,49 @@ def build():
         json.dumps(idx, ensure_ascii=False, separators=(",", ":")), encoding="utf-8"
     )
     inner = (
-        '<div class="logbox"><h1>搜尋</h1>'
-        '<p>輸入關鍵字（多個詞用空格隔開，須全部出現），搜尋標題與對話文字。</p>'
-        '<form id="sf"><input id="sq" type="search" placeholder="例：約翰 烤肉" autocomplete="off" '
-        'style="width:70%;font:16px Verdana,sans-serif;padding:2px 6px"> <button type="submit">搜尋</button></form>'
-        '<p id="ss" style="font-weight:700"></p><ul id="sr"></ul></div>'
+        '<nav class="oc ocsearch"><h1>搜尋</h1>'
+        '<form id="sf"><input id="sq" type="search" placeholder="輸入關鍵字後按 Enter（多個詞用空格隔開，須全部出現）" autocomplete="off">'
+        '<label><input id="sx" type="checkbox"> 完全符合</label></form>'
+        '<h2>結果</h2><p id="ss"></p><ul id="sr"></ul></nav>'
         "<script>(function(){var D=null,f=document.getElementById('sf'),q=document.getElementById('sq'),"
         "ss=document.getElementById('ss'),sr=document.getElementById('sr');"
         "function E(s){return s.replace(/[&<>\"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]})}"
-        "function run(){var w=q.value.toLowerCase().split(/\\s+/).filter(Boolean);sr.innerHTML='';if(!w.length){ss.textContent='';return}"
+        "function run(){var v=q.value.toLowerCase().trim(),w=document.getElementById('sx').checked?(v?[v]:[]):v.split(/\\s+/).filter(Boolean);sr.innerHTML='';if(!w.length){ss.textContent='';return}"
         "var out=[],i,r,h,k,p,t;for(i=0;i<D.length&&out.length<200;i++){r=D[i];h=(r[1]+' '+r[2]).toLowerCase();"
         "if(w.every(function(x){return h.indexOf(x)>=0}))out.push(r)}"
         "ss.textContent=out.length?('找到 '+(out.length>=200?'200+':out.length)+' 頁'):'找不到符合的頁面';"
         "sr.innerHTML=out.map(function(r){p=r[2].toLowerCase().indexOf(w[0]);t=p<0?r[2].slice(0,80):r[2].slice(Math.max(0,p-30),p+60);"
-        "return '<li style=\"margin:6px 0\"><a href=\"BASE/p/'+('00000'+r[0]).slice(-6)+'.html\">'+r[0]+' 「'+E(r[1])+'」</a><br><span>…'+E(t)+'…</span></li>'}).join('')}"
-        "f.onsubmit=function(e){e.preventDefault();if(D)return run();ss.textContent='載入索引中…';"
+        "return '<li><a href=\"BASE/p/'+('00000'+r[0]).slice(-6)+'.html\">'+r[0]+' 「'+E(r[1])+'」</a><br><span>…'+E(t)+'…</span></li>'}).join('')}"
+        "document.getElementById('sx').onchange=function(){if(D)run()};f.onsubmit=function(e){e.preventDefault();if(D)return run();ss.textContent='載入索引中…';"
         "fetch('BASE/search_index.json').then(function(x){return x.json()}).then(function(d){D=d;run()})"
         ".catch(function(){ss.textContent='索引載入失敗'})};})();</script>"
     ).replace("BASE", base)
     (OUT / "search.html").write_text(
-        layout(site, f"搜尋 - {site['title']}", inner, base), encoding="utf-8"
+        layout(site, f"搜尋 - {site['title']}", inner, base, raw=True, body_class="offi"), encoding="utf-8"
     )
 
     # 新讀者（對應官方 /newreader）：中文翻譯
     first = pages[0]["page"] if pages else 1901
-    inner = f"""<div class="logbox newreader"><h1>嘿！</h1><h2>歡迎來到 MSPA！</h2>
+    inner = f"""<article class="oc ocnr"><div><h1>嘿！</h1><h2>歡迎來到 MSPA！</h2>
 <p>Homestuck.com（前身為 MSPaintAdventures.com）是安德魯・赫西（Andrew Hussie）創作的各部冒險作品的存檔。這些網路漫畫是為了展現那個年代敘事與技術的結合而做的——那時網路上滿是 Flash 和 Shockwave 遊戲，螢幕是橫向的，解析度高達 1024 像素，網路的蠻荒西部可以用無窮無盡、令人驚嘆的方式玩壞。這個存檔盡力重現當時的體驗，不過 Homestuck「作者原本的意圖」，用電腦讀會比用手機讀好得多。</p>
 <p>在開始讀 Homestuck（或任何一部冒險）之前，有兩件事要先知道。</p>
 <p><b>1) MSPA 的故事是以「模擬遊戲」的形式呈現</b>，更準確地說，是文字冒險遊戲。你要點擊一些聽起來像是在文字提示列輸入的指令的連結，來推進故事的頁面，讓角色去做某件事。通常，角色會在下一頁回應那個指令。</p>
 <p><b>2) MSPA 的故事大多是「讀者驅動」的</b>，也就是大部分的文字指令都是讀者透過建議箱提供的。安德魯會從清單中選一個指令，然後把執行的結果畫出來。對 Homestuck 來說，這個功能用得不多，但被拿來做了許多有趣的變化。</p>
 <p>不過話說回來，歸根結底，Homestuck 只是一個關於四個朋友和他們一起玩的遊戲的簡單故事。</p>
 <p>那是瓶中的閃電。再也沒有別的作品像它。它會毀掉你的人生。</p>
-<p><a href="{base}/p/{first:06d}.html"><button type="button" style="font:700 16px Verdana,sans-serif;padding:4px 12px">開始讀 HOMESTUCK</button></a></p>
-<hr>
+<a href="{base}/p/{first:06d}.html" style="align-self:center"><button type="button">開始讀 HOMESTUCK</button></a>
+<section>
 <p>想繼續看的話，可以到<a href="{base}/archive.html">目錄</a>頁，查看 Homestuck.com 目前收錄的各部冒險。</p>
 <p>想看安德魯・赫西的另一部作品，可以試試 <a href="https://store.steampowered.com/app/1529810/Psycholonials/">Psycholonials</a>，這是一款講述疫情時代的網紅如何建立小丑邪教的遊戲。</p>
 <p>如果你是 Homestuck 食人魔（trolls）的忠實粉絲，可以看看 <a href="https://www.hiveswap.com/">Hiveswap 遊戲與延伸宇宙</a>，包括 <a href="https://store.steampowered.com/agecheck/app/833040/">Friendsim 視覺小說</a>。</p>
 <p>想和 Homestuck 的一些角色一起玩，Steam 上有視覺小說 <a href="https://store.steampowered.com/app/1144030/Pesterquest/">Pesterquest</a>。</p>
 <p>如果你是老讀者（你來這一頁做什麼？？），可以看看 <a href="https://beyondcanon.com/">Homestuck: Beyond Canon</a>，這是接續 Homestuck 後記的故事續作，持續更新中！</p>
 <p>2017 年左右的舊版「新讀者」頁面，請<a href="https://www.homestuck.com/oldreader">點這裡</a>（官方英文）。</p>
-<p>當然，還有 Homestuck 目前的社群連結：</p>
-<ul><li><a href="https://discord.com/invite/homestuck">Discord</a></li><li><a href="https://x.com/homestuck">Twitter</a></li><li><a href="https://bsky.app/profile/homestuck.com">Bluesky</a></li></ul>
-<p style="font-size:10px">以上為本站讀者翻譯，原文見<a href="https://www.homestuck.com/newreader">官方新讀者頁</a>。</p></div>"""
+<section>當然，還有 Homestuck 目前的社群連結：<ul><li><a href="https://discord.com/invite/homestuck">Discord</a></li><li><a href="https://x.com/homestuck">Twitter</a></li><li><a href="https://bsky.app/profile/homestuck.com">Bluesky</a></li></ul></section>
+<p style="font-size:10px">以上為本站讀者翻譯，原文見<a href="https://www.homestuck.com/newreader">官方新讀者頁</a>。</p>
+</section></div></article>"""
     (OUT / "newreader.html").write_text(
-        layout(site, f"新讀者 - {site['title']}", inner, base), encoding="utf-8"
+        layout(site, f"新讀者 - {site['title']}", inner, base, raw=True, body_class="offi"), encoding="utf-8"
     )
 
     # 目錄（對應官方 /archive）：Homestuck 連本站頁面，其他作品連官方英文站
@@ -988,9 +987,9 @@ def build():
             mh += "</div></div>"
         if opened_side:
             mh += "</div></div>"
-    inner = '<div class="logbox mapbox"><h1>冒險地圖</h1>' + mh + "</div>"
+    inner = '<nav class="oc ocmap mapbox"><h1>冒險地圖</h1>' + mh + "</nav>"
     (OUT / "map.html").write_text(
-        layout(site, f"地圖 - {site['title']}", inner, base), encoding="utf-8"
+        layout(site, f"地圖 - {site['title']}", inner, base, raw=True, body_class="offi"), encoding="utf-8"
     )
 
     # 致謝（對應官方 /credits）：官方的音樂／美術／程式致謝有近千條外部連結，這裡先連到官方；本站自己的致謝列在下面
@@ -999,16 +998,16 @@ def build():
         for c in site.get("credits", [])
     )
     inner = (
-        '<div class="logbox newreader"><h1>致謝</h1>'
+        '<article class="ow"><header><h1>致謝</h1></header><section>'
         "<h2>官方致謝</h2>"
         "<p>Homestuck 的音樂與音效、美術、程式的完整致謝名單（逐頁列出曲目、作者與連結），請見官方英文頁面：</p>"
         '<ul><li><a href="https://www.homestuck.com/credits">音效致謝／美術致謝／程式致謝（官方 Credits）</a></li></ul>'
         "<h2>本站致謝</h2>"
         f"<p>{esc(site.get('copyright', ''))}</p>"
-        f"<ul>{credits_li}</ul></div>"
+        f"<ul>{credits_li}</ul></section></article>"
     )
     (OUT / "credits.html").write_text(
-        layout(site, f"致謝 - {site['title']}", inner, base), encoding="utf-8"
+        layout(site, f"致謝 - {site['title']}", inner, base, raw=True, body_class="owhite"), encoding="utf-8"
     )
 
     # 秘密（對應官方 /unlock）：中文翻譯；各條指令的圖畫頁仍連官方英文站
@@ -1018,21 +1017,22 @@ def build():
         for i, t in enumerate(SECRET_CMDS)
     )
     inner = (
-        '<div class="logbox newreader secrets"><h1>隱藏內容</h1>'
-        '<p style="text-align:center"><img src="https://storage.homestuck.com/secrets/old-secrets/images/unlock_gamecode.gif" alt="輸入了一組神秘的遊戲代碼"></p>'
-        '<p style="text-align:center">恭喜！！！</p>'
-        '<p style="text-align:center">你輸入了有效的遊戲代碼（GAME CODE），解鎖了令人興奮的秘密！其中包括：</p>'
+        '<article class="ow"><header><h1>隱藏內容</h1></header><section>'
+        '<img src="https://storage.homestuck.com/secrets/old-secrets/images/unlock_gamecode.gif" alt="輸入了一組神秘的遊戲代碼">'
+        '<p>恭喜！！！</p>'
+        '<p>你輸入了有效的遊戲代碼（GAME CODE），解鎖了令人興奮的秘密！其中包括：</p>'
         '<h2>安德魯的東西</h2><ul><li><a href="https://linktr.ee/andrewhussie">Linktree</a></li>'
         '<li><a href="https://mspaintadventures.itch.io/troubled-cosmos">Troubled Cosmos</a></li></ul>'
         '<h2>冷門連結</h2><ul><li><a href="https://www.homestuck.com/faqs">極度過時的常見問答</a></li>'
         '<li><a href="https://www.homestuck.com/ryanquest">Ryanquest</a></li>'
         '<li><a href="https://www.homestuck.com/old-secrets/vigilprince">The Vigil Prince</a></li></ul>'
-        '<p style="text-align:center">你還解鎖了一些<b>粉絲點播的遊戲指令</b>。如果你在 2010 年以前捐過款，這些指令就會被畫出來並貼在這裡。</p>'
+        '</section><section>'
+        '<p>你還解鎖了一些<b>粉絲點播的遊戲指令</b>。如果你在 2010 年以前捐過款，這些指令就會被畫出來並貼在這裡。</p>'
         '<ol>' + cmd_li + '</ol>'
-        '<p style="font-size:10px;text-align:center">以上為本站讀者翻譯，原文見<a href="https://www.homestuck.com/unlock">官方頁面</a>；各條指令的圖畫頁為官方英文站。</p></div>'
+        '<p style="font-size:10px">以上為本站讀者翻譯，原文見<a href="https://www.homestuck.com/unlock">官方頁面</a>；各條指令的圖畫頁為官方英文站。</p></section></article>'
     )
     (OUT / "secrets.html").write_text(
-        layout(site, f"秘密 - {site['title']}", inner, base), encoding="utf-8"
+        layout(site, f"秘密 - {site['title']}", inner, base, raw=True, body_class="owhite"), encoding="utf-8"
     )
 
     # 首頁
