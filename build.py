@@ -50,7 +50,7 @@ header.site .dd>a{cursor:pointer}
 .logbox{padding:8px 12px;font-size:12px}
 .logbox h1{text-align:center;font-size:24px;margin:4px 0}
 .logbox ul{list-style:none;margin:0;padding:0}
-.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.archive{font-weight:700;padding:8px;font-family:Verdana,"Microsoft JhengHei",sans-serif}.archive header{display:flex;flex-direction:column;align-items:center;gap:16px;margin:16px 0}.logbox.archive h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;margin:0}.archive header p{font-weight:400;text-align:center;margin:0;line-height:24px}.arch{display:flex;align-items:center;align-self:center;width:100%;max-width:512px;margin:0 auto;padding:16px 0}.arch>a{display:contents}.arch img{display:block;width:164px;height:164px;max-width:100%;flex:none}.arch>div{display:flex;flex-direction:column;align-items:center;padding:16px 24px}.arch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;padding:0 0 16px;margin:0}.arch p{font-weight:400;text-align:center;line-height:24px;padding:0 0 16px;margin:0}.arch p span{font-weight:700}.arch ul{display:flex;gap:12px;margin:0;padding:0;font-weight:400;list-style:none;line-height:24px}.arch li{padding-left:4px}.arch li+li{list-style:"|" outside;margin-left:0}@media (max-width:767px){.arch{flex-direction:column}}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
+.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.archive{font-weight:700;font-size:16px;padding:8px;font-family:Verdana,"Microsoft JhengHei",sans-serif}.archive header{display:flex;flex-direction:column;align-items:center;gap:16px;margin:16px 0}.logbox.archive h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;margin:0}.archive header p{font-weight:400;text-align:center;margin:0;line-height:24px}.arch{display:flex;align-items:center;align-self:center;width:100%;max-width:512px;margin:0 auto;padding:16px 0}.arch>a{display:contents}.arch img{display:block;width:164px;height:164px;max-width:100%;flex:none}.arch>div{display:flex;flex-direction:column;align-items:center;padding:16px 24px}.arch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;padding:0 0 16px;margin:0}.arch p{font-weight:400;text-align:center;line-height:24px;padding:0 0 16px;margin:0}.arch p span{font-weight:700}.arch li span.off{text-decoration:line-through}.arch ul{display:flex;gap:12px;margin:0;padding:0;font-weight:400;list-style:none;line-height:24px}.arch li{padding-left:4px}.arch li+li{list-style:"|" outside;margin-left:0}@media (max-width:767px){.arch{flex-direction:column}}body.offi main.wrap{max-width:940px;padding:0}.logbox.archive{margin:8px;background:#eee;padding:8px}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
 main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:20px 12px 8px}
 article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 0}
 .story h1{font:700 28px/1.25 "Courier New",CourierPrime,courier,monospace;text-align:center;margin:0 16px 12px}
@@ -884,9 +884,9 @@ def build():
     IM = "https://storage.homestuck.com/media/images/"
     arch = [
         ("PSYCHOLONIALS", O + "/psycholonials", "archive_psy.gif", "兩位網紅在與超自然力量溝通的同時，推出了一個大膽的新社群媒體品牌。", "已完結", []),
-        ("THE HOMESTUCK EPILOGUES", O + "/epilogues/prologue", "archive_ep.gif", "真實性有待商榷的故事。", "已完結", [("紀錄", O + "/epilogues/viewlog")]),
+        ("THE HOMESTUCK EPILOGUES", O + "/epilogues/prologue", "archive_ep.gif", "真實性有待商榷的故事。", "已完結", [("紀錄", O + "/epilogues/viewlog"), ("搜尋", None)]),
         ("HOMESTUCK", f"{base}/p/{first:06d}.html", "archive_hs.gif", "一個關於男孩、他的朋友們，以及他們一起玩的遊戲的故事。約 8,000 頁。（本站繁體中文版）", "已完結",
-         [("地圖", base + "/map.html"), ("紀錄", base + "/log.html"), ("搜尋", base + "/search.html"), ("致謝", base + "/credits.html"), ("HOMESTUCK(英文官方網址)", O + "/001901")]),
+         [("地圖", base + "/map.html"), ("紀錄", base + "/log.html"), ("搜尋", base + "/search.html"), ("致謝", base + "/credits.html")]),
         ("PROBLEM SLEUTH", O + "/problemsleuth/000219", "archive_ps.gif", "一個關於硬漢偵探在他辦公室裡的冒險。22 章，約 1700 頁。", "已完結",
          [("地圖", O + "/problemsleuth/viewmap"), ("紀錄", O + "/problemsleuth/viewlog"), ("搜尋", O + "/problemsleuth/search"), ("科學問答", O + "/faqs/science")]),
         ("JESTER QUEST", O + "/jesterquest/000001", "archive_jq.gif", "一個單純的小丑，從 2007 年起就一直耐心等待《吟遊詩人任務》更新。30,000 頁。", "已完結",
@@ -900,18 +900,18 @@ def build():
     ]
     secs = ""
     for name, url, img, desc, st, links in arch:
-        lk = "".join(f'<li><a href="{esc(u)}">{esc(t)}</a></li>' for t, u in links)
+        lk = "".join((f'<li><a href="{esc(u)}">{esc(t)}</a></li>' if u else f'<li><span class="off">{esc(t)}</span></li>') for t, u in links)
         secs += (
             f'<section class="arch"><a href="{esc(url)}"><img src="{IM}{img}" alt="{esc(name)}"></a>'
             f'<div><h2><a href="{esc(url)}">{esc(name)}</a></h2><p>{esc(desc)} {("<span>[" + st + "]</span>") if st else ""}</p>'
             + (f"<ul>{lk}</ul>" if lk else "") + "</div></section>"
         )
     inner = (
-        '<nav class="logbox archive"><header><h1>目錄</h1><p>冒險作品依我們高興的順序排列。</p></header>'
-        + secs + '<p style="font:400 10px/1.5 Verdana,sans-serif;text-align:center">除 Homestuck 外，其餘作品連到官方英文站。</p></nav>'
+        '<nav class="logbox archive"><header><h1>目錄</h1><p>冒險作品依我們高興的順序排列。</p><p>※此頁面連結皆連結至原英文官方頁面，本站並無翻譯</p></header>'
+        + secs + '</nav>'
     )
     (OUT / "archive.html").write_text(
-        layout(site, f"目錄 - {site['title']}", inner, base), encoding="utf-8"
+        layout(site, f"目錄 - {site['title']}", inner, base, raw=True, body_class="offi"), encoding="utf-8"
     )
 
     # 地圖（對應官方 /viewmap）：map_data.txt 取自官方（S/T=側欄標籤、A/R=地圖圖片連結、P=程式碼文字、H=光碟圖）
