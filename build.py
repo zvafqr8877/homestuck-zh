@@ -906,7 +906,7 @@ def build():
             + (f"<ul>{lk}</ul>" if lk else "") + "</div></section>"
         )
     inner = (
-        '<nav class="logbox archive"><header><h1>目錄</h1><p>冒險作品依我們高興的順序排列。</p><p>※此頁面連結皆連結至原英文官方頁面，本站並無翻譯</p></header>'
+        '<nav class="logbox archive"><header><h1>目錄</h1><p>冒險作品依我們高興的順序排列。</p><p>※本頁連結皆連至原英文官方頁面，本站並無翻譯</p></header>'
         + secs + '</nav>'
     )
     (OUT / "archive.html").write_text(
