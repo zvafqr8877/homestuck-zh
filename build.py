@@ -882,27 +882,29 @@ def build():
     O = "https://www.homestuck.com"
     IM = "https://storage.homestuck.com/media/images/"
     arch = [
-        ("PSYCHOLONIALS", O + "/psycholonials", "archive_psy.gif", "兩位網紅在與超自然力量溝通的同時，推出了一個大膽的新社群媒體品牌。", "已完結", []),
+        ("PSYCHOLONIALS", O + "/psycholonials", "archive_psy.gif", "在與超自然力量溝通的過程中，兩位網紅推出了大膽的全新社群媒體品牌。", "已完結", []),
         ("THE HOMESTUCK EPILOGUES", O + "/epilogues/prologue", "archive_ep.gif", "真實性有待商榷的故事。", "已完結", [("紀錄", O + "/epilogues/viewlog"), ("搜尋", None)]),
-        ("HOMESTUCK", f"{base}/p/{first:06d}.html", "archive_hs.gif", "一個關於男孩、他的朋友們，以及他們一起玩的遊戲的故事。約 8,000 頁。（本站繁體中文版）", "已完結",
+        ("HOMESTUCK", f"{base}/p/{first:06d}.html", "archive_hs.gif", "一個關於男孩與朋友們，以及他們一起玩的電子遊戲的故事。約 8,000 頁。", "已完結",
          [("地圖", base + "/map.html"), ("紀錄", base + "/log.html"), ("搜尋", base + "/search.html"), ("致謝", base + "/credits.html")]),
-        ("PROBLEM SLEUTH", O + "/problemsleuth/000219", "archive_ps.gif", "一個關於硬漢偵探在他辦公室裡的冒險。22 章，約 1700 頁。", "已完結",
+        ("PROBLEM SLEUTH", O + "/problemsleuth/000219", "archive_ps.gif", "一場關於硬漢偵探在他辦公室裡的冒險。共22 章，約 1700 頁。", "已完結",
          [("地圖", O + "/problemsleuth/viewmap"), ("紀錄", O + "/problemsleuth/viewlog"), ("搜尋", O + "/problemsleuth/search"), ("科學問答", O + "/faqs/science")]),
-        ("JESTER QUEST", O + "/jesterquest/000001", "archive_jq.gif", "一個單純的小丑，從 2007 年起就一直耐心等待《吟遊詩人任務》更新。30,000 頁。", "已完結",
+        ("JESTER QUEST", O + "/jesterquest/000001", "archive_jq.gif", "一個普通的小丑，自 2007 年以來就一直熱切地等待著《[[BARD QUEST]]》更新。共30,000 頁。", "已完結",
          [("紀錄", O + "/jesterquest/viewlog"), ("搜尋", O + "/jesterquest/search")]),
-        ("BARD QUEST", O + "/bardquest/000136", "archive_bq.gif", "一位年輕吟遊詩人屠龍的努力。分支式的「自選冒險」風格。47 頁。", "已完結？",
+        ("BARD QUEST", O + "/bardquest/000136", "archive_bq.gif", "一個年輕吟遊詩人試圖殺掉幾隻龍。分支式風格「做出你冒險的選擇」。共47 頁。", "已完結？",
          [("紀錄", O + "/bardquest/viewlog"), ("搜尋", O + "/bardquest/search")]),
-        ("JAILBREAK", O + "/jailbreak/000002", "archive_jb.gif", "一個傢伙想要越獄。134 頁。", "已完結？",
+        ("JAILBREAK", O + "/jailbreak/000002", "archive_jb.gif", "一個人試圖越獄。共134 頁。", "已完結？",
          [("紀錄", O + "/jailbreak/viewlog"), ("搜尋", O + "/jailbreak/search")]),
-        ("SWEET BRO AND HELLA JEFF", O + "/sweetbroandhellajeff/001", "archive_sbahj.gif", "它一直在發生。頁數不明。", "",
+        ("SWEET BRO AND HELLA JEFF", O + "/sweetbroandhellajeff/001", "archive_sbahj.gif", "它還正在進行中。共???頁。", "",
          [("紀錄", O + "/sweetbroandhellajeff/001#log")]),
     ]
     secs = ""
     for name, url, img, desc, st, links in arch:
         lk = "".join((f'<li><a href="{esc(u)}">{esc(t)}</a></li>' if u else f'<li><span class="off">{esc(t)}</span></li>') for t, u in links)
+        desc_html = esc(desc).replace("[[BARD QUEST]]", '<a href="' + O + '/bardquest/000136">BARD QUEST</a>')
+        st_html = ("<span>【" + st + "】</span>") if st else ""
         secs += (
             f'<section class="arch"><a href="{esc(url)}"><img src="{IM}{img}" alt="{esc(name)}"></a>'
-            f'<div><h2><a href="{esc(url)}">{esc(name)}</a></h2><p>{esc(desc)} {("<span>[" + st + "]</span>") if st else ""}</p>'
+            f'<div><h2><a href="{esc(url)}">{esc(name)}</a></h2><p>{desc_html} {st_html}</p>'
             + (f"<ul>{lk}</ul>" if lk else "") + "</div></section>"
         )
     inner = (
