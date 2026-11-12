@@ -51,10 +51,10 @@ header.site .dd>a{cursor:pointer}
 .logbox h1{text-align:center;font-size:24px;margin:4px 0}
 .logbox ul{list-style:none;margin:0;padding:0}
 .newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.archive{font-weight:700;font-size:16px;padding:8px;font-family:Verdana,"Microsoft JhengHei",sans-serif}.archive header{display:flex;flex-direction:column;align-items:center;gap:16px;margin:16px 0}.logbox.archive h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;margin:0}.archive header p{font-weight:400;text-align:center;margin:0;line-height:24px}.arch{display:flex;align-items:center;align-self:center;width:100%;max-width:650px;margin:0 auto;padding:16px 0}.arch>a{display:contents}.arch img{display:block;width:164px;height:164px;max-width:100%;flex:none}.arch>div{display:flex;flex-direction:column;align-items:center;padding:16px 24px}.arch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;padding:0 0 16px;margin:0}.arch p{font-weight:400;text-align:center;line-height:24px;padding:0 0 16px;margin:0}.arch p span{font-weight:700}.arch li span.off{text-decoration:line-through}.arch ul{display:flex;gap:12px;margin:0;padding:0;font-weight:400;list-style:none;line-height:24px}.arch li{padding-left:4px}.arch li+li{list-style:"|" outside;margin-left:0}@media (max-width:767px){.arch{flex-direction:column}}body.offi main.wrap{max-width:940px;padding:0;display:flow-root}.logbox.archive{margin:8px;background:#eee;padding:8px}body.owhite main.wrap{max-width:650px;padding:0;background:#fff;display:flow-root;margin:0 auto 40px}.oc{margin:8px;background:#eee;padding:8px;display:flex;flex-direction:column;font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000}.oc h1{font:700 30px/36px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:0}.oc ul{list-style:none;margin:0;padding:0}.oclog .tg{display:block;font:700 10px/15px Verdana,"Microsoft JhengHei",sans-serif;padding:0 0 8px;color:#00f;text-decoration:underline}.oclog li span{font-size:12px;line-height:16px}.ocmap h1{padding:16px 0 40px}.ocsearch h1{font-size:36px;line-height:40px;margin-top:8px}.ocsearch input[type=search]{display:block;width:100%;background:#fff;color:#000;border:1px solid #000;padding:4px;font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;margin:8px 0}.ocsearch label{display:block;font-weight:400}.ocsearch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:8px 0 0}.ocsearch #ss{margin:8px 0;font-weight:400}.ocsearch #sr li{margin:8px 0;font-weight:400}.ocsearch #sr span{font-size:12px}.ocnr{flex-direction:row;justify-content:center}.ocnr>div{max-width:750px;width:100%;display:flex;flex-direction:column;gap:28px;margin:32px 0;font-weight:400}.ocnr p{text-align:center;margin:0}.ocnr h2{font-size:16px;font-weight:400;align-self:center;margin:0}.ocnr button{font:400 48px/48px Homestuck,"Microsoft JhengHei",monospace;border:5px solid #000;background:#fff;color:#000;padding:16px 24px;cursor:pointer;max-width:100%}.ocnr button:hover{background:#000;color:#fff}.ocnr section{display:flex;flex-direction:column;gap:32px}.ocnr section p{text-align:left}.ocnr section ul{list-style:disc;margin:0 0 0 40px;padding:0;display:flex;flex-direction:column}.ow{font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000;background:#fff}.ow header{display:flex;flex-direction:column;gap:16px;margin:16px 0}.ow h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;margin:0}.ow section{display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px;text-align:center}.ow h2{font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;margin:16px 0 0}.ow p{margin:0}.ow ul{list-style:none;padding:0;margin:0}.ow ol{display:flex;flex-direction:column;gap:16px;margin:0;padding:0;list-style-position:inside}.ow ul.left,.ow .left{text-align:left}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
-main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:20px 12px 8px}
-article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 0}
-.story h1{font:700 28px/1.25 "Courier New",CourierPrime,courier,monospace;text-align:center;margin:0 16px 12px}
-.story .assets{margin:0}
+main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:0;display:flex;flex-direction:column;align-items:center}
+article.story{width:100%;max-width:650px;margin:8px 0 24px;background:#eee;padding:12px 0;display:flex;flex-direction:column;gap:16px}
+.story h1{font:700 30px/36px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;margin:0 32px}
+.story .assets{margin:0 0 16px}
 .story .assets>*+*{margin-top:32px}
 .story .assets img,.story .assets video{width:650px;max-width:100%;height:auto;display:block;margin:0 auto}
 .flash{margin:0 auto;max-width:650px;position:relative}
@@ -137,10 +137,10 @@ body.a6a6{background:#042300}
 .dialog .log.off{display:none}
 .plain{margin:0 24px;text-align:center;font:400 16px/1.55 "Courier New",CourierPrime,courier,"Microsoft JhengHei","Noto Sans TC",monospace}
 .plain p{margin:0 0 16px}.plain p:last-child{margin-bottom:0}
-.nextlink{margin:16px 24px 0;font:24px/32px Verdana,"Microsoft JhengHei",sans-serif}
+.nextlink{margin:16px 24px;font:24px/32px Verdana,"Microsoft JhengHei",sans-serif}
 .nextlink span{color:#000}
 .story-foot{margin:16px 28px 0;font:12px/1.6 Verdana,"Microsoft JhengHei",sans-serif}
-.savebar{display:flex;justify-content:flex-end;position:relative;margin:16px 28px 0;font:700 11px/16px Verdana,"Microsoft JhengHei",sans-serif}
+.savebar{display:flex;justify-content:flex-end;position:relative;margin:0 24px;font:700 11px/16px Verdana,"Microsoft JhengHei",sans-serif}
 .savebar.first{justify-content:flex-start}
 .savebar ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap}
 .savebar li{padding:0 4px}
@@ -172,7 +172,7 @@ footer.site .line{font-weight:700;margin:0 0 6px}
 footer.site p{margin:.4em 0}
 footer.site ul{margin:.4em 0;padding-left:1.2em}
 footer.site h2{font:700 13px/1.6 Verdana,"Microsoft JhengHei",sans-serif;margin:10px 0 2px}
-@media (max-width:560px){.story h1{font-size:22px}.dialog{margin:12px 8px 0;padding:6px 10px 12px}.nextlink,.story-foot,.plain{margin-left:12px;margin-right:12px}.nextlink{font-size:20px}main.wrap{padding:8px 0}}
+@media (max-width:560px){.story h1{font-size:22px}.dialog{margin:12px 8px 0;padding:6px 10px 12px}.nextlink,.story-foot,.plain{margin-left:12px;margin-right:12px}.nextlink{font-size:20px}main.wrap{padding:0}}
 """
 
 
