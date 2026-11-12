@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as n,o as a,n as o}from"./index-Bd5ug0Z9.js";const _=n({__name:"005737DS",setup(t){return(i,r)=>(a(),o(e,{imageFile:"banners/room42.gif",alt:"14 begins firing a minigun into Spades Slick. The Tumor is shattered by the bullets."}))}});export{_ as default};

@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n}from"./index-Bd5ug0Z9.js";const m=o({__name:"005731DS",setup(t){return(r,s)=>(a(),n(e,{imageFile:"banners/room36.gif",alt:"Slick throws the weapon at 11's head, knocking him out."}))}});export{m as default};

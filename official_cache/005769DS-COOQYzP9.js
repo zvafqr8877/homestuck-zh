@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n as t}from"./index-Bd5ug0Z9.js";const m=a({__name:"005769DS",setup(n){return(r,s)=>(o(),t(e,{imageFile:"banners/room74.gif",alt:"Jade fires another round into Jack. Jack teleports behind Dave, causing him to be sprayed with the bullets."}))}});export{m as default};

@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n}from"./index-Bd5ug0Z9.js";const c=o({__name:"005936DS",setup(r){return(s,t)=>(a(),n(e,{imageFile:"banners/room86.gif",alt:"The banging stops."}))}});export{c as default};

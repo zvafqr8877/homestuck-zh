@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n as t}from"./index-Bd5ug0Z9.js";const _=a({__name:"005771DS",setup(s){return(n,r)=>(o(),t(e,{imageFile:"banners/room76.gif",alt:"The fenestrated wall switches back to show Doc's apartment."}))}});export{_ as default};

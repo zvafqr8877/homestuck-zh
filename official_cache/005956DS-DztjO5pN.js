@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as t,n as s}from"./index-Bd5ug0Z9.js";const c=o({__name:"005956DS",setup(a){return(r,i)=>(t(),s(e,{imageFile:"banners/room92.gif",tooltip:"BOOYEAH",alt:"Hussie smashes through the fifth wall. Mousing over or clicking this image reveals more text!"}))}});export{c as default};

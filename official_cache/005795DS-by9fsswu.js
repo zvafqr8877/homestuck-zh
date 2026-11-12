@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n as s}from"./index-Bd5ug0Z9.js";const _=o({__name:"005795DS",setup(t){return(r,n)=>(a(),s(e,{imageFile:"banners/room81.gif",alt:"Doc causes the room to flash again. He disappears, but the book fuses back together."}))}});export{_ as default};

@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n}from"./index-Bd5ug0Z9.js";const _=o({__name:"005757DS",setup(t){return(r,s)=>(a(),n(e,{imageFile:"banners/room62.gif",alt:"The two are ensnared in a hate snog. They are biting each other's mouths to the point of drawing blood."}))}});export{_ as default};

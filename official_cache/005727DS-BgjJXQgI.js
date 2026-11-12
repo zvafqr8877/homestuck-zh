@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o as n,n as o}from"./index-Bd5ug0Z9.js";const c=a({__name:"005727DS",setup(r){return(s,t)=>(n(),o(e,{imageFile:"banners/room32.gif",alt:"4 arrives on the scene. 11 is still spraying."}))}});export{c as default};

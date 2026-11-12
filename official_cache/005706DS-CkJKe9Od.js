@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n as r}from"./index-Bd5ug0Z9.js";const i=a({__name:"005706DS",setup(s){return(t,n)=>(o(),r(e,{imageFile:"banners/room11.gif",alt:"Doc stands back while Slick approaches the candy bowl. There's a message on the typewriter from Rose."}))}});export{i as default};

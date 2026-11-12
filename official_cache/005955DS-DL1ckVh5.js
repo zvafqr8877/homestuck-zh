@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n as t}from"./index-Bd5ug0Z9.js";const f=o({__name:"005955DS",setup(n){return(r,s)=>(a(),t(e,{imageFile:"banners/room91.gif",alt:"Light beams out of the fifth wall."}))}});export{f as default};

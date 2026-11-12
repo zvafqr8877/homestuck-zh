@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o as n,n as o}from"./index-Bd5ug0Z9.js";const _=a({__name:"005764DS",setup(r){return(s,t)=>(n(),o(e,{imageFile:"banners/room69.gif",alt:"Jade fires a round of bullets into Jack. Several Daves appear and begin slicing at Jack."}))}});export{_ as default};

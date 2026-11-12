@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o as n,n as o}from"./index-Bd5ug0Z9.js";const _=a({__name:"005756DS",setup(s){return(r,t)=>(n(),o(e,{imageFile:"banners/room61.gif",alt:"A fenestrated wall frames the scene of Slick and Snowman's kiss."}))}});export{_ as default};

@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as r,n as a}from"./index-Bd5ug0Z9.js";const A=o({__name:"005968DS",setup(t){return(s,n)=>(r(),a(e,{imageFile:"banners/room104.gif",tooltip:"RAAARARRAAUUUAAAAUUAGHGHGGHGGGGHHGH! *flip*",alt:"Hussie flips the table. Arrow commands fly everywhere."}))}});export{A as default};

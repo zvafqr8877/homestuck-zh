@@ -35,15 +35,25 @@ def main():
     home = get(BASE + "/")
     index = re.search(r"assets/index-[\w-]+\.js", home).group(0)
     ij = get(f"{BASE}/{index}")
-    sv = re.search(r"StandardPageView-[\w-]+\.js", ij).group(0)
-    svt = get(f"{BASE}/assets/{sv}")
+    # 官方的頁面檔分在好幾個 View 檔裡：StandardPageView（HS，一般頁）、ScratchPageView（DS，剪貼簿房間 5664–5981）、
+    # TricksterPageView（TK）、DoublePageView（DP）、NoBackButtonView（CS）、NoElementView（NV）…
+    # PS／JQ／BQ／JB 是別的冒險（頁碼會撞號），不收。
+    views = sorted(set(re.findall(r"[\w-]+View-[\w-]+\.js", ij)))
     chunks = {}
-    for m in re.finditer(r"assets/(\d{6})(\w*)-([\w-]+)\.js", svt):
-        p = int(m.group(1))
-        if lo <= p <= hi:
-            chunks.setdefault(p, [])
-            if m.group(0) not in chunks[p]:
-                chunks[p].append(m.group(0))
+    for v in views:
+        try:
+            vt = get(f"{BASE}/assets/{v}")
+        except Exception as e:
+            print(f"{v}: 失敗 {e}")
+            continue
+        for m in re.finditer(r"assets/(\d{6})(\w*)-([\w-]+)\.js", vt):
+            p = int(m.group(1))
+            if m.group(2) in ("PS", "JQ", "BQ", "JB"):
+                continue
+            if lo <= p <= hi:
+                chunks.setdefault(p, [])
+                if m.group(0) not in chunks[p]:
+                    chunks[p].append(m.group(0))
     print(f"官方頁面檔 {len(chunks)} 頁")
     out_path = ROOT / "manifest_old.json"
     out = json.loads(out_path.read_text(encoding="utf-8")) if out_path.exists() else {}

@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n as s}from"./index-Bd5ug0Z9.js";const i=a({__name:"005770DS",setup(r){return(n,t)=>(o(),s(e,{imageFile:"banners/room75.gif",alt:"Jade leans over Dave's corpse. Jack stands wearily to the side."}))}});export{i as default};

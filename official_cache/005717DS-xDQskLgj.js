@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n}from"./index-Bd5ug0Z9.js";const m=o({__name:"005717DS",setup(t){return(r,s)=>(a(),n(e,{imageFile:"banners/room22.gif",alt:"Slick has covered half of the room in oil. Doc seemingly still hasn't noticed."}))}});export{m as default};

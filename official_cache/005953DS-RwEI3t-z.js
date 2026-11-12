@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n}from"./index-Bd5ug0Z9.js";const c=a({__name:"005953DS",setup(r){return(t,s)=>(o(),n(e,{imageFile:"banners/room89.gif",alt:"Ms. Paint walks out of frame."}))}});export{c as default};

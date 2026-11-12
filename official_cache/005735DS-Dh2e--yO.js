@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as n,n as a}from"./index-Bd5ug0Z9.js";const _=o({__name:"005735DS",setup(s){return(t,r)=>(n(),a(e,{imageFile:"banners/room40.gif",alt:"The coin lands. 4 is sucked into the coin."}))}});export{_ as default};

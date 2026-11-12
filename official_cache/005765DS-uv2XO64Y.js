@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as t,o as n,n as o}from"./index-Bd5ug0Z9.js";const i=t({__name:"005765DS",setup(r){return(s,a)=>(n(),o(e,{imageFile:"banners/room70.gif",alt:"The strife continues. Jade pulls out the green sun streetsweeper."}))}});export{i as default};

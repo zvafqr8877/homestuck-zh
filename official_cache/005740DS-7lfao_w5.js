@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as s,n as a}from"./index-Bd5ug0Z9.js";const i=o({__name:"005740DS",setup(n){return(r,t)=>(s(),a(e,{imageFile:"banners/room45.gif",alt:"Slick's corpse is seen through a synapse."}))}});export{i as default};

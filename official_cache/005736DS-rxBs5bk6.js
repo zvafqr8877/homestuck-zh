@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n as r}from"./index-Bd5ug0Z9.js";const _=o({__name:"005736DS",setup(n){return(t,p)=>(a(),r(e,{imageFile:"banners/room41.gif",alt:"14 appears from the flipped coin."}))}});export{_ as default};

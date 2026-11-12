@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as t,n as a}from"./index-Bd5ug0Z9.js";const c=o({__name:"005726DS",setup(n){return(r,s)=>(t(),a(e,{imageFile:"banners/room31.gif",alt:"11 puts the fire extinguisher to use. The bowl of candy is taken."}))}});export{c as default};

@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as t,n as a}from"./index-Bd5ug0Z9.js";const _=o({__name:"005713DS",setup(n){return(r,i)=>(t(),a(e,{imageFile:"banners/room18.gif",alt:"Doc is still by the typewriter. Slick twists open a container of oil."}))}});export{_ as default};

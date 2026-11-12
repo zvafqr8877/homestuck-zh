@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n as r}from"./index-Bd5ug0Z9.js";const m=a({__name:"005754DS",setup(n){return(t,c)=>(o(),r(e,{imageFile:"banners/room59.gif",alt:"The crowbar and cigarette holder fall to the ground. Snowman and Slick are standing very close to each other."}))}});export{m as default};

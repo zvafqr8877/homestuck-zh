@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as n,n as a}from"./index-Bd5ug0Z9.js";const _=o({__name:"005702DS",setup(t){return(i,r)=>(n(),a(e,{imageFile:"banners/room07.gif",alt:"Slick is bonking Doc on the head with his weapon."}))}});export{_ as default};

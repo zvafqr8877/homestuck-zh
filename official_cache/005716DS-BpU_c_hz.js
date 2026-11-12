@@ -1,0 +1,1 @@
+import{_ as o}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e,o as a,n}from"./index-Bd5ug0Z9.js";const _=e({__name:"005716DS",setup(s){return(t,r)=>(a(),n(o,{imageFile:"banners/room21.gif",alt:"Doc still has the book open. Slick is still pouring."}))}});export{_ as default};

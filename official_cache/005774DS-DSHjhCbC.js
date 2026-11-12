@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n as r}from"./index-Bd5ug0Z9.js";const _=o({__name:"005774DS",setup(n){return(s,t)=>(a(),r(e,{imageFile:"banners/room79.gif",alt:"Doc approaches the scrapbook."}))}});export{_ as default};

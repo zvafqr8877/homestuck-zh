@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n}from"./index-Bd5ug0Z9.js";const i=a({__name:"005954DS",setup(r){return(s,t)=>(o(),n(e,{imageFile:"banners/room90.gif",alt:"Hussie walks into frame."}))}});export{i as default};

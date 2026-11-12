@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n as r}from"./index-Bd5ug0Z9.js";const _=o({__name:"005724DS",setup(n){return(t,s)=>(a(),r(e,{imageFile:"banners/room29.gif",alt:"Doc is still out of frame. A hand reaches for the candy."}))}});export{_ as default};

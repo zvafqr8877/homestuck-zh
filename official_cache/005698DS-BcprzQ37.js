@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n}from"./index-Bd5ug0Z9.js";const m=o({__name:"005698DS",setup(r){return(t,c)=>(a(),n(e,{imageFile:"banners/room03.gif",alt:"Doc approaches the bowl of candy."}))}});export{m as default};

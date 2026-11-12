@@ -1,0 +1,1 @@
+import{_ as o}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e,o as a,n as r}from"./index-Bd5ug0Z9.js";const c=e({__name:"005836DS",setup(n){return(s,t)=>(a(),r(o,{imageFile:"banners/room82.gif",alt:"There's a bang on the door. Doc grabs his broom."}))}});export{c as default};

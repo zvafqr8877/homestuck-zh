@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n as r}from"./index-Bd5ug0Z9.js";const i=a({__name:"005752DS",setup(t){return(n,c)=>(o(),r(e,{imageFile:"banners/room57.gif",alt:"Slick approaches with the crowbar."}))}});export{i as default};

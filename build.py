@@ -50,7 +50,7 @@ header.site .dd>a{cursor:pointer}
 .logbox{padding:8px 12px;font-size:12px}
 .logbox h1{text-align:center;font-size:24px;margin:4px 0}
 .logbox ul{list-style:none;margin:0;padding:0}
-.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.arch{display:flex;gap:12px;align-items:center;margin:14px 0}.arch img{width:110px;height:auto;flex:none}.arch h2{font-size:16px;margin:0 0 4px}.arch p{margin:0 0 4px;font-size:13px}.arch ul{display:flex;gap:12px;margin:0;padding:0;list-style:none;flex-wrap:wrap;font-size:12px;font-weight:700}.arch span{font-weight:700}.mapbox{overflow-x:auto}.mapbox h1{margin-bottom:24px}@font-face{font-family:Homestuck;src:url("assets/fonts/homestuck.woff2") format("woff2");font-display:swap}.mside,.mpart{display:flex}.msb{display:flex;flex-direction:column;align-items:flex-end;flex:none}.mlab{margin-top:32px;padding-top:4px;min-width:30px;color:#fff;font-family:Homestuck,Verdana,sans-serif;writing-mode:vertical-rl;text-orientation:upright}.mlab .a{font-size:14px;margin-bottom:8px}.mlab .b{font-size:30px;line-height:1}.msb img{margin-top:8px}.mbar{width:16px;margin-right:12px;border-top:8px solid;border-bottom:8px solid;flex:none}.mbody{display:flex;flex-direction:column;justify-content:center;margin:0 auto}.mcol{display:flex;flex-direction:column;align-items:center}.mcol img{display:block}.mrow{display:flex}.mcode{font:12px monospace;text-align:center;margin:12px 0}.mside{margin:12px auto;justify-content:center;width:max-content;max-width:100%}.mdisc{text-align:center;margin:20px 0}.mdisc h2{font:20px Homestuck,Verdana,sans-serif}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
+.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.arch{display:flex;gap:12px;align-items:center;margin:14px 0}.arch img{width:110px;height:auto;flex:none}.arch h2{font-size:16px;margin:0 0 4px}.arch p{margin:0 0 4px;font-size:13px}.arch ul{display:flex;gap:12px;margin:0;padding:0;list-style:none;flex-wrap:wrap;font-size:12px;font-weight:700}.arch span{font-weight:700}.mapbox{overflow-x:auto}.mapbox h1{margin-bottom:24px}@font-face{font-family:Homestuck;src:url("assets/fonts/homestuck.woff2") format("woff2");font-display:swap}.mside,.mpart{display:flex}.msb{display:flex;flex-direction:column;align-items:flex-end;flex:none}.mlab{margin-top:32px;padding-top:4px;min-width:30px;color:#fff;font-family:Homestuck,Verdana,sans-serif;writing-mode:vertical-rl;text-orientation:upright}.mlab .a{font-size:14px;margin-bottom:8px}.mlab .b{font-size:30px;line-height:1}.msb img{margin-top:8px}.mbar{width:16px;margin-right:12px;border-top:8px solid;border-bottom:8px solid;flex:none}.mbody{display:flex;flex-direction:column;justify-content:center;margin:0 auto}.mcol{display:flex;flex-direction:column;align-items:center}.mcol img{display:block}.mrow{display:flex}.mcode{font:12px monospace;text-align:center;margin:12px 0}.mside{margin:12px auto;justify-content:center;width:max-content;max-width:100%}.mdisc{text-align:center;margin:20px 0}.mdisc h2{font:20px Homestuck,Verdana,sans-serif}.secrets h2{text-align:center;font-size:16px;margin:16px 0 4px}.secrets ul{text-align:center}.secrets ol{text-align:center;padding:0;list-style-position:inside}.secrets li{margin:10px 0}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
 main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:20px 12px 8px}
 article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 0}
 .story h1{font:700 28px/1.25 "Courier New",CourierPrime,courier,monospace;text-align:center;margin:0 16px 12px}
@@ -193,6 +193,9 @@ RUFFLE_JS = r"""
     urlRewriteRules: [
       ["/^http:\\/\\/www\\.mspaintadventures\\.com\\/\\?s=6&p=(\\d+)/", base + "/p/$1.html"],
       ["/^http:\\/\\/www\\.mspaintadventures\\.com\\/\\?s=4/", "https://zhhomestuck.github.io/"],
+      // 繁中站翻譯過的 Flash 裡的連結（https://zhhomestuck.github.io/p/005786 或相對的 /p/005786）改成本站頁面
+      ["/^https?:\\/\\/zhhomestuck\\.github\\.io\\/p\\/+(\\d+)(?:\\.html)?/", base + "/p/$1.html"],
+      ["/^https?:\\/\\/[^\\/]*github\\.io\\/p\\/+(\\d+)(?:\\.html)?/", base + "/p/$1.html"],
       ["/^http:\\/\\/www\\.mspaintadventures\\.com\\/(soundcredits|artcredits)\\.html/", base + "/"],
       ["/^http:\\/\\/www\\.mspaintadventures\\.com\\/storyfiles\\/hs2\\/(\\d+)\\/([^\\/]+)\\.(\\w+)/", "https://storage.homestuck.com/story/homestuck/media/audio/$1/$2.$3"],
       ["/^http:\\/\\/www\\.mspaintadventures\\.com\\/storyfiles\\/hs2\\/songs\\/alterniaboundsongs\\/([^\\/]+)\\.(\\w+)/", "https://storage.homestuck.com/story/homestuck/media/audio/004692/$1.$2"],
@@ -350,7 +353,7 @@ def layout(site, title, inner, base, raw=False, body_class="", sep_img=""):
         [("目錄", base + "/archive.html", "c2"), ("新讀者？", base + "/newreader.html", "c2")],
         [("地圖", base + "/map.html", "c3"), ("紀錄", base + "/log.html", "c3"), ("搜尋", base + "/search.html", "c3")],
         [("商店", "https://homestuckofficial.store/", "c4", [("官方商店", "https://homestuckofficial.store/"), ("Topatoco", "https://topatoco.com/collections/hussie"), ("粉絲周邊", "https://shop.fruityrumpus.com/")]), ("音樂", "https://homestuck.bandcamp.com", "c4")],
-        [("論壇", "https://www.fruityrumpus.com/forums", "c5", [("論壇", "https://www.fruityrumpus.com/forums"), ("Discord", "https://discord.com/invite/homestuck")]), ("秘密", HS + "/unlock", "c5"), ("致謝", base + "/credits.html", "c5")],
+        [("論壇", "https://www.fruityrumpus.com/forums", "c5", [("論壇", "https://www.fruityrumpus.com/forums"), ("Discord", "https://discord.com/invite/homestuck")]), ("秘密", base + "/secrets.html", "c5"), ("致謝", base + "/credits.html", "c5")],
     ]
     def li(it):
         if len(it) > 3:
@@ -1006,6 +1009,30 @@ def build():
     )
     (OUT / "credits.html").write_text(
         layout(site, f"致謝 - {site['title']}", inner, base), encoding="utf-8"
+    )
+
+    # 秘密（對應官方 /unlock）：中文翻譯；各條指令的圖畫頁仍連官方英文站
+    SECRET_CMDS = ['FAD+ZAD+AD：憤怒地把帽子摔在地上。', 'PI：以令人震驚的不得體方式跌倒。', 'PI：以硬派黑色反英雄的方式跌倒。', 'PS：GAMBIT SCHEMA -> 帶著 :3 臉的糖果玉米老虎！', 'MK：和兇惡的打手們擺出反派姿勢。', 'PI：邀請你意想不到的客人進來，痛快地玩一場龍與地下城。', 'PI：令人不安地盯著阿曼達（Amanda）看。', 'PS：騎著死神的鐮刀像騎機械公牛一樣，同時死神用小提琴拉出一曲激昂的〈魔鬼下到喬治亞〉。', 'FAD：GAMBIT SCHEMA -> 辣玉米粽卓柏卡布拉！', 'FPI：帶著未來版的《終極警探》傳送到電影院，讓 FAD 和 MK 放鬆一下，「看場電影！」。', 'FPI - 離開之前，把妓院改造成可愛的賭場。', 'GPI：深情地看著捐款。', 'PS：召喚（順便雇用）午夜天團，讓這個邋遢的小角色見識誰才是真正的王牌。', 'MC：被激怒，猛烈地加入戰鬥，改為替 DMK 效力。', 'MC 和 SMK：向主角們發動無情、由捐款資助的戰爭，雖非正史，卻是宏大的劇情線。', '無墨鏡的斯蒂勒半身像：從時空裂縫中現身，緩慢而詭異地朝觀眾飄去。', 'PS + AD + PI + ZAD + FAD + 4 名冒險者 + HD + NB + candymecha + GPI + PPI + FPI 對上 MK + LoathsomeBeast + MM + DMK + MonsterPI + Fluthulu + SurlyThugs + FrighteningBeast + MortholDryax + BowenStilsonDogg：正面對決！', 'MC：讓勞工黃蜂從主角們身上採集影子花蜜。然後，HIVE RAGTIME：用午夜把牠們灌滿。', '所有人：暫停拍一輯十二個月的月曆寫真，因為事情變得令人不安地真實了。', '用酷炫的骰子科技反擊午夜天團。', '開始約會模擬小遊戲。', 'MC：SHADOW COMB RAVE -> MIDNIGHT GOSPEL ACT', '把機率論黃蜂教授的「干涉等級」從中調到高。', '死神：不小心在你的《遊魂之書》上撕開一個劇情漏洞。', 'PS：戰鬥手法：召喚 ZILLYHOO 戰錘！', '玩一場(興)奮的(興)奮的《猛男翹臀：萬智牌》。', '蜜蜂教授：一勞永逸地結束機率論黃蜂教授那些惱人的干涉。', '午夜天團：繼續你們的戰鬥，對黃蜂教授干涉時間所造成的種種怪異改變渾然不覺。', 'MC：嘗試用更高明的影子魔法，終結機率論黃蜂的干涉。', '顯示玩家目前為止見過的所有地點的地圖。', 'PI：召喚一隊殭屍太空人來幫忙！', 'PS：和一隻小白貓合影，因為事情變得好可愛了。', '糖果機甲駕駛員 PI：成為總統，用糖果機甲拯救美國。', '一邊曖昧地朝玩家眨眼，一邊點起小小的鬍子火。', 'PS：召喚微波爐觸手怪。LVL 150 CODDLETECH：滑溜溜的拍打吸盤觸鬚', 'FMB：深情地看著莎拉（Sarah）', '死神：用你的《遊魂之書》，召集 PS、PI、AD 以及 ZAD 先前的骸骨。事情真實到你們組成了一個樂團去巡迴演出，演奏〈顫慄〉和其他與不死有關的音樂曲目。', 'Dapper Swain：像騎真正的公牛一樣騎機械公牛。', 'Cooper：「借用」戴夫（Dave）的酷炫裝備，對一些老鼠和其他森林動物發狂，同時說出機智的單句台詞。', 'Richard：向塔夫羅斯（Tavros）挑戰輪椅比武。']
+    cmd_li = "".join(
+        '<li><a href="https://www.homestuck.com/old-secrets/ps%06d">%s</a></li>' % (i + 1, esc(t))
+        for i, t in enumerate(SECRET_CMDS)
+    )
+    inner = (
+        '<div class="logbox newreader secrets"><h1>隱藏內容</h1>'
+        '<p style="text-align:center"><img src="https://storage.homestuck.com/secrets/old-secrets/images/unlock_gamecode.gif" alt="輸入了一組神秘的遊戲代碼"></p>'
+        '<p style="text-align:center">恭喜！！！</p>'
+        '<p style="text-align:center">你輸入了有效的遊戲代碼（GAME CODE），解鎖了令人興奮的秘密！其中包括：</p>'
+        '<h2>安德魯的東西</h2><ul><li><a href="https://linktr.ee/andrewhussie">Linktree</a></li>'
+        '<li><a href="https://mspaintadventures.itch.io/troubled-cosmos">Troubled Cosmos</a></li></ul>'
+        '<h2>冷門連結</h2><ul><li><a href="https://www.homestuck.com/faqs">極度過時的常見問答</a></li>'
+        '<li><a href="https://www.homestuck.com/ryanquest">Ryanquest</a></li>'
+        '<li><a href="https://www.homestuck.com/old-secrets/vigilprince">The Vigil Prince</a></li></ul>'
+        '<p style="text-align:center">你還解鎖了一些<b>粉絲點播的遊戲指令</b>。如果你在 2010 年以前捐過款，這些指令就會被畫出來並貼在這裡。</p>'
+        '<ol>' + cmd_li + '</ol>'
+        '<p style="font-size:10px;text-align:center">以上為本站讀者翻譯，原文見<a href="https://www.homestuck.com/unlock">官方頁面</a>；各條指令的圖畫頁為官方英文站。</p></div>'
+    )
+    (OUT / "secrets.html").write_text(
+        layout(site, f"秘密 - {site['title']}", inner, base), encoding="utf-8"
     )
 
     # 首頁

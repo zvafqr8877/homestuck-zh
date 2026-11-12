@@ -1,0 +1,1 @@
+import{_ as o}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e,o as a,n}from"./index-Bd5ug0Z9.js";const _=e({__name:"005710DS",setup(r){return(t,s)=>(a(),n(o,{imageFile:"banners/room15.gif",alt:"Doc places his coat onto The Tumor."}))}});export{_ as default};

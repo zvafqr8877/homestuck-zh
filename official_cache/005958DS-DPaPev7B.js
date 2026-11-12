@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as t,n as a}from"./index-Bd5ug0Z9.js";const m=o({__name:"005958DS",setup(s){return(n,r)=>(t(),a(e,{imageFile:"banners/room94.gif",tooltip:"Oh hell no. He's talking about ancestors, isn't he.",alt:"Hussie reaches for the broom."}))}});export{m as default};

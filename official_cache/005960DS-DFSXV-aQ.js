@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as r,n}from"./index-Bd5ug0Z9.js";const m=o({__name:"005960DS",setup(s){return(t,a)=>(r(),n(e,{imageFile:"banners/room96.gif",tooltip:"NOT IN MY FUCKING COMIC.",alt:"Authorsplode! Hussie kicks the door open, broom in hand. Locks fly everywhere."}))}});export{m as default};

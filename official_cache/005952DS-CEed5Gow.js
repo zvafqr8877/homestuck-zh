@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as s,n as a}from"./index-Bd5ug0Z9.js";const c=o({__name:"005952DS",setup(n){return(t,i)=>(s(),a(e,{imageFile:"banners/room88.gif",alt:"The fifth wall is back on. Ms. Paint notices this from within Hussie's room."}))}});export{c as default};

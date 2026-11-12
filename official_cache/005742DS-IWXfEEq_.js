@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n as s}from"./index-Bd5ug0Z9.js";const c=o({__name:"005742DS",setup(r){return(n,t)=>(a(),s(e,{imageFile:"banners/room47.gif",alt:"The camera zooms out through a sea of synapses."}))}});export{c as default};

@@ -1,0 +1,1 @@
+import{_ as o}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e,o as t,n as a}from"./index-Bd5ug0Z9.js";const _=e({__name:"005964DS",setup(r){return(n,s)=>(t(),a(o,{imageFile:"banners/room100.gif",tooltip:"That was not the right door.",alt:"Hussie checks another door."}))}});export{_ as default};

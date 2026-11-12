@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n as s}from"./index-Bd5ug0Z9.js";const m=o({__name:"005709DS",setup(n){return(t,r)=>(a(),s(e,{imageFile:"banners/room14.gif",alt:"Slick smooshes his hat back onto his head."}))}});export{m as default};

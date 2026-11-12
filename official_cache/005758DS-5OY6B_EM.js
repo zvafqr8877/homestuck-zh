@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n}from"./index-Bd5ug0Z9.js";const l=a({__name:"005758DS",setup(t){return(s,r)=>(o(),n(e,{imageFile:"banners/room63.gif",alt:"The fenestrated wall changes scenes to Jade collecting a frog outside a volcano. Lava is flowing and melting the snow below."}))}});export{l as default};

@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n as r}from"./index-Bd5ug0Z9.js";const m=a({__name:"005762DS",setup(n){return(t,s)=>(o(),r(e,{imageFile:"banners/room67.gif",alt:"Jade and Dave ready their weapons for a fight."}))}});export{m as default};

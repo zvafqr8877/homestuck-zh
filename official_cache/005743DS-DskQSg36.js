@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n}from"./index-Bd5ug0Z9.js";const m=a({__name:"005743DS",setup(s){return(r,t)=>(o(),n(e,{imageFile:"banners/room48.gif",alt:"A dazzling ocean of synapses."}))}});export{m as default};

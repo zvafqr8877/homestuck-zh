@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n}from"./index-Bd5ug0Z9.js";const i=o({__name:"005703DS",setup(s){return(t,r)=>(a(),n(e,{imageFile:"banners/room08.gif",alt:"Doc bends the weapon with his hands."}))}});export{i as default};

@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n}from"./index-Bd5ug0Z9.js";const c=o({__name:"005755DS",setup(t){return(r,s)=>(a(),n(e,{imageFile:"banners/room60.gif",alt:"Doc is shocked. Two matesprits are making out in his own apartment!"}))}});export{c as default};

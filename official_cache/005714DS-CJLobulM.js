@@ -1,0 +1,1 @@
+import{_ as o}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e,o as t,n as r}from"./index-Bd5ug0Z9.js";const _=e({__name:"005714DS",setup(a){return(i,n)=>(t(),r(o,{imageFile:"banners/room19.gif",alt:"Slick is pouring oil onto the floor. Doc is still at the typewriter."}))}});export{_ as default};

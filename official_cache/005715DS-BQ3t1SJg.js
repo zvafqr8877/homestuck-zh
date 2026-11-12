@@ -1,0 +1,1 @@
+import{_ as o}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e,o as s,n as a}from"./index-Bd5ug0Z9.js";const l=e({__name:"005715DS",setup(i){return(n,t)=>(s(),a(o,{imageFile:"banners/room20.gif",alt:"Doc sits down and picks up the blood-soaked tilDEATH book. Slick is still pouring oil."}))}});export{l as default};

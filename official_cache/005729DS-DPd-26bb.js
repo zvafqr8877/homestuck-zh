@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n as r}from"./index-Bd5ug0Z9.js";const p=a({__name:"005729DS",setup(t){return(n,s)=>(o(),r(e,{imageFile:"banners/room34.gif",alt:"The fire has almost been put out. Slick retrieves his warped weapon."}))}});export{p as default};

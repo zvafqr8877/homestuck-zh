@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n as r}from"./index-Bd5ug0Z9.js";const _=a({__name:"005721DS",setup(s){return(n,t)=>(o(),r(e,{imageFile:"banners/room26.gif",alt:"Doc walks through the flames, arms behind his back."}))}});export{_ as default};

@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as r,n}from"./index-Bd5ug0Z9.js";const _=o({__name:"005720DS",setup(t){return(a,s)=>(r(),n(e,{imageFile:"banners/room25.gif",alt:"Slick sets the entire room on fire."}))}});export{_ as default};

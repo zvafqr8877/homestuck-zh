@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n}from"./index-Bd5ug0Z9.js";const m=o({__name:"005748DS",setup(s){return(r,t)=>(a(),n(e,{imageFile:"banners/room53.gif",alt:"Snowman appears in Doc's apartment, just before 14 turned Slick's body into swiss cheese."}))}});export{m as default};

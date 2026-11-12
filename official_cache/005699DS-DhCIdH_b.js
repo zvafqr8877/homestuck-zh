@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as r,n as t}from"./index-Bd5ug0Z9.js";const m=o({__name:"005699DS",setup(a){return(c,i)=>(r(),t(e,{imageFile:"banners/room04.gif",alt:"Doc refills the bowl with more Scottie Dogs licorice."}))}});export{m as default};

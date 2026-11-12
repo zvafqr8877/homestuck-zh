@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n}from"./index-Bd5ug0Z9.js";const _=o({__name:"005732DS",setup(s){return(i,r)=>(a(),n(e,{imageFile:"banners/room37.gif",alt:"Slick begins beating 11's face in with his own crowbar. 4 is shocked!"}))}});export{_ as default};

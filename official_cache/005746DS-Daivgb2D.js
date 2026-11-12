@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n as r}from"./index-Bd5ug0Z9.js";const c=a({__name:"005746DS",setup(n){return(t,s)=>(o(),r(e,{imageFile:"banners/room51.gif",alt:"Snowman stares from a bright green backdrop."}))}});export{c as default};

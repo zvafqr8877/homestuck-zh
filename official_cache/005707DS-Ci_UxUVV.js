@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as n,o,n as a}from"./index-Bd5ug0Z9.js";const _=n({__name:"005707DS",setup(t){return(r,c)=>(o(),a(e,{imageFile:"banners/room12.gif",alt:"Slick begins pocketing the candy."}))}});export{_ as default};

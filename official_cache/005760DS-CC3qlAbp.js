@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as a,o,n as s}from"./index-Bd5ug0Z9.js";const c=a({__name:"005760DS",setup(t){return(n,r)=>(o(),s(e,{imageFile:"banners/room65.gif",alt:"Jade looks slightly past Dave's head."}))}});export{c as default};

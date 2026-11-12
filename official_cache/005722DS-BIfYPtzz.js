@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as a,n as s}from"./index-Bd5ug0Z9.js";const m=o({__name:"005722DS",setup(i){return(n,r)=>(a(),s(e,{imageFile:"banners/room27.gif",alt:"Doc is pouring more Scottie Dogs. Hella Jeff's face is visible on his head."}))}});export{m as default};

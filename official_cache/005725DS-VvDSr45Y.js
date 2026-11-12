@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as r,o as a,n as o}from"./index-Bd5ug0Z9.js";const _=r({__name:"005725DS",setup(t){return(n,i)=>(a(),o(e,{imageFile:"banners/room30.gif",alt:"Felt member 11 arrives with a fire extinguisher."}))}});export{_ as default};

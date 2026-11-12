@@ -1,0 +1,1 @@
+import{_ as e}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as t,n as a}from"./index-Bd5ug0Z9.js";const c=o({__name:"005730DS",setup(n){return(i,r)=>(t(),a(e,{imageFile:"banners/room35.gif",alt:"Slick holds the weapon in the air as 11 finishes putting out the fire."}))}});export{c as default};

@@ -1,0 +1,1 @@
+import{_ as a}from"./ComicTopBanner.vue_vue_type_script_setup_true_lang-kSNdKjva.js";import{e as o,o as e,n as t}from"./index-Bd5ug0Z9.js";const i=o({__name:"005766DS",setup(n){return(r,s)=>(e(),t(a,{imageFile:"banners/room71.gif",alt:"Dave stops an attack from Jack by holding Jade in front of him. Jack doesn't attack. Auto-Harley!"}))}});export{i as default};
