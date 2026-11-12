@@ -50,7 +50,7 @@ header.site .dd>a{cursor:pointer}
 .logbox{padding:8px 12px;font-size:12px}
 .logbox h1{text-align:center;font-size:24px;margin:4px 0}
 .logbox ul{list-style:none;margin:0;padding:0}
-.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.arch{display:flex;gap:12px;align-items:center;margin:14px 0}.arch img{width:110px;height:auto;flex:none}.arch h2{font-size:16px;margin:0 0 4px}.arch p{margin:0 0 4px;font-size:13px}.arch ul{display:flex;gap:12px;margin:0;padding:0;list-style:none;flex-wrap:wrap;font-size:12px;font-weight:700}.arch span{font-weight:700}.mapbox{overflow-x:auto}.mapbox h1{margin-bottom:24px}@font-face{font-family:Homestuck;src:url("assets/fonts/homestuck.woff2") format("woff2");font-display:swap}.mside,.mpart{display:flex}.msb{display:flex;flex-direction:column;align-items:flex-end;flex:none}.mlab{margin-top:32px;padding-top:4px;min-width:30px;color:#fff;font-family:Homestuck,Verdana,sans-serif;writing-mode:vertical-rl;text-orientation:upright}.mlab .a{font-size:14px;margin-bottom:8px}.mlab .b{font-size:30px;line-height:1}.msb img{margin-top:8px}.mbar{width:16px;margin-right:12px;border-top:8px solid;border-bottom:8px solid;flex:none}.mbody{display:flex;flex-direction:column;justify-content:center;margin:0 auto}.mcol{display:flex;flex-direction:column;align-items:center}.mcol img{display:block}.mrow{display:flex}.mcode{font:12px monospace;text-align:center;margin:12px 0}.mside{margin:12px auto;justify-content:center;width:max-content;max-width:100%}.mdisc{text-align:center;margin:20px 0}.mdisc h2{font:20px Homestuck,Verdana,sans-serif}.secrets h2{text-align:center;font-size:16px;margin:16px 0 4px}.secrets ul{text-align:center}.secrets ol{text-align:center;padding:0;list-style-position:inside}.secrets li{margin:10px 0}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
+.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.archive{font-weight:700;padding:8px;font-family:Verdana,"Microsoft JhengHei",sans-serif}.archive header{display:flex;flex-direction:column;align-items:center;gap:16px;margin:16px 0}.logbox.archive h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;margin:0}.archive header p{font-weight:400;text-align:center;margin:0;line-height:24px}.arch{display:flex;align-items:center;align-self:center;width:100%;max-width:512px;margin:0 auto;padding:16px 0}.arch>a{display:contents}.arch img{display:block;width:164px;height:164px;max-width:100%;flex:none}.arch>div{display:flex;flex-direction:column;align-items:center;padding:16px 24px}.arch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;padding:0 0 16px;margin:0}.arch p{font-weight:400;text-align:center;line-height:24px;padding:0 0 16px;margin:0}.arch p span{font-weight:700}.arch ul{display:flex;gap:12px;margin:0;padding:0;font-weight:400;list-style:none;line-height:24px}.arch li{padding-left:4px}.arch li+li{list-style:"|" outside;margin-left:0}@media (max-width:767px){.arch{flex-direction:column}}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
 main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:20px 12px 8px}
 article.story{max-width:650px;margin:8px auto 14px;background:#eee;padding:12px 0}
 .story h1{font:700 28px/1.25 "Courier New",CourierPrime,courier,monospace;text-align:center;margin:0 16px 12px}
@@ -135,9 +135,9 @@ body.a6a6{background:#042300}
 .dialog .log p{margin:0}
 .dialog .log p.gap{margin-top:12px}
 .dialog .log.off{display:none}
-.plain{margin:16px 28px 0;font:14px/1.8 Verdana,"Microsoft JhengHei",sans-serif}
-.plain p{margin:.4em 0}
-.nextlink{margin:16px 28px 0;font:24px/32px "Courier New",CourierPrime,courier,monospace}
+.plain{margin:0 24px;text-align:center;font:400 16px/1.55 "Courier New",CourierPrime,courier,"Microsoft JhengHei","Noto Sans TC",monospace}
+.plain p{margin:0 0 16px}.plain p:last-child{margin-bottom:0}
+.nextlink{margin:16px 24px 0;font:24px/32px Verdana,"Microsoft JhengHei",sans-serif}
 .nextlink span{color:#000}
 .story-foot{margin:16px 28px 0;font:12px/1.6 Verdana,"Microsoft JhengHei",sans-serif}
 .savebar{display:flex;justify-content:flex-end;position:relative;margin:16px 28px 0;font:700 11px/16px Verdana,"Microsoft JhengHei",sans-serif}
@@ -886,7 +886,7 @@ def build():
         ("PSYCHOLONIALS", O + "/psycholonials", "archive_psy.gif", "兩位網紅在與超自然力量溝通的同時，推出了一個大膽的新社群媒體品牌。", "已完結", []),
         ("THE HOMESTUCK EPILOGUES", O + "/epilogues/prologue", "archive_ep.gif", "真實性有待商榷的故事。", "已完結", [("紀錄", O + "/epilogues/viewlog")]),
         ("HOMESTUCK", f"{base}/p/{first:06d}.html", "archive_hs.gif", "一個關於男孩、他的朋友們，以及他們一起玩的遊戲的故事。約 8,000 頁。（本站繁體中文版）", "已完結",
-         [("地圖", base + "/map.html"), ("紀錄", base + "/log.html"), ("搜尋", base + "/search.html"), ("致謝", base + "/credits.html")]),
+         [("地圖", base + "/map.html"), ("紀錄", base + "/log.html"), ("搜尋", base + "/search.html"), ("致謝", base + "/credits.html"), ("HOMESTUCK(英文官方網址)", O + "/001901")]),
         ("PROBLEM SLEUTH", O + "/problemsleuth/000219", "archive_ps.gif", "一個關於硬漢偵探在他辦公室裡的冒險。22 章，約 1700 頁。", "已完結",
          [("地圖", O + "/problemsleuth/viewmap"), ("紀錄", O + "/problemsleuth/viewlog"), ("搜尋", O + "/problemsleuth/search"), ("科學問答", O + "/faqs/science")]),
         ("JESTER QUEST", O + "/jesterquest/000001", "archive_jq.gif", "一個單純的小丑，從 2007 年起就一直耐心等待《吟遊詩人任務》更新。30,000 頁。", "已完結",
@@ -903,12 +903,12 @@ def build():
         lk = "".join(f'<li><a href="{esc(u)}">{esc(t)}</a></li>' for t, u in links)
         secs += (
             f'<section class="arch"><a href="{esc(url)}"><img src="{IM}{img}" alt="{esc(name)}"></a>'
-            f'<div><h2><a href="{esc(url)}">{esc(name)}</a></h2><p>{esc(desc)} {("<span>［" + st + "］</span>") if st else ""}</p>'
+            f'<div><h2><a href="{esc(url)}">{esc(name)}</a></h2><p>{esc(desc)} {("<span>[" + st + "]</span>") if st else ""}</p>'
             + (f"<ul>{lk}</ul>" if lk else "") + "</div></section>"
         )
     inner = (
-        '<div class="logbox"><h1>目錄</h1><p style="text-align:center">冒險作品依我們高興的順序排列。</p>'
-        + secs + '<p style="font-size:10px">除 Homestuck 外，其餘作品連到官方英文站。</p></div>'
+        '<nav class="logbox archive"><header><h1>目錄</h1><p>冒險作品依我們高興的順序排列。</p></header>'
+        + secs + '<p style="font:400 10px/1.5 Verdana,sans-serif;text-align:center">除 Homestuck 外，其餘作品連到官方英文站。</p></nav>'
     )
     (OUT / "archive.html").write_text(
         layout(site, f"目錄 - {site['title']}", inner, base), encoding="utf-8"
