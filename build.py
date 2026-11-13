@@ -163,7 +163,7 @@ body.a6a6{background:#042300}
 .plain p{margin:0 0 16px}.plain p:last-child{margin-bottom:0}
 .nextlink{margin:16px 24px;font:24px/32px Verdana,"Microsoft JhengHei",sans-serif}
 .nextlink span{color:#000}
-.tcpage{padding:12px 20px 18px;font:15px Courier,Verdana,monospace;text-align:left;color:#000}
+article.story.tcpage{display:block;padding:12px 20px 18px;font:15px Courier,Verdana,monospace;text-align:left;color:#000}
 .tcpage h1{text-align:center;font:700 28px Courier,Verdana,monospace;margin:6px 0 18px;color:#000}
 .tcpage .tcs-i{line-height:normal}
 .tcpage a{color:#00e}
