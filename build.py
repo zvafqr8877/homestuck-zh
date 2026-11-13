@@ -808,14 +808,24 @@ def build():
     items = []
     lo = ROOT / "log_official.json"
     if lo.exists():
-        # 官方紀錄原文（fetch_log.py 產生）：日期與連結文字都與官方完全一致，連結優先指向本站頁面
+        # 官方紀錄（fetch_log.py 產生）：日期、[S] 之類的標記與 ==> 箭頭照官方；英文句子改用本站的繁中標題；全部連到本站，引號改為「」
+        SPECIAL = {"/GAMEOVER": 8801, "/shes8ack": 9305}
+        TAGS = re.compile(r"^(?:\s*\[[^\]]*\])*\s*")
         for _id, d, v, link in json.loads(lo.read_text(encoding="utf-8")):
             mm = re.fullmatch(r"/(\d{6})", link)
-            if mm and int(mm.group(1)) in by_num:
-                href = f"{base}/p/{mm.group(1)}.html"
+            num = int(mm.group(1)) if mm else SPECIAL.get(link)
+            if num in by_num:
+                href = f"{base}/p/{num:06d}.html"
             else:
                 href = "https://www.homestuck.com" + link
-            items.append(f'<li><span>{d} - <a href="{esc(href)}">{esc(v)}</a></span></li>')
+            inner_v = v[1:-1] if len(v) >= 2 and v[0] == '"' and v[-1] == '"' else v
+            prefix = TAGS.match(inner_v).group(0)
+            rest = inner_v[len(prefix):]
+            if re.search(r"[A-Za-z0-9\u4e00-\u9fff]", rest) and num in by_num:
+                zh = TAGS.sub("", by_num[num]["title"]).strip()
+                if zh and not re.match(r"^(第\s*\d+\s*頁|測試頁)", zh):
+                    rest = zh
+            items.append(f'<li><span>{d} - <a href="{esc(href)}">「{esc(prefix + rest)}」</a></span></li>')
     for p in ([] if items else pages):
         d = dates.get(p["page"], "")
         items.append(
