@@ -636,8 +636,10 @@ def build():
     official_tpl = site.get("official_url", "")
     flash_mode = site.get("flash_mode", "iframe")
 
+    # 官方沒有這一頁（標題、內文都是空的占位檔，例如 004299、004938、004988）就略過，不產生頁面
     all_pages = sorted(
-        (parse_page(p) for p in CONTENT.glob("*.md")), key=lambda d: d["page"]
+        (d for d in (parse_page(p) for p in CONTENT.glob("*.md")) if d["title"].strip() or d["body"].strip()),
+        key=lambda d: d["page"],
     )
     # 隱藏頁（front matter 寫 hidden: true）：有網址，但不在上一頁／下一頁的路徑上，也不算進度
     pages = [p for p in all_pages if p.get("hidden", "").lower() != "true"]
