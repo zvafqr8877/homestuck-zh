@@ -20,7 +20,7 @@
     {
       "name": "The Unofficial Homestuck Collection",
       "url": "https://uhca.carrd.co/",
-      "note": "原文與素材參考"
+      "note": "頁面與素材路徑資料取自其素材包的 mspa.json（僅取路徑，不含素材本身）；素材原始來源為官方 https://www.homestuck.com"
     }
   ],
   "copyright": "Homestuck 的著作權屬於 Andrew Hussie。本站為讀者製作的非官方、非營利目的整理與翻譯，內容如有疑慮請聯絡管理員。 部分 Flash 動畫內的中文譯文字形取自 Microsoft JhengHei（微軟正黑體）Bold，該字型著作權屬 Microsoft Corporation 所有，僅用於顯示本站的非營利翻譯文字。"
