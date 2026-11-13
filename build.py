@@ -61,12 +61,21 @@ header.site .dd>a{cursor:pointer}
 .ocsearch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:8px 0 0}
 .ocsearch .sempty{align-self:center;font:400 16px/24px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace}
 .ocsearch .sres{display:flex;flex-direction:column;align-items:center;margin:16px}
-.ocsearch .sres a{color:#000;text-decoration:none;cursor:pointer}
+.ocsearch .sflt{display:flex;flex-direction:column;gap:8px}
+.sct,.scl{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.sc{font:400 14px/20px Verdana,"Microsoft JhengHei",sans-serif;padding:2px 10px;background:#fff;color:#000;border:1px solid #000;cursor:pointer}
+.sc.on{font-weight:700;background:#000;color:#fff}
+.scl .sc{border-color:#888}
+.scl input{width:70px;font:400 14px/20px Verdana,sans-serif;padding:2px 4px;border:1px solid #000}
+.sres a{color:#000;text-decoration:none;cursor:pointer}
 .sres h3{margin:0;font:700 18px/28px Verdana,"Microsoft JhengHei",sans-serif;color:#00f;text-decoration:none}
 .ocsearch ul{list-style:none;margin:0;padding:0}
 .ocsearch .sres p{margin:16px;font-weight:400;word-break:break-all}
 .ocsearch .sres p b{font-weight:700}
 .ocsearch .sline{border-bottom:1px solid #000;width:40%}
+.sflt{font:400 14px/24px Verdana,"Microsoft JhengHei",sans-serif}.sflt summary{cursor:pointer}
+.sfrow{display:flex;flex-wrap:wrap;gap:8px 16px;padding:8px 0}.sfc{width:100%}.chip{font:400 12px/20px Verdana,sans-serif;margin:2px;padding:0 8px;border:1px solid #000;border-radius:10px;background:#fff;cursor:pointer}.chip.on{background:#00f;color:#fff;border-color:#00f}
+.sfrow input,.sfrow select{font:inherit;border:1px solid #000;padding:2px 4px;background:#fff}.sfrow input[type=number]{width:80px}
 .ocsearch .spg{display:flex;align-self:center}
 .ocsearch .spg button{font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;gap:8px;padding:16px;background:none;border:0;color:#000;cursor:pointer}
 .ocsearch .spg button.cur{font-weight:700}
@@ -308,6 +317,14 @@ function hl(t,w){if(!w.length)return E(t.length>150?t.slice(0,150)+'…':t);var 
   if(t.length>150){var f=t.search(re);if(f>40){t='…'+t.slice(f-30)}if(t.length>150)t=t.slice(0,150)+'…'}
   while((m=re.exec(t))){if(!m[0])break;o+=E(t.slice(i,m.index))+'<b>'+E(m[0])+'</b>';i=m.index+m[0].length}
   return o+E(t.slice(i))}
+var fa=document.getElementById('fa'),fcs=document.getElementById('fcs'),f1=document.getElementById('fp1'),f2=document.getElementById('fp2'),SEL={};
+Object.keys(ACTS).forEach(function(k){var o=document.createElement('option');o.value=k;o.textContent=k;fa.appendChild(o)});
+loadCh(function(){if(!CH||!CH.aliases)return;var seen={};Object.keys(CH.aliases).forEach(function(k){var v=CH.aliases[k];(Array.isArray(v)?v:[v]).forEach(function(n){seen[String(n).toLowerCase()]=1})});
+  fcs.innerHTML=Object.keys(seen).sort().map(function(n){return '<button type="button" class="chip" data-c="'+E(n)+'">'+E(n)+'</button>'}).join('')});
+fcs.addEventListener('click',function(e){var b=e.target.closest('.chip');if(!b)return;var c=b.dataset.c;if(SEL[c]){delete SEL[c];b.classList.remove('on')}else{SEL[c]=1;b.classList.add('on')}flt()});
+function flt(){var p=[],cs=Object.keys(SEL);if(cs.length)p.push('chars:'+cs.join(','));if(fa.value)p.push('acts:'+fa.value);
+  var a1=f1.value.trim(),a2=f2.value.trim();if(a1||a2)p.push('pages:'+(a1||a2)+'-'+(a2||a1));a.value=p.join(' ');run()}
+[fa,f1,f2].forEach(function(el){el.addEventListener('input',flt);el.addEventListener('change',flt)});
 var T=0,W=[];function run(){clearTimeout(T);T=setTimeout(function(){loadCh(run2)},120)}
 function run2(){var v=q.value.toLowerCase().trim(),w=x.checked?(v?[v]:[]):v.split(/\s+/).filter(Boolean),ad=parseAdv(a.value);
   cur=1;res=[];W=w;
@@ -326,6 +343,24 @@ function draw(){sm.style.display=res.length?'none':'';
   var st=Math.max(1,Math.min(cur-4,tot-9)),en=Math.min(tot,st+9),h='<div><button type="button"'+(cur<=1?' disabled':'')+' data-p="'+(cur-1)+'">上一頁</button>',k;
   for(k=st;k<=en;k++)h+='<button type="button"'+(k===cur?' class="cur"':'')+' data-p="'+k+'">'+k+'</button>';
   sp.innerHTML=h+'<button type="button"'+(cur>=tot?' disabled':'')+' data-p="'+(cur+1)+'">下一頁</button></div>'}
+
+var SF=document.getElementById('sf'),CHL=['john','rose','dave','jade','jake','dirk','roxy','jane','calliope','caliborn','vriska','terezi','karkat','nepeta','kanaya','sollux','eridan','feferi','aradia','tavros','gamzee','equius','mom','dad','bro','nannasprite','jaspersprite','davesprite','rosemary','nanna','grandpa','dave　sprite'].filter(function(n){return n.indexOf('　')<0}),OPEN='';
+function segRe(k){return new RegExp('(^|\\s)'+k+':.*?(?=\\s+(?:acts|pages|chars):|$)','i')}
+function getVals(k){var m=a.value.match(segRe(k));return m?m[0].trim().slice(k.length+1).split(',').map(function(z){return z.trim()}).filter(Boolean):[]}
+function setVals(k,v){var s=a.value.replace(segRe(k),'').replace(/\s+/g,' ').trim();if(v.length)s=(s?s+' ':'')+k+':'+v.join(',');a.value=s;run()}
+function toggle(k,v){var c=getVals(k),i=c.indexOf(v);if(i<0)c.push(v);else c.splice(i,1);setVals(k,c);panel()}
+function chip(t,on,attr){return '<button type="button" class="sc'+(on?' on':'')+'" '+attr+'>'+E(t)+'</button>'}
+function panel(){var h='<div class="sct">'+chip('角色',OPEN==='chars'||getVals('chars').length,'data-o="chars"')+chip('章節',OPEN==='acts'||getVals('acts').length,'data-o="acts"')+chip('頁碼',OPEN==='pages'||getVals('pages').length,'data-o="pages"')+'</div>',i;
+  if(OPEN==='chars'){var L=CHL.slice(),sel=getVals('chars');sel.forEach(function(z){if(L.indexOf(z)<0)L.push(z)});h+='<div class="scl">'+L.map(function(n){return chip(n,sel.indexOf(n)>=0,'data-k="chars" data-v="'+E(n)+'"')}).join('')+'</div>'}
+  if(OPEN==='acts'){var ks=Object.keys(ACTS),sel2=getVals('acts');h+='<div class="scl">'+ks.map(function(n){return chip(n,sel2.indexOf(n)>=0,'data-k="acts" data-v="'+E(n)+'"')}).join('')+'</div>'}
+  if(OPEN==='pages'){var pv=getVals('pages');h+='<div class="scl">'+pv.map(function(n){return chip(n+' ×',true,'data-k="pages" data-v="'+E(n)+'"')}).join('')+'<input id="pf" type="text" inputmode="numeric" placeholder="起">-<input id="pt" type="text" inputmode="numeric" placeholder="迄">'+chip('加入',false,'data-add="1"')+'</div>'}
+  SF.innerHTML=h}
+SF.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+  if(b.dataset.o){OPEN=OPEN===b.dataset.o?'':b.dataset.o;panel();return}
+  if(b.dataset.add){var f=document.getElementById('pf').value.replace(/\D/g,''),t=document.getElementById('pt').value.replace(/\D/g,'');if(!f&&!t)return;var v=f&&t?f+'-'+t:(f||t),c=getVals('pages');if(c.indexOf(v)<0)c.push(v);setVals('pages',c);panel();return}
+  if(b.dataset.k)toggle(b.dataset.k,b.dataset.v)});
+a.addEventListener('input',function(){panel()});
+loadCh(function(){if(CH&&CH.aliases){var s={};Object.keys(CH.aliases).forEach(function(k){[].concat(CH.aliases[k]).forEach(function(n){s[String(n).toLowerCase()]=1})});var L=Object.keys(s).filter(function(n){return n.length>1});if(L.length)CHL=L.sort()}panel()});
 sp.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;cur=+b.dataset.p;draw();window.scrollTo(0,0)});
 [q,a].forEach(function(el){el.addEventListener('input',run);el.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();clearTimeout(T);loadCh(run2)}})});
 x.addEventListener('change',run);
@@ -1019,6 +1054,12 @@ def build():
         '<input id="sq" class="sq1" type="text" placeholder="搜尋 Homestuck" autocomplete="off">'
         '<label class="sexact"><input id="sx" type="checkbox"><span>完全符合</span></label>'
         '<input id="sa" class="sq2" type="text" placeholder="chars:john,gt acts:6.1i pages:3000-5000" autocomplete="off">'
+        '<details class="sflt"><summary>篩選選單</summary><div class="sfrow">'
+        '<label>幕次 <select id="fa"><option value="">全部</option></select></label>'
+        '<div class="sfc">角色 <span id="fcs"></span></div>'
+        '<label>頁碼 <input id="fp1" type="number" min="1901" placeholder="起"> - <input id="fp2" type="number" min="1901" placeholder="迄"></label>'
+        '</div></details>'
+        '<div class="sflt" id="sf"></div>'
         '<h2>結果</h2><div class="sempty" id="sm"><i>找不到結果。</i></div><ul id="sr"></ul>'
         '</article></section><div class="spg" id="sp"></div></nav>'
     ) + SEARCH_JS.replace("BASE", base).replace("ACTS_JSON", json.dumps(acts_rng))
