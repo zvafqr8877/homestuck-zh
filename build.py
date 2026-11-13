@@ -60,9 +60,10 @@ header.site .dd>a{cursor:pointer}
 .ocsearch .sexact input{margin:0;width:13px;height:13px}
 .ocsearch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:8px 0 0}
 .ocsearch .sempty{align-self:center;font:400 16px/24px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace}
-.ocsearch ul{list-style:none;margin:0;padding:0}
 .ocsearch .sres{display:flex;flex-direction:column;align-items:center;margin:16px}
-.ocsearch .sres h3{margin:0;font:700 18px/28px Verdana,"Microsoft JhengHei",sans-serif;color:#00f;text-decoration:underline}
+.ocsearch .sres a{color:#000;text-decoration:none;cursor:pointer}
+.sres h3{margin:0;font:700 18px/28px Verdana,"Microsoft JhengHei",sans-serif;color:#00f;text-decoration:none}
+.ocsearch ul{list-style:none;margin:0;padding:0}
 .ocsearch .sres p{margin:16px;font-weight:400;word-break:break-all}
 .ocsearch .sres p b{font-weight:700}
 .ocsearch .sline{border-bottom:1px solid #000;width:40%}
