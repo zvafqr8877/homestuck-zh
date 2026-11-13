@@ -32,6 +32,12 @@ def get(name):
         except Exception as e:
             print("  下載失敗", name, e); cache[name] = None
     return cache[name]
+# 翻譯版 Flash 需要的中文字型（繁中站同款，約 23MB，只下載一次）
+font = ROOT / "assets" / "ruffle" / "NotoSansCJKTC.swf"
+if not DRY and not (font.exists() and font.stat().st_size > 20_000_000):
+    print("下載中文字型 NotoSansCJKTC.swf（約 23MB）…")
+    d = urllib.request.urlopen(urllib.request.Request("https://zhhomestuck.github.io/assets/font-swfs/NotoSansCJKTC.swf", headers={"User-Agent": "Mozilla/5.0"}), timeout=300).read()
+    font.parent.mkdir(parents=True, exist_ok=True); font.write_bytes(d); print("  寫入", font, len(d), "bytes")
 new = same = miss = 0
 for pg, name in sorted(TC.items()):
     fl = [i["file"] for i in man.get(str(pg), []) if i.get("type") == "flash"]

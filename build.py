@@ -232,9 +232,12 @@ RUFFLE_JS = r"""
       ["/^http:\\/\\/www\\.timelesschaos\\.com\\/transferFiles\\/618heircut.mp3/", "https://storage.homestuck.com/story/homestuck/media/audio/005221/618heircut.mp3"]
     ]
   };
-  // 英文原版 Flash 用官方的像素字型；繁中站翻譯過的 Flash（assets/zh/）要用 Ruffle 預設字型，
-  // 否則字型被換成沒有中文字的像素字型，中文會消失（和繁中站的設定一致）
-  if (!document.querySelector('.flash[data-swf*="/assets/zh/"]')) {
+  // 英文原版 Flash 用官方的像素字型；繁中站翻譯過的 Flash（assets/zh/）需要中文字型，否則中文會消失
+  if (document.querySelector('.flash[data-swf*="/assets/zh/"]')) {
+    // 翻譯版 Flash：照繁中站的設定，載入 Noto Sans CJK TC 字型（assets/ruffle/NotoSansCJKTC.swf，由 fetch_tc_flash.py 下載）
+    window.RufflePlayer.config.fontSources = [base + "/assets/ruffle/NotoSansCJKTC.swf"];
+    window.RufflePlayer.config.defaultFonts = {sans: ["Verdana", "Noto Sans CJK TC Bold"], serif: ["Times New Roman", "新細明體", "Noto Sans CJK TC Bold"], typewriter: ["Courier New", "新細明體", "Noto Sans CJK TC Bold"]};
+  } else {
     window.RufflePlayer.config.fontSources = [base + "/assets/ruffle/homestuck-fonts.swf", base + "/assets/ruffle/courier-new-pixel.swf"];
     window.RufflePlayer.config.defaultFonts = {sans: ["Arial"], serif: ["Times New Roman"], typewriter: ["Courier New"]};
   }
