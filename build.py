@@ -50,7 +50,27 @@ header.site .dd>a{cursor:pointer}
 .logbox{padding:8px 12px;font-size:12px}
 .logbox h1{text-align:center;font-size:24px;margin:4px 0}
 .logbox ul{list-style:none;margin:0;padding:0}
-.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.archive{font-weight:700;font-size:16px;padding:8px;font-family:Verdana,"Microsoft JhengHei",sans-serif}.archive header{display:flex;flex-direction:column;align-items:center;gap:16px;margin:16px 0}.logbox.archive h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;margin:0}.archive header p{font-weight:400;text-align:center;margin:0;line-height:24px}.arch{display:flex;align-items:center;align-self:center;width:100%;max-width:650px;margin:0 auto;padding:16px 0}.arch>a{display:contents}.arch img{display:block;width:164px;height:164px;max-width:100%;flex:none}.arch>div{display:flex;flex-direction:column;align-items:center;flex:1 1 0;min-width:0;padding:16px 24px}.arch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;padding:0 0 16px;margin:0}.arch p{font-weight:400;text-align:center;line-height:24px;padding:0 0 16px;margin:0}.arch p span{font-weight:700}.arch li span.off{text-decoration:line-through}.arch ul{display:flex;gap:12px;margin:0;padding:0;font-weight:400;list-style:none;line-height:24px}.arch li{padding-left:4px}.arch li+li{list-style:"|" outside;margin-left:0}@media (max-width:649px){.arch{flex-direction:column}}body.offi main.wrap{max-width:940px;padding:0;display:flow-root}.logbox.archive{margin:8px;background:#eee;padding:8px}body.owhite main.wrap{max-width:650px;padding:0;background:#fff;display:flow-root;margin:0 auto 40px}.oc{margin:8px;background:#eee;padding:8px;display:flex;flex-direction:column;font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000}.oc h1{font:700 30px/36px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:0}.oc ul{list-style:none;margin:0;padding:0}.oclog .tg{display:block;font:700 10px/15px Verdana,"Microsoft JhengHei",sans-serif;padding:0 0 8px;color:#00f;text-decoration:underline}.oclog li span{font-size:12px;line-height:16px}.ocmap h1{padding:16px 0 40px}.mbox{display:flex;background:#fff;width:100%}.mleft{display:flex;flex-direction:column;min-width:0}.mrw{display:flex;justify-content:center;padding:8px}.mflex{display:flex}.msb{display:none;flex-direction:column;align-items:flex-end;border-right:8px solid}.msb.l{align-items:flex-start;border-right:0;border-left:8px solid}.mlab{width:fit-content;min-width:30px;height:fit-content;margin-top:32px;padding-top:4px;color:#fff}.upright{writing-mode:vertical-lr;text-orientation:upright;font:400 16px/24px Homestuck,monospace;margin:0;color:#fff}.upright .a{font-size:14px;line-height:20px;padding-bottom:8px}.upright .b{font-size:30px;line-height:36px}.msb img{margin-top:4px;max-width:100%;height:auto}.msb img.mi{margin-top:4px}.mside>.mflex>.msb img{margin-top:8px}.mbr{display:none;width:16px;border-top:8px solid;border-bottom:8px solid;margin-right:12px}.mbr.l{margin-right:0;margin-left:12px}.mcont{min-width:0}.mpc{display:flex;flex-direction:column;align-items:center;min-width:0}.mpc a{display:block;max-width:100%}.mpc img{display:block;max-width:100%;height:auto}.mrow{display:flex}.mrow a{flex:0 1 auto}.mcode{text-align:center;font:400 20px/28px Verdana,"Microsoft JhengHei",sans-serif;margin:20px 0}.mright{display:flex;flex-direction:column;padding:8px;flex-grow:1}.mrt{display:flex}@media (min-width:650px){.msb{display:flex}.mcode.m0{margin-left:60px}.mcode.m1{margin-left:200px}.mcode.m2{margin-left:70px}}@media (min-width:950px){.mbr{display:block}.mbr.l{display:block}}.ocsearch h1{font-size:36px;line-height:40px;margin-top:8px}.ocsearch input[type=search]{display:block;width:100%;background:#fff;color:#000;border:1px solid #000;padding:4px;font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;margin:8px 0}.ocsearch label{display:block;font-weight:400}.ocsearch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:8px 0 0}.ocsearch #ss{margin:8px 0;font-weight:400}.ocsearch #sr li{margin:8px 0;font-weight:400}.ocsearch #sr span{font-size:12px}.ocnr{flex-direction:row;justify-content:center}.ocnr>div{max-width:750px;width:100%;display:flex;flex-direction:column;gap:28px;margin:32px 0;font-weight:400}.ocnr p{text-align:center;margin:0}.ocnr h2{font-size:16px;font-weight:400;align-self:center;margin:0}.ocnr button{font:400 48px/48px Homestuck,"Microsoft JhengHei",monospace;border:5px solid #000;background:#fff;color:#000;padding:16px 24px;cursor:pointer;max-width:100%}.ocnr button:hover{background:#000;color:#fff}.ocnr section{display:flex;flex-direction:column;gap:32px}.ocnr section p{text-align:left}.ocnr section ul{list-style:disc;margin:0 0 0 40px;padding:0;display:flex;flex-direction:column}.ow{font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000;background:#fff}.ow header{display:flex;flex-direction:column;gap:16px;margin:16px 0}.ow h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;margin:0}.ow section{display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px;text-align:center}.ow h2{font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;margin:16px 0 0}.ow p{margin:0}.ow ul{list-style:none;padding:0;margin:0}.ow ol{display:flex;flex-direction:column;gap:16px;margin:0;padding:0;list-style-position:inside}.ow ul.left,.ow .left{text-align:left}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
+.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.archive{font-weight:700;font-size:16px;padding:8px;font-family:Verdana,"Microsoft JhengHei",sans-serif}.archive header{display:flex;flex-direction:column;align-items:center;gap:16px;margin:16px 0}.logbox.archive h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;margin:0}.archive header p{font-weight:400;text-align:center;margin:0;line-height:24px}.arch{display:flex;align-items:center;align-self:center;width:100%;max-width:650px;margin:0 auto;padding:16px 0}.arch>a{display:contents}.arch img{display:block;width:164px;height:164px;max-width:100%;flex:none}.arch>div{display:flex;flex-direction:column;align-items:center;flex:1 1 0;min-width:0;padding:16px 24px}.arch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;padding:0 0 16px;margin:0}.arch p{font-weight:400;text-align:center;line-height:24px;padding:0 0 16px;margin:0}.arch p span{font-weight:700}.arch li span.off{text-decoration:line-through}.arch ul{display:flex;gap:12px;margin:0;padding:0;font-weight:400;list-style:none;line-height:24px}.arch li{padding-left:4px}.arch li+li{list-style:"|" outside;margin-left:0}@media (max-width:649px){.arch{flex-direction:column}}body.offi main.wrap{max-width:940px;padding:0;display:flow-root}.logbox.archive{margin:8px;background:#eee;padding:8px}body.owhite main.wrap{max-width:650px;padding:0;background:#fff;display:flow-root;margin:0 auto 40px}.oc{margin:8px;background:#eee;padding:8px;display:flex;flex-direction:column;font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000}.oc.ocsearch h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;margin:8px 0 0;align-self:center}
+.ocsearch .sbox{display:flex;align-self:center;width:775px;max-width:100%;padding:16px 0}
+.ocsearch .scard{display:flex;flex-direction:column;gap:16px;padding:12px 0;margin:8px 0 24px;width:100%;background:#eee;font-weight:400}
+.ocsearch input[type=text]{display:block;width:100%;box-sizing:border-box;background:#fff;color:#000;padding:4px;font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;border-radius:0}
+.ocsearch .sq1{border:0;border-bottom:1px solid #000}
+.ocsearch .sq2{border:1px solid #000}
+.ocsearch .sexact{display:flex;align-items:center;gap:5px;height:24px;font-weight:400}
+.ocsearch .sexact input{margin:0;width:13px;height:13px}
+.ocsearch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:8px 0 0}
+.ocsearch .sempty{align-self:center;font:400 16px/24px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace}
+.ocsearch ul{list-style:none;margin:0;padding:0}
+.ocsearch .sres{display:flex;flex-direction:column;align-items:center;margin:16px}
+.ocsearch .sres h3{margin:0;font:700 18px/28px Verdana,"Microsoft JhengHei",sans-serif;color:#00f;text-decoration:underline}
+.ocsearch .sres p{margin:16px;font-weight:400;word-break:break-all}
+.ocsearch .sres p b{font-weight:700}
+.ocsearch .sline{border-bottom:1px solid #000;width:40%}
+.ocsearch .spg{display:flex;align-self:center}
+.ocsearch .spg button{font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;gap:8px;padding:16px;background:none;border:0;color:#000;cursor:pointer}
+.ocsearch .spg button.cur{font-weight:700}
+.ocsearch .spg button:disabled{cursor:not-allowed;opacity:.5}
+.oc h1{font:700 30px/36px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:0}.oc ul{list-style:none;margin:0;padding:0}.oclog .tg{display:block;font:700 10px/15px Verdana,"Microsoft JhengHei",sans-serif;padding:0 0 8px;color:#00f;text-decoration:underline}.oclog li span{font-size:12px;line-height:16px}.ocmap h1{padding:16px 0 40px}.mbox{display:flex;background:#fff;width:100%}.mleft{display:flex;flex-direction:column;min-width:0}.mrw{display:flex;justify-content:center;padding:8px}.mflex{display:flex}.msb{display:none;flex-direction:column;align-items:flex-end;border-right:8px solid}.msb.l{align-items:flex-start;border-right:0;border-left:8px solid}.mlab{width:fit-content;min-width:30px;height:fit-content;margin-top:32px;padding-top:4px;color:#fff}.upright{writing-mode:vertical-lr;text-orientation:upright;font:400 16px/24px Homestuck,monospace;margin:0;color:#fff}.upright .a{font-size:14px;line-height:20px;padding-bottom:8px}.upright .b{font-size:30px;line-height:36px}.msb img{margin-top:4px;max-width:100%;height:auto}.msb img.mi{margin-top:4px}.mside>.mflex>.msb img{margin-top:8px}.mbr{display:none;width:16px;border-top:8px solid;border-bottom:8px solid;margin-right:12px}.mbr.l{margin-right:0;margin-left:12px}.mcont{min-width:0}.mpc{display:flex;flex-direction:column;align-items:center;min-width:0}.mpc a{display:block;max-width:100%}.mpc img{display:block;max-width:100%;height:auto}.mrow{display:flex}.mrow a{flex:0 1 auto}.mcode{text-align:center;font:400 20px/28px Verdana,"Microsoft JhengHei",sans-serif;margin:20px 0}.mright{display:flex;flex-direction:column;padding:8px;flex-grow:1}.mrt{display:flex}@media (min-width:650px){.msb{display:flex}.mcode.m0{margin-left:60px}.mcode.m1{margin-left:200px}.mcode.m2{margin-left:70px}}@media (min-width:950px){.mbr{display:block}.mbr.l{display:block}}.ocnr{flex-direction:row;justify-content:center}.ocnr>div{max-width:750px;width:100%;display:flex;flex-direction:column;gap:28px;margin:32px 0;font-weight:400}.ocnr p{text-align:center;margin:0}.ocnr h2{font-size:16px;font-weight:400;align-self:center;margin:0}.ocnr button{font:400 48px/48px Homestuck,"Microsoft JhengHei",monospace;border:5px solid #000;background:#fff;color:#000;padding:16px 24px;cursor:pointer;max-width:100%}.ocnr button:hover{background:#000;color:#fff}.ocnr section{display:flex;flex-direction:column;gap:32px}.ocnr section p{text-align:left}.ocnr section ul{list-style:disc;margin:0 0 0 40px;padding:0;display:flex;flex-direction:column}.ow{font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000;background:#fff}.ow header{display:flex;flex-direction:column;gap:16px;margin:16px 0}.ow h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;margin:0}.ow section{display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px;text-align:center}.ow h2{font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;margin:16px 0 0}.ow p{margin:0}.ow ul{list-style:none;padding:0;margin:0}.ow ol{display:flex;flex-direction:column;gap:16px;margin:0;padding:0;list-style-position:inside}.ow ul.left,.ow .left{text-align:left}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
 main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:0;display:flex;flex-direction:column;align-items:center}
 article.story{width:100%;max-width:650px;margin:8px 0 24px;background:#eee;padding:12px 0;display:flex;flex-direction:column;gap:16px}
 .story h1{font:700 30px/36px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;margin:0 32px}
@@ -256,6 +276,41 @@ window.addEventListener("load", function () {
   });
 });
 </script>"""
+
+
+SEARCH_JS = r"""<script>(function(){
+var D=null,q=document.getElementById('sq'),a=document.getElementById('sa'),x=document.getElementById('sx'),
+    sm=document.getElementById('sm'),sr=document.getElementById('sr'),sp=document.getElementById('sp'),res=[],cur=1,PER=10;
+function E(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+var ACTS=ACTS_JSON;
+function parseAdv(v){var o={rng:[],chars:[],on:false},p=v.toLowerCase().trim().split(/\b(acts|pages|chars):/),k,key,val;
+  for(k=1;k<p.length;k+=2){key=p[k];val=p[k+1].trim().replace(/,$/,'');
+    if(key==='acts'){val.split(',').forEach(function(t){t=t.trim();if(ACTS[t]){o.rng.push(ACTS[t]);o.on=true}})}
+    else if(key==='pages'){val.split(',').forEach(function(t){var m=t.trim().match(/^(\d+)(?:-(\d+))?$/);if(m){o.rng.push([+m[1],m[2]?+m[2]:+m[1]]);o.on=true}})}
+    else if(key==='chars'){o.chars=val.split(',').map(function(t){return t.trim()}).filter(Boolean);if(o.chars.length)o.on=true}}
+  return o}
+function inRng(r,n){for(var i=0;i<r.length;i++)if(n>=r[i][0]&&n<=r[i][1])return true;return false}
+function load(cb){if(D)return cb();fetch('BASE/search_index.json').then(function(r){return r.json()}).then(function(d){D=d;cb()}).catch(function(){sm.innerHTML='<i>索引載入失敗。</i>'})}
+function run(){var v=q.value.toLowerCase().trim(),w=x.checked?(v?[v]:[]):v.split(/\s+/).filter(Boolean),ad=parseAdv(a.value);
+  cur=1;res=[];if(!w.length&&!ad.on){draw();return}
+  load(function(){var i,r,h,lab;
+    for(i=0;i<D.length&&res.length<2000;i++){r=D[i];if(ad.rng.length&&!inRng(ad.rng,r[0]))continue;h=(r[1]+' '+r[2]).toLowerCase();
+      if(!w.every(function(t){return h.indexOf(t)>=0}))continue;
+      if(ad.chars.length&&!ad.chars.some(function(c){return h.indexOf(c+'：')>=0||h.indexOf(c+':')>=0}))continue;
+      res.push(r)}
+    draw()})}
+function label(t){var m=t.match(/^((?:\s*\[[^\]]*\])*\s*)([^：:]{1,16})([：:])([\s\S]*)$/);
+  return m?E(m[1])+'<b>'+E(m[2])+'</b>'+E(m[3]+m[4]):E(t)}
+function draw(){sm.style.display=res.length?'none':'';
+  sr.innerHTML=res.slice((cur-1)*PER,cur*PER).map(function(r){return '<li><section class="sres"><a href="BASE/p/'+('00000'+r[0]).slice(-6)+'.html" target="_blank"><h3>第 '+('00000'+r[0]).slice(-6)+' 頁</h3></a><p>'+label(r[1])+'</p><div class="sline"></div></section></li>'}).join('');
+  var tot=Math.ceil(res.length/PER);if(tot<=1){sp.innerHTML='';return}
+  var st=Math.max(1,Math.min(cur-4,tot-9)),en=Math.min(tot,st+9),h='<div><button type="button"'+(cur<=1?' disabled':'')+' data-p="'+(cur-1)+'">上一頁</button>',k;
+  for(k=st;k<=en;k++)h+='<button type="button"'+(k===cur?' class="cur"':'')+' data-p="'+k+'">'+k+'</button>';
+  sp.innerHTML=h+'<button type="button"'+(cur>=tot?' disabled':'')+' data-p="'+(cur+1)+'">下一頁</button></div>'}
+sp.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;cur=+b.dataset.p;draw();window.scrollTo(0,0)});
+[q,a].forEach(function(el){el.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();run()}})});
+x.addEventListener('change',run);
+})();</script>"""
 
 
 # 官方故事頁按 F5 重新整理會回到最上面（不還原捲動位置）；上一頁／下一頁（back_forward）仍由瀏覽器還原
@@ -891,28 +946,60 @@ def build():
     idx = []
     for p in pages:
         txt = re.sub(r"\s*\n\s*", " ", re.sub(r"[ \t]+", " ", p["body"])).strip()
-        idx.append([p["page"], p["title"], txt])
+        idx.append([p["page"], log_label(p["page"]) or p["title"], p["title"] + " " + txt])
     (OUT / "search_index.json").write_text(
         json.dumps(idx, ensure_ascii=False, separators=(",", ":")), encoding="utf-8"
     )
+    # acts: 篩選依地圖頁（map_data.txt 的 A 行）的分配：5.1、6.1、6.1i、6.6.1…；5、6、6.6 為合併範圍
+    acts_rng = {}
+    starts = []
+    if (ROOT / "map_data.txt").exists():
+        for ln in (ROOT / "map_data.txt").read_text(encoding="utf-8").splitlines():
+            t = ln.split()
+            if len(t) >= 3 and t[0] == "A" and t[1].isdigit():
+                c, pg_ = t[2], int(t[1])
+                al = None
+                if re.fullmatch(r"06_0[1-4]", c):
+                    al = str(int(c[-1]))
+                elif c == "06_int":
+                    al = "1i"
+                elif c in ("06_051", "06_052"):
+                    al = "5." + c[-1]
+                elif c == "06_int2":
+                    al = "6.1"
+                elif re.fullmatch(r"06_I[1-5]", c):
+                    al = "6." + c[-1] + "i"
+                elif re.fullmatch(r"06_06[2-5]", c):
+                    al = "6." + c[-1]
+                elif re.fullmatch(r"06_0661_I1|06_066[1-6]_I\d|06_066[1-6]", c):
+                    m6 = re.fullmatch(r"06_066(\d)(_I\d)?", c)
+                    al = "6.6." + m6.group(1) + ("i" if m6.group(2) else "")
+                elif c == "06_07_01":
+                    al = "7"
+                if al:
+                    starts.append((pg_, al))
+        starts.sort()
+        last_pg = max((p["page"] for p in all_pages), default=10030)
+        for k, (st, al) in enumerate(starts):
+            hi = starts[k + 1][0] - 1 if k + 1 < len(starts) else max(last_pg, st)
+            acts_rng[al] = [st, hi]
+        def grp(name, lo_al, hi_al):
+            if lo_al in acts_rng and hi_al in acts_rng:
+                acts_rng[name] = [acts_rng[lo_al][0], acts_rng[hi_al][1]]
+        grp("5", "5.1", "5.2")
+        grp("6", "6.1", "7")
+        grp("6.6", "6.6.1", "7")
+        if "1i" in acts_rng:
+            acts_rng["i"] = acts_rng["intermission"] = acts_rng["1i"]
     inner = (
         '<nav class="oc ocsearch"><h1>搜尋</h1>'
-        '<form id="sf"><input id="sq" type="search" placeholder="輸入關鍵字後按 Enter（多個詞用空格隔開，須全部出現）" autocomplete="off">'
-        '<label><input id="sx" type="checkbox"> 完全符合</label></form>'
-        '<h2>結果</h2><p id="ss"></p><ul id="sr"></ul></nav>'
-        "<script>(function(){var D=null,f=document.getElementById('sf'),q=document.getElementById('sq'),"
-        "ss=document.getElementById('ss'),sr=document.getElementById('sr');"
-        "function E(s){return s.replace(/[&<>\"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]})}"
-        "function run(){var v=q.value.toLowerCase().trim(),w=document.getElementById('sx').checked?(v?[v]:[]):v.split(/\\s+/).filter(Boolean);sr.innerHTML='';if(!w.length){ss.textContent='';return}"
-        "var out=[],i,r,h,k,p,t;for(i=0;i<D.length&&out.length<200;i++){r=D[i];h=(r[1]+' '+r[2]).toLowerCase();"
-        "if(w.every(function(x){return h.indexOf(x)>=0}))out.push(r)}"
-        "ss.textContent=out.length?('找到 '+(out.length>=200?'200+':out.length)+' 頁'):'找不到符合的頁面';"
-        "sr.innerHTML=out.map(function(r){p=r[2].toLowerCase().indexOf(w[0]);t=p<0?r[2].slice(0,80):r[2].slice(Math.max(0,p-30),p+60);"
-        "return '<li><a href=\"BASE/p/'+('00000'+r[0]).slice(-6)+'.html\">'+r[0]+' 「'+E(r[1])+'」</a><br><span>…'+E(t)+'…</span></li>'}).join('')}"
-        "document.getElementById('sx').onchange=function(){if(D)run()};f.onsubmit=function(e){e.preventDefault();if(D)return run();ss.textContent='載入索引中…';"
-        "fetch('BASE/search_index.json').then(function(x){return x.json()}).then(function(d){D=d;run()})"
-        ".catch(function(){ss.textContent='索引載入失敗'})};})();</script>"
-    ).replace("BASE", base)
+        '<section class="sbox"><article class="scard">'
+        '<input id="sq" class="sq1" type="text" placeholder="搜尋 Homestuck" autocomplete="off">'
+        '<label class="sexact"><input id="sx" type="checkbox"><span>完全符合</span></label>'
+        '<input id="sa" class="sq2" type="text" placeholder="chars:john,gt acts:6.1i pages:3000-5000" autocomplete="off">'
+        '<h2>結果</h2><div class="sempty" id="sm"><i>找不到結果。</i></div><ul id="sr"></ul>'
+        '</article></section><div class="spg" id="sp"></div></nav>'
+    ) + SEARCH_JS.replace("BASE", base).replace("ACTS_JSON", json.dumps(acts_rng))
     (OUT / "search.html").write_text(
         layout(site, f"搜尋 - {site['title']}", inner, base, raw=True, body_class="offi"), encoding="utf-8"
     )
