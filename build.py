@@ -139,13 +139,13 @@ body.a6a6{background:#042300}
 .plain p{margin:0 0 16px}.plain p:last-child{margin-bottom:0}
 .nextlink{margin:16px 24px;font:24px/32px Verdana,"Microsoft JhengHei",sans-serif}
 .nextlink span{color:#000}
-.story-foot{margin:16px 28px 0;font:12px/1.6 Verdana,"Microsoft JhengHei",sans-serif}
-.footrow{display:flex;align-items:flex-end;justify-content:space-between;margin:0 24px}.footrow .startover{list-style:none;margin:0;padding:0;display:flex;font:700 11px/16px Verdana,"Microsoft JhengHei",sans-serif}.footrow .startover li{padding:0 4px}.footrow .startover li+li:before{content:"|";margin-right:8px;font-weight:400}.footrow a{color:#0000ee;text-decoration:underline}
-.savebar{display:flex;justify-content:flex-end;position:relative;margin:0 0 0 auto;font:700 11px/16px Verdana,"Microsoft JhengHei",sans-serif}
+.story-foot{margin:0 28px;font:12px/1.6 Verdana,"Microsoft JhengHei",sans-serif}
+.footrow{display:flex;align-items:flex-end;justify-content:space-between;margin:0 -4px}.footrow .startover{list-style:"|" outside;margin:0;padding:0;display:flex;font:700 10px/12px Verdana,"Microsoft JhengHei",sans-serif}.footrow .startover li{padding:0 4px;margin-right:4px}.footrow .startover li:first-child,.savebar li:first-child{list-style:none}.footrow a{color:#0000ee;text-decoration:underline}
+.savebar{display:flex;justify-content:flex-end;position:relative;margin:0 0 0 auto;font:700 10px/12px Verdana,"Microsoft JhengHei",sans-serif}
 .savebar.first{justify-content:flex-start;margin:0}
-.savebar ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap}
-.savebar li{padding:0 4px}
-.savebar li+li:before{content:"|";margin-right:8px;font-weight:400}
+.savebar ul{list-style:"|" outside;margin:0;padding:0;display:flex;flex-wrap:wrap}
+.savebar li{padding:0 4px;margin-right:4px}
+
 .savebar button{font:inherit;background:none;border:0;padding:0;margin:0;color:#0000ee;text-decoration:underline;cursor:pointer}
 .savebar .tip{margin-left:3px;color:#0000ee;text-decoration:underline;cursor:pointer;position:relative}
 .savebar .tipbox{position:absolute;bottom:100%;right:0;width:260px;background:#eee;border:4px solid #ccc;padding:8px 10px;margin-bottom:6px;font:400 12px/1.6 Verdana,"Microsoft JhengHei",sans-serif;color:#000;text-align:left;z-index:20}
