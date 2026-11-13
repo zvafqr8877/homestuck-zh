@@ -571,8 +571,19 @@ def build():
             if num is not None:
                 LOGV[num] = (d, v, link)
 
+    # log_zh.csv：手動指定某些頁在紀錄頁與「> 下一頁」連結顯示的完整文字（含 [S] 標記），優先於自動規則
+    LOG_ZH = {}
+    lz = ROOT / "log_zh.csv"
+    if lz.exists():
+        import csv
+        for row in csv.DictReader(lz.open(encoding="utf-8-sig", newline="")):
+            if (row.get("page") or "").strip().isdigit():
+                LOG_ZH[int(row["page"])] = row["text"]
+
     def log_label(num):
         """標記（[S]、[A6A6I5]）與 ==> 箭頭照官方；英文句子換成本站的繁中標題。沒有官方資料時回傳 None。"""
+        if num in LOG_ZH:
+            return LOG_ZH[num]
         if num not in LOGV:
             return None
         v = LOGV[num][1]
@@ -580,7 +591,13 @@ def build():
         prefix = log_tags.match(inner_v).group(0)
         rest = inner_v[len(prefix):]
         if re.search(r"[A-Za-z0-9\u4e00-\u9fff]", rest) and num in by_num:
-            zh = log_tags.sub("", by_num[num]["title"]).strip()
+            zh = re.sub(r"<[^>]+>", "", by_num[num]["title"])  # 標題裡的 <b>、<span>※</span> 等標籤在紀錄頁不用
+            for _ in range(3):  # 有些標題的 &gt; 被轉了兩三次，還原到穩定為止
+                z2 = html.unescape(zh)
+                if z2 == zh:
+                    break
+                zh = z2
+            zh = log_tags.sub("", zh).strip()
             if zh and not re.match(r"^(第\s*\d+\s*頁|測試頁)", zh):
                 rest = zh
         return prefix + rest
