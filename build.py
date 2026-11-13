@@ -50,7 +50,7 @@ header.site .dd>a{cursor:pointer}
 .logbox{padding:8px 12px;font-size:12px}
 .logbox h1{text-align:center;font-size:24px;margin:4px 0}
 .logbox ul{list-style:none;margin:0;padding:0}
-.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.archive{font-weight:700;font-size:16px;padding:8px;font-family:Verdana,"Microsoft JhengHei",sans-serif}.archive header{display:flex;flex-direction:column;align-items:center;gap:16px;margin:16px 0}.logbox.archive h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;margin:0}.archive header p{font-weight:400;text-align:center;margin:0;line-height:24px}.arch{display:flex;align-items:center;align-self:center;width:100%;max-width:650px;margin:0 auto;padding:16px 0}.arch>a{display:contents}.arch img{display:block;width:164px;height:164px;max-width:100%;flex:none}.arch>div{display:flex;flex-direction:column;align-items:center;flex:1 1 0;min-width:0;padding:16px 24px}.arch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;padding:0 0 16px;margin:0}.arch p{font-weight:400;text-align:center;line-height:24px;padding:0 0 16px;margin:0}.arch p span{font-weight:700}.arch li span.off{text-decoration:line-through}.arch ul{display:flex;gap:12px;margin:0;padding:0;font-weight:400;list-style:none;line-height:24px}.arch li{padding-left:4px}.arch li+li{list-style:"|" outside;margin-left:0}@media (max-width:767px){.arch{flex-direction:column}}body.offi main.wrap{max-width:940px;padding:0;display:flow-root}.logbox.archive{margin:8px;background:#eee;padding:8px}body.owhite main.wrap{max-width:650px;padding:0;background:#fff;display:flow-root;margin:0 auto 40px}.oc{margin:8px;background:#eee;padding:8px;display:flex;flex-direction:column;font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000}.oc h1{font:700 30px/36px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:0}.oc ul{list-style:none;margin:0;padding:0}.oclog .tg{display:block;font:700 10px/15px Verdana,"Microsoft JhengHei",sans-serif;padding:0 0 8px;color:#00f;text-decoration:underline}.oclog li span{font-size:12px;line-height:16px}.ocmap h1{padding:16px 0 40px}.ocsearch h1{font-size:36px;line-height:40px;margin-top:8px}.ocsearch input[type=search]{display:block;width:100%;background:#fff;color:#000;border:1px solid #000;padding:4px;font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;margin:8px 0}.ocsearch label{display:block;font-weight:400}.ocsearch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:8px 0 0}.ocsearch #ss{margin:8px 0;font-weight:400}.ocsearch #sr li{margin:8px 0;font-weight:400}.ocsearch #sr span{font-size:12px}.ocnr{flex-direction:row;justify-content:center}.ocnr>div{max-width:750px;width:100%;display:flex;flex-direction:column;gap:28px;margin:32px 0;font-weight:400}.ocnr p{text-align:center;margin:0}.ocnr h2{font-size:16px;font-weight:400;align-self:center;margin:0}.ocnr button{font:400 48px/48px Homestuck,"Microsoft JhengHei",monospace;border:5px solid #000;background:#fff;color:#000;padding:16px 24px;cursor:pointer;max-width:100%}.ocnr button:hover{background:#000;color:#fff}.ocnr section{display:flex;flex-direction:column;gap:32px}.ocnr section p{text-align:left}.ocnr section ul{list-style:disc;margin:0 0 0 40px;padding:0;display:flex;flex-direction:column}.ow{font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000;background:#fff}.ow header{display:flex;flex-direction:column;gap:16px;margin:16px 0}.ow h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;margin:0}.ow section{display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px;text-align:center}.ow h2{font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;margin:16px 0 0}.ow p{margin:0}.ow ul{list-style:none;padding:0;margin:0}.ow ol{display:flex;flex-direction:column;gap:16px;margin:0;padding:0;list-style-position:inside}.ow ul.left,.ow .left{text-align:left}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
+.newreader p{font-size:14px;margin:.7em 0}.newreader h2{text-align:center;font-size:18px;margin:4px 0 10px}.archive{font-weight:700;font-size:16px;padding:8px;font-family:Verdana,"Microsoft JhengHei",sans-serif}.archive header{display:flex;flex-direction:column;align-items:center;gap:16px;margin:16px 0}.logbox.archive h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;margin:0}.archive header p{font-weight:400;text-align:center;margin:0;line-height:24px}.arch{display:flex;align-items:center;align-self:center;width:100%;max-width:650px;margin:0 auto;padding:16px 0}.arch>a{display:contents}.arch img{display:block;width:164px;height:164px;max-width:100%;flex:none}.arch>div{display:flex;flex-direction:column;align-items:center;flex:1 1 0;min-width:0;padding:16px 24px}.arch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;padding:0 0 16px;margin:0}.arch p{font-weight:400;text-align:center;line-height:24px;padding:0 0 16px;margin:0}.arch p span{font-weight:700}.arch li span.off{text-decoration:line-through}.arch ul{display:flex;gap:12px;margin:0;padding:0;font-weight:400;list-style:none;line-height:24px}.arch li{padding-left:4px}.arch li+li{list-style:"|" outside;margin-left:0}@media (max-width:767px){.arch{flex-direction:column}}body.offi main.wrap{max-width:940px;padding:0;display:flow-root}.logbox.archive{margin:8px;background:#eee;padding:8px}body.owhite main.wrap{max-width:650px;padding:0;background:#fff;display:flow-root;margin:0 auto 40px}.oc{margin:8px;background:#eee;padding:8px;display:flex;flex-direction:column;font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000}.oc h1{font:700 30px/36px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:0}.oc ul{list-style:none;margin:0;padding:0}.oclog .tg{display:block;font:700 10px/15px Verdana,"Microsoft JhengHei",sans-serif;padding:0 0 8px;color:#00f;text-decoration:underline}.oclog li span{font-size:12px;line-height:16px}.ocmap h1{padding:16px 0 40px}.mbox{display:flex;background:#fff;width:100%}.mleft{display:flex;flex-direction:column;min-width:0}.mrw{display:flex;justify-content:center;padding:8px}.mflex{display:flex}.msb{display:none;flex-direction:column;align-items:flex-end;border-right:8px solid}.msb.l{align-items:flex-start;border-right:0;border-left:8px solid}.mlab{width:fit-content;min-width:30px;height:fit-content;margin-top:32px;padding-top:4px;color:#fff}.upright{writing-mode:vertical-lr;text-orientation:upright;font:400 16px/24px Homestuck,monospace;margin:0;color:#fff}.upright .a{font-size:14px;padding-bottom:8px}.upright .b{font-size:30px}.msb img{margin-top:4px}.msb img.mi{margin-top:4px}.mside>.mflex>.msb img{margin-top:8px}.mbr{display:none;width:16px;border-top:8px solid;border-bottom:8px solid;margin-right:12px}.mbr.l{margin-right:0;margin-left:12px}.mcont{min-width:0}.mpc{display:flex;flex-direction:column;align-items:center;min-width:0}.mpc a{display:block;max-width:100%}.mpc img{display:block;max-width:100%;height:auto}.mrow{display:flex}.mrow a{flex:0 1 auto}.mcode{text-align:center;font:400 20px/28px Verdana,"Microsoft JhengHei",sans-serif;margin:20px 0}.mright{display:flex;flex-direction:column;padding:8px;flex-grow:1}.mrt{display:flex}@media (min-width:768px){.msb{display:flex}.mcode.m0{margin-left:60px}.mcode.m1{margin-left:200px}.mcode.m2{margin-left:70px}}@media (min-width:1024px){.mbr{display:block}.mbr.l{display:block}}.ocsearch h1{font-size:36px;line-height:40px;margin-top:8px}.ocsearch input[type=search]{display:block;width:100%;background:#fff;color:#000;border:1px solid #000;padding:4px;font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;margin:8px 0}.ocsearch label{display:block;font-weight:400}.ocsearch h2{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;align-self:center;margin:8px 0 0}.ocsearch #ss{margin:8px 0;font-weight:400}.ocsearch #sr li{margin:8px 0;font-weight:400}.ocsearch #sr span{font-size:12px}.ocnr{flex-direction:row;justify-content:center}.ocnr>div{max-width:750px;width:100%;display:flex;flex-direction:column;gap:28px;margin:32px 0;font-weight:400}.ocnr p{text-align:center;margin:0}.ocnr h2{font-size:16px;font-weight:400;align-self:center;margin:0}.ocnr button{font:400 48px/48px Homestuck,"Microsoft JhengHei",monospace;border:5px solid #000;background:#fff;color:#000;padding:16px 24px;cursor:pointer;max-width:100%}.ocnr button:hover{background:#000;color:#fff}.ocnr section{display:flex;flex-direction:column;gap:32px}.ocnr section p{text-align:left}.ocnr section ul{list-style:disc;margin:0 0 0 40px;padding:0;display:flex;flex-direction:column}.ow{font:400 16px/24px Verdana,"Microsoft JhengHei",sans-serif;color:#000;background:#fff}.ow header{display:flex;flex-direction:column;gap:16px;margin:16px 0}.ow h1{font:700 36px/40px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;margin:0}.ow section{display:flex;flex-direction:column;align-items:center;gap:16px;padding:16px;text-align:center}.ow h2{font:700 16px/24px Verdana,"Microsoft JhengHei",sans-serif;margin:16px 0 0}.ow p{margin:0}.ow ul{list-style:none;padding:0;margin:0}.ow ol{display:flex;flex-direction:column;gap:16px;margin:0;padding:0;list-style-position:inside}.ow ul.left,.ow .left{text-align:left}.logbox>a{font-size:10px;font-weight:700;display:block;padding-bottom:8px}
 main.wrap{max-width:940px;margin:0 auto;background:#c6c6c6;padding:0;display:flex;flex-direction:column;align-items:center}
 article.story{width:100%;max-width:650px;margin:8px 0 24px;background:#eee;padding:12px 0;display:flex;flex-direction:column;gap:16px}
 .story h1{font:700 30px/36px "Courier New",CourierPrime,courier,"Microsoft JhengHei",monospace;text-align:center;margin:0 32px}
@@ -940,55 +940,79 @@ def build():
             f'<div class="mbar" style="border-color:{c}"></div>'
         )
 
+    def msb(kind, num, col, img, cls, right=False):
+        c = SIDEC.get(col, "#b7b7b7")
+        lab = f'<span class="a">{kind}</span>' + (f'<span class="b">{num}</span>' if num else "")
+        return (
+            f'<div class="msb{" mr" if right else ""}" style="border-color:{c}"><div class="mlab" style="background:{c}">'
+            f'<h2 class="upright">{lab}</h2></div><img class="{cls}" src="{MAPB}{img}" alt=""></div>'
+            f'<div class="mbr{" mr" if right else ""}" style="border-color:{c}"></div>'
+        )
+
+    def mcode(idx, names):
+        cols = ["", "", ""]
+        head = ["bifurcate Act_5", "split Act_6", "split Act_6_6"][idx]
+        colr = ["#ff0000,#0000ff", "#2ed73a", "#007800"][idx].split(",")
+        sp = ", ".join(f'<span style="color:{colr[k] if k < len(colr) else colr[-1]}">{n}</span>' for k, n in enumerate(names))
+        return f'<p class="mcode m{idx}">{head}[{sp}];</p>'
+
     mh = ""
     if mp.exists():
+        lines = [ln.split() for ln in mp.read_text(encoding="utf-8").splitlines() if ln.strip()]
         pi = 0
-        opened_side = opened_part = False
-        for ln in mp.read_text(encoding="utf-8").splitlines():
-            t = ln.split()
-            if not t:
-                continue
+        in_side = in_part = False
+
+        def close_part():
+            return "</div></div>" if in_part else ""
+
+        for n, t in enumerate(lines):
             k = t[0]
-            if k in ("S", "T", "A", "R", "P") and k != "S" and k != "T" and not opened_part and k != "P":
-                mh += '<div class="mcol">'
-                opened_part = "col"
             if k == "S":
-                if opened_part:
-                    mh += "</div></div>" if opened_part == "col" else ""
-                    opened_part = False
-                if opened_side:
-                    mh += "</div></div>"
-                mh += '<div class="mside">' + mlabel("SIDE", t[1], t[2], t[3], "s") + '<div class="mbody">'
-                opened_side = True
+                mh += close_part() + ("</div></div></div></div>" if in_side else "")
+                in_part = False
+                mh += '<div class="mrw"><div class="mside"><div class="mflex">' + msb("SIDE", t[1], t[2], t[3], "mi") + '<div class="mcont">'
+                in_side = True
             elif k == "T":
-                if opened_part == "col":
-                    mh += "</div></div>"
-                    opened_part = False
-                mh += '<div class="mpart">' + mlabel("PART", t[1], t[2], t[3], "t")
-                opened_part = False
+                mh += close_part()
+                mh += '<div class="mflex">' + msb("PART", t[1], t[2], t[3], "mi") + '<div class="mpc">'
+                in_part = True
             elif k == "A":
                 mh += mlink(t[1], t[2])
             elif k == "R":
                 mh += '<div class="mrow">' + "".join(mlink(t[i], t[i + 1]) for i in range(1, len(t), 2)) + "</div>"
             elif k == "P":
-                if opened_part == "col":
-                    mh += "</div></div>"
-                    opened_part = False
-                mh += f'<p class="mcode">{mapcode[min(pi, 2)]}</p>'
+                nxt = next((u[0] for u in lines[n + 1:] if u[0] != "P"), "")
+                names = t[1].split("|")
+                if nxt in ("S", "H"):
+                    mh += close_part() + "</div></div></div></div>"
+                    in_part = in_side = False
+                    mh += mcode(pi, names).replace('class="mcode', 'class="mcode mout')
+                else:
+                    mh += close_part()
+                    in_part = False
+                    mh += mcode(pi, names)
                 pi += 1
             elif k == "H":
-                if opened_part == "col":
-                    mh += "</div></div>"
-                    opened_part = False
-                if opened_side:
-                    mh += "</div></div>"
-                    opened_side = False
-                nm = {"DISC 1": "光碟 1", "DISC 2": "光碟 2", "SUPERCARTRIDGE": "超級卡匣"}.get(" ".join(t[1:-1]), " ".join(t[1:-1]))
-                mh += f'<div class="mdisc"><h2>{nm}</h2><img src="{MAPB}{t[-1]}" alt="{nm}"></div>'
-        if opened_part == "col":
-            mh += "</div></div>"
-        if opened_side:
-            mh += "</div></div>"
+                break
+        mh += close_part() + ("</div></div></div></div>" if in_side else "")
+        # 右側欄（DISC 1、DISC 2、SUPERCARTRIDGE）
+        hs = [u for u in lines if u[0] == "H"]
+        rc = ""
+        specs = [("DISC", "1", "height:3070px"), ("", "", "height:252px"), ("DISC", "2", "height:3560px"), ("", "", "height:310px"), ("SUPERCARTRIDGE", "", "flex:1")]
+        hi = 0
+        for kind, num, st in specs:
+            if not kind:
+                rc += f'<div style="{st}"></div>'
+                continue
+            u = hs[hi]; hi += 1
+            c = SIDEC["1"]
+            lab = f'<span class="a">{kind}</span>' + (f'<span class="b">{num}</span>' if num else "")
+            rc += (
+                f'<div class="mrt" style="{st}"><div class="mbr l" style="border-color:{c}"></div>'
+                f'<div class="msb l" style="border-color:{c}"><div class="mlab" style="background:{c}"><h2 class="upright">{lab}</h2></div>'
+                f'<img class="mi" src="{MAPB}{u[-1]}" alt=""></div></div>'
+            )
+        mh = f'<div class="mbox"><div class="mleft">{mh}</div><div class="mright">{rc}</div></div>'
     inner = '<nav class="oc ocmap mapbox"><h1>冒險地圖</h1>' + mh + "</nav>"
     (OUT / "map.html").write_text(
         layout(site, f"地圖 - {site['title']}", inner, base, raw=True, body_class="offi"), encoding="utf-8"
