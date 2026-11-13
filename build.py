@@ -258,6 +258,10 @@ window.addEventListener("load", function () {
 </script>"""
 
 
+# 官方故事頁按 F5 重新整理會回到最上面（不還原捲動位置）；上一頁／下一頁（back_forward）仍由瀏覽器還原
+RELOAD_JS = r"""<script>(function(){try{var n=performance.getEntriesByType("navigation")[0];if(n&&n.type==="reload"){history.scrollRestoration="manual";window.scrollTo(0,0);window.addEventListener("load",function(){window.scrollTo(0,0);setTimeout(function(){window.scrollTo(0,0)},60)});}}catch(e){}})();</script>"""
+
+
 SAVE_JS = r"""<script>
 (function () {
   var bar = document.querySelector(".savebar"); if (!bar) return;
@@ -795,7 +799,7 @@ def build():
 </article>
 <div class="page-info">第 {n} 頁 ·
 <span class="badge {pg["status"]}">{STATUS_LABEL[pg["status"]]}</span>{official}</div>
-{js}"""
+{js}{RELOAD_JS}"""
         (OUT / "p" / f"{n:06d}.html").write_text(
             layout(site, f'{pg["title"]} - {site["title"]}', inner, base, raw=True, body_class=body_class, sep_img=tooth),
             encoding="utf-8",
