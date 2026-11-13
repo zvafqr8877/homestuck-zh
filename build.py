@@ -287,28 +287,47 @@ function parseAdv(v){var o={rng:[],chars:[],on:false},p=v.toLowerCase().trim().s
   for(k=1;k<p.length;k+=2){key=p[k];val=p[k+1].trim().replace(/,$/,'');
     if(key==='acts'){val.split(',').forEach(function(t){t=t.trim();if(ACTS[t]){o.rng.push(ACTS[t]);o.on=true}})}
     else if(key==='pages'){val.split(',').forEach(function(t){var m=t.trim().match(/^(\d+)(?:-(\d+))?$/);if(m){o.rng.push([+m[1],m[2]?+m[2]:+m[1]]);o.on=true}})}
-    else if(key==='chars'){o.chars=val.split(',').map(function(t){return t.trim()}).filter(Boolean);if(o.chars.length)o.on=true}}
+    else if(key==='chars'){var set={};val.split(',').forEach(function(t){t=t.trim().toLowerCase();if(!t)return;var al=CH&&CH.aliases[t];(al?(Array.isArray(al)?al:[al]):[t]).forEach(function(n){set[n]=1})});o.chars=Object.keys(set);if(o.chars.length)o.on=true}}
   return o}
 function inRng(r,n){for(var i=0;i<r.length;i++)if(n>=r[i][0]&&n<=r[i][1])return true;return false}
+var CH=null,CHTRY=false;function loadCh(cb){if(CH||CHTRY)return cb();CHTRY=true;fetch('BASE/search_chars.json').then(function(r){if(!r.ok)throw 0;return r.json()}).then(function(d){CH=d;cb()}).catch(function(){cb()})}
 function load(cb){if(D)return cb();fetch('BASE/search_index.json').then(function(r){return r.json()}).then(function(d){D=d;cb()}).catch(function(){sm.innerHTML='<i>索引載入失敗。</i>'})}
-function run(){var v=q.value.toLowerCase().trim(),w=x.checked?(v?[v]:[]):v.split(/\s+/).filter(Boolean),ad=parseAdv(a.value);
-  cur=1;res=[];if(!w.length&&!ad.on){draw();return}
-  load(function(){var i,r,h,lab;
-    for(i=0;i<D.length&&res.length<2000;i++){r=D[i];if(ad.rng.length&&!inRng(ad.rng,r[0]))continue;h=(r[1]+' '+r[2]).toLowerCase();
-      if(!w.every(function(t){return h.indexOf(t)>=0}))continue;
-      if(ad.chars.length&&!ad.chars.some(function(c){return h.indexOf(c+'：')>=0||h.indexOf(c+':')>=0}))continue;
-      res.push(r)}
+var SPK=/^\s*((?:\[[^\]]*\]\s*)*)([^：:\[\]]{1,40}?)\s*[：:]/;
+function norm(n){n=String(n).toLowerCase().trim();var al=CH&&CH.aliases&&CH.aliases[n];return al?(Array.isArray(al)?al:[al]).map(function(z){return String(z).toLowerCase()}):[n]}
+function spk(t){var m=t.match(SPK);if(!m)return[];var n=m[2].trim().toLowerCase(),r=norm(n);if(r.length===1&&r[0]===n&&n.indexOf(' ')>0){var f=norm(n.split(/\s+/)[0]);if(f[0]!==n.split(/\s+/)[0])r=f}return r}
+function parseAdv(v){var o={rng:[],chars:[],on:false},p=v.toLowerCase().trim().split(/\b(acts|pages|chars):/),k,key,val;
+  for(k=1;k<p.length;k+=2){key=p[k];val=p[k+1].trim().replace(/,$/,'');
+    if(key==='acts'){val.split(',').forEach(function(t){t=t.trim();if(ACTS[t]){o.rng.push(ACTS[t]);o.on=true}})}
+    else if(key==='pages'){val.split(',').forEach(function(t){var m=t.trim().match(/^(\d+)(?:-(\d+))?$/);if(m){o.rng.push([+m[1],m[2]?+m[2]:+m[1]]);o.on=true}})}
+    else if(key==='chars'){var set={};val.split(',').forEach(function(t){t=t.trim();if(!t)return;norm(t).forEach(function(n){set[n]=1})});o.chars=Object.keys(set);if(o.chars.length)o.on=true}}
+  return o}
+function inRng(r,n){for(var i=0;i<r.length;i++)if(n>=r[i][0]&&n<=r[i][1])return true;return false}
+function RE(s){return s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
+function hl(t,w){if(!w.length)return E(t.length>150?t.slice(0,150)+'…':t);var re=new RegExp('('+w.map(RE).join('|')+')','gi'),o='',i=0,m;
+  if(t.length>150){var f=t.search(re);if(f>40){t='…'+t.slice(f-30)}if(t.length>150)t=t.slice(0,150)+'…'}
+  while((m=re.exec(t))){if(!m[0])break;o+=E(t.slice(i,m.index))+'<b>'+E(m[0])+'</b>';i=m.index+m[0].length}
+  return o+E(t.slice(i))}
+var T=0,W=[];function run(){clearTimeout(T);T=setTimeout(function(){loadCh(run2)},120)}
+function run2(){var v=q.value.toLowerCase().trim(),w=x.checked?(v?[v]:[]):v.split(/\s+/).filter(Boolean),ad=parseAdv(a.value);
+  cur=1;res=[];W=w;
+  var ok=w.length&&(v.length>=2||/[㐀-鿿]/.test(v));
+  if(!ok&&!(ad.chars.length&&!w.length)){draw();return}
+  load(function(){var i,j,r,L,t,h;
+    for(i=0;i<D.length&&res.length<2000;i++){r=D[i];if(ad.rng.length&&!inRng(ad.rng,r[0]))continue;
+      if(!ad.chars.length&&w.length){h=r[1].toLowerCase();if(w.every(function(z){return h.indexOf(z)>=0}))res.push([r[0],r[1]])}
+      L=r[2];for(j=0;j<L.length&&res.length<2000;j++){t=L[j];
+        if(w.length){h=t.toLowerCase();if(!w.every(function(z){return h.indexOf(z)>=0}))continue}
+        if(ad.chars.length&&!spk(t).some(function(c){return ad.chars.indexOf(c)>=0}))continue;
+        res.push([r[0],t])}}
     draw()})}
-function label(t){var m=t.match(/^((?:\s*\[[^\]]*\])*\s*)([^：:]{1,16})([：:])([\s\S]*)$/);
-  return m?E(m[1])+'<b>'+E(m[2])+'</b>'+E(m[3]+m[4]):E(t)}
 function draw(){sm.style.display=res.length?'none':'';
-  sr.innerHTML=res.slice((cur-1)*PER,cur*PER).map(function(r){return '<li><section class="sres"><a href="BASE/p/'+('00000'+r[0]).slice(-6)+'.html" target="_blank"><h3>第 '+('00000'+r[0]).slice(-6)+' 頁</h3></a><p>'+label(r[1])+'</p><div class="sline"></div></section></li>'}).join('');
+  sr.innerHTML=res.slice((cur-1)*PER,cur*PER).map(function(r){return '<li><section class="sres"><a href="BASE/p/'+('00000'+r[0]).slice(-6)+'.html" target="_blank"><h3>第 '+('00000'+r[0]).slice(-6)+' 頁</h3></a><p>'+hl(r[1],W)+'</p><div class="sline"></div></section></li>'}).join('');
   var tot=Math.ceil(res.length/PER);if(tot<=1){sp.innerHTML='';return}
   var st=Math.max(1,Math.min(cur-4,tot-9)),en=Math.min(tot,st+9),h='<div><button type="button"'+(cur<=1?' disabled':'')+' data-p="'+(cur-1)+'">上一頁</button>',k;
   for(k=st;k<=en;k++)h+='<button type="button"'+(k===cur?' class="cur"':'')+' data-p="'+k+'">'+k+'</button>';
   sp.innerHTML=h+'<button type="button"'+(cur>=tot?' disabled':'')+' data-p="'+(cur+1)+'">下一頁</button></div>'}
 sp.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;cur=+b.dataset.p;draw();window.scrollTo(0,0)});
-[q,a].forEach(function(el){el.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();run()}})});
+[q,a].forEach(function(el){el.addEventListener('input',run);el.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();clearTimeout(T);loadCh(run2)}})});
 x.addEventListener('change',run);
 })();</script>"""
 
@@ -945,8 +964,9 @@ def build():
     # 搜尋（對應官方 /search）：把全站文字做成 search_index.json，在瀏覽器裡搜尋，不需要伺服器
     idx = []
     for p in pages:
-        txt = re.sub(r"\s*\n\s*", " ", re.sub(r"[ \t]+", " ", p["body"])).strip()
-        idx.append([p["page"], log_label(p["page"]) or p["title"], p["title"] + " " + txt])
+        blines = [l.strip() for l in p["body"].splitlines() if l.strip()]
+        blines = [l for l in blines if not re.match(r"^原[網网]址\s*[：:]", l)]
+        idx.append([p["page"], log_label(p["page"]) or p["title"], blines])
     (OUT / "search_index.json").write_text(
         json.dumps(idx, ensure_ascii=False, separators=(",", ":")), encoding="utf-8"
     )
@@ -991,6 +1011,8 @@ def build():
         grp("6.6", "6.6.1", "7")
         if "1i" in acts_rng:
             acts_rng["i"] = acts_rng["intermission"] = acts_rng["1i"]
+    if (ROOT / "search_chars.json").exists():
+        shutil.copy(ROOT / "search_chars.json", OUT / "search_chars.json")
     inner = (
         '<nav class="oc ocsearch"><h1>搜尋</h1>'
         '<section class="sbox"><article class="scard">'
