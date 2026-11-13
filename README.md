@@ -80,6 +80,8 @@ GitHub Pages 單站建議不超過 1 GB，影片很多的話不適合放同一�
 2. **原版 Flash**（只有 `assets/flashes/` 有檔案）：用 Ruffle 播放英文原版，使用官方的像素字型設定。
 3. **沒放檔案的 Flash**：由 `site.json` 的 `flash_mode` 決定：`iframe`（預設，直接嵌入官方頁面，只露出 650x450 的動畫區；官方的 SWF 只允許 `www.homestuck.com` 讀取，自己用 Ruffle 會被 CORS 擋住）、`ruffle`、`link`（只放連結）。
 
+翻譯原則：Flash 內的文字只用繁中站已翻譯的版本（36 頁）和簡中站字幕（3 頁），其餘維持官方原版，不自己翻譯。有文字但兩邊都沒有譯文的 Flash（3049、7640、6009、2376、7626、6565、6517、9828、2038、2037、2238、2297、2655、2657、2669、2725、3307、3541、3620、3840、4478、7614、7659、7677）照舊用原版。
+
 選檔順序在 `build.py` 的 `local_swf()`：`assets/zh/<manifest 路徑>` → `assets/zh/flashes/<檔名>` → `assets/<manifest 路徑>` → `assets/flashes/<檔名>`。
 
 Ruffle 從 `https://unpkg.com/@ruffle-rs/ruffle` 載入（不在 repo 裡）。
@@ -137,12 +139,10 @@ python tools/swf_zh.py --font NotoSansCJKtc-Bold.otf
 ## 頁面下方列
 
 「首頁 | 上一頁」和右邊的存檔列（存檔／自動存檔／讀檔／刪除遊戲資料）寫法和官方相同（清單符號「|」、項目左右內距 4px、右邊外距 4px）。存檔記在這台瀏覽器的 localStorage，不用登入。
-注意：`.story-foot a{margin-right:14px}` 是舊規則，下方列的連結另外用 `.story-foot .footrow a{margin-right:0}` 蓋掉，否則「|」前面會多出 14px。
 
 ## 還沒做的事
 
 - 特殊故事頁（Collide 等）和官方的版面比對。
-- 有文字但沒翻譯的 Flash，共 24 頁：3049、7640、6009、2376、7626、6565、6517、9828、2038、2037、2238、2297、2655、2657、2669、2725、3307、3541、3620、3840、4478、7614、7659、7677（繁中站也沒翻；本站規則是譯文只取自簡中／繁中站，沒有就維持英文）。
 - 搜尋頁的英文標籤（Page、Previous／Next）、紀錄頁的切換文字、進階搜尋介面簡化。
 - 製作人員名單頁文字、各幕邊界和官方的差異。
 - Ruffle 目前依賴 `unpkg.com`，可考慮改放進 repo。
