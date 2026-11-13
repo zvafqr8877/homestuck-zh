@@ -32,7 +32,10 @@
 
 ## 流程
 
-1. 簡體站站長已同意（條件：比照繁中站，不得營利，只能從網路抓取）。署名請保留 `site.json` 的致謝名單。
+1. 參考網站：
+   - 繁中站：https://zhhomestuck.github.io/
+   - 簡中站：https://linzhiyi622.github.io/
+   - The Unofficial Homestuck Collection：https://uhca.carrd.co/
 2. 在你自己的電腦上：
 
    ```
