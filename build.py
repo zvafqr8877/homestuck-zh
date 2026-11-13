@@ -163,6 +163,13 @@ body.a6a6{background:#042300}
 .plain p{margin:0 0 16px}.plain p:last-child{margin-bottom:0}
 .nextlink{margin:16px 24px;font:24px/32px Verdana,"Microsoft JhengHei",sans-serif}
 .nextlink span{color:#000}
+.tcs{margin:16px 28px;font:14px/1.6 Verdana,"Microsoft JhengHei",sans-serif;border:1px dashed gray;padding:4px 8px;text-align:left}
+.tcs>summary{cursor:pointer;font-weight:700}
+.tcs-c{margin:6px 0;color:#666}
+.tcs-i{text-align:left}
+.tcs-d{margin:6px 0;border:1px dashed gray;padding:2px 6px}
+.tcs-d>summary{cursor:pointer;font-weight:700}
+.tcs-b{white-space:pre-line;margin:6px 0}
 .story-foot{margin:0 28px;font:12px/1.6 Verdana,"Microsoft JhengHei",sans-serif}
 .footrow{display:flex;align-items:flex-end;justify-content:space-between;margin:0 -4px}.footrow .startover{list-style:"|" outside;margin:0;padding:0;display:flex;font:700 10px/12px Verdana,"Microsoft JhengHei",sans-serif}.footrow .startover li{padding:0 4px;margin-right:4px}.footrow .startover li:first-child,.savebar li:first-child{list-style:none}.footrow a{color:#0000ee;text-decoration:underline}
 .savebar{display:flex;justify-content:flex-end;position:relative;margin:0 0 0 auto;font:700 10px/12px Verdana,"Microsoft JhengHei",sans-serif}
@@ -647,6 +654,10 @@ def build():
     by_num = {p["page"]: p for p in all_pages}
 
     # 官方紀錄資料（fetch_log.py 產生）：紀錄頁與各頁「> 下一頁」連結共用同一套文字規則
+    # 繁中站的 Flash 文字版特殊頁（fetch_tc_special.py 產生 tc_special.json）：放在對應頁面最下方，預設收合
+    TC_SPECIAL = {}
+    if (ROOT / "tc_special.json").exists():
+        TC_SPECIAL = json.loads((ROOT / "tc_special.json").read_text(encoding="utf-8"))
     LOGV = {}
     LOG_SPECIAL = {"/GAMEOVER": 8801, "/shes8ack": 9305}
     log_tags = re.compile(r"^(?:\s*\[[^\]]*\])*\s*")
@@ -749,6 +760,13 @@ def build():
             left = f'<ul class="startover">{li}</ul>' if li else ""
         foot = '<div class="footrow">' + left + foot + '</div>' + SAVE_JS
         text = body_html(pg["body"], colors)
+        tcs = TC_SPECIAL.get(str(n))
+        if tcs:
+            credit = esc(tcs.get("credit", "")) or "文本由繁中站翻譯"
+            text += (
+                '<details class="tcs"><summary>繁中站的文字版（Flash 內文）</summary>'
+                f'<p class="tcs-c">{credit}</p><div class="tcs-i">{tcs["html"]}</div></details>'
+            )
         # 來源連結：優先用 sources.csv（gen_mapping.py 產生），
         # 沒有的話只有 front matter 寫了 official: 官方頁碼 才顯示官方連結，避免頁碼對錯
         key = int(pg["official"]) if pg.get("official", "").isdigit() else n
