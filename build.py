@@ -315,7 +315,6 @@ function run2(){var v=q.value.toLowerCase().trim(),w=x.checked?(v?[v]:[]):v.spli
   if(!ok&&!(ad.chars.length&&!w.length)){draw();return}
   load(function(){var i,j,r,L,t,h;
     for(i=0;i<D.length&&res.length<2000;i++){r=D[i];if(ad.rng.length&&!inRng(ad.rng,r[0]))continue;
-      if(!ad.chars.length&&w.length){h=r[1].toLowerCase();if(w.every(function(z){return h.indexOf(z)>=0}))res.push([r[0],r[1]])}
       L=r[2];for(j=0;j<L.length&&res.length<2000;j++){t=L[j];
         if(w.length){h=t.toLowerCase();if(!w.every(function(z){return h.indexOf(z)>=0}))continue}
         if(ad.chars.length&&!spk(t).some(function(c){return ad.chars.indexOf(c)>=0}))continue;
