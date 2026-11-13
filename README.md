@@ -117,7 +117,7 @@ python fetch_flash.py
 python tools/swf_zh.py --font NotoSansCJKtc-Bold.otf
 ```
 
-`NotoSansCJKtc-Bold.otf` 只是產生時用的字形來源（可從 https://github.com/notofonts/noto-cjk 下載），**不要 commit**。
+`NotoSansCJKtc-Bold.otf` 只是產生時用的字型來源（可從 https://github.com/notofonts/noto-cjk 下載），**不要 commit**。
 簡中站沒有譯文的動畫文字維持英文。細節見 `swf_zh/README.md`。
 
 ## 繁中站的 11 個特殊頁
