@@ -163,6 +163,14 @@ body.a6a6{background:#042300}
 .plain p{margin:0 0 16px}.plain p:last-child{margin-bottom:0}
 .nextlink{margin:16px 24px;font:24px/32px Verdana,"Microsoft JhengHei",sans-serif}
 .nextlink span{color:#000}
+.tcpage{padding:12px 28px;font:14px/1.7 Verdana,"Microsoft JhengHei",sans-serif;text-align:left}
+.tcpage h1{text-align:center}
+.tcs-c{margin:6px 0;color:#666}
+.tcs-i{text-align:left}
+.tcs-d{margin:6px 0;border:1px dashed gray;padding:2px 6px}
+.tcs-d>summary{cursor:pointer;font-weight:700}
+.tcs-b{white-space:pre-line;margin:6px 0}
+.tcs-back{margin-top:18px}
 .tclinks{text-align:center;margin:10px 28px 0;font:14px/1.45 Verdana,"Microsoft JhengHei",sans-serif}.tclinks a{color:#00e;text-decoration:underline}
 .story-foot{margin:0 28px;font:12px/1.6 Verdana,"Microsoft JhengHei",sans-serif}
 .footrow{display:flex;align-items:flex-end;justify-content:space-between;margin:0 -4px}.footrow .startover{list-style:"|" outside;margin:0;padding:0;display:flex;font:700 10px/12px Verdana,"Microsoft JhengHei",sans-serif}.footrow .startover li{padding:0 4px;margin-right:4px}.footrow .startover li:first-child,.savebar li:first-child{list-style:none}.footrow a{color:#0000ee;text-decoration:underline}
@@ -655,7 +663,10 @@ def build():
     by_num = {p["page"]: p for p in all_pages}
 
     # 官方紀錄資料（fetch_log.py 產生）：紀錄頁與各頁「> 下一頁」連結共用同一套文字規則
-    # 繁中站 11 個特殊頁的連結（不再匯入 Flash 內文）
+    # 繁中站的 Flash 文字版特殊頁（fetch_tc_special.py 產生 tc_special.json）→ 本站自己的 p/NNNNNNtc.html
+    TC_SPECIAL = {}
+    if (ROOT / "tc_special.json").exists():
+        TC_SPECIAL = json.loads((ROOT / "tc_special.json").read_text(encoding="utf-8"))
     TC_LINKS = {  # 繁中站（zhhomestuck.github.io）這 11 頁 Flash 下方的連結：(文字, 網址)；"#tcs" = 繁中站的文字版頁面
     2153: [("純文字版本", "#tcs")],
     3258: [("地圖", "https://zhhsmedia.jumpingcrab.com/images/storyfiles/hs2/scraps/gate1map.jpg"), ("攻略/純文字版本", "#tcs")],
@@ -772,13 +783,14 @@ def build():
         foot = '<div class="footrow">' + left + foot + '</div>' + SAVE_JS
         text = body_html(pg["body"], colors)
         # 11 個繁中站特殊頁：Flash 下方的連結照繁中站的版面（置中、藍底線、緊湊），
-        # 「純文字版本」連到繁中站的文字版頁面（不在本站放 Flash 內文），YouTube 連結照繁中站原樣
+        # 「純文字版本」連到本站自己的 p/NNNNNNtc.html（內容取自繁中站），YouTube 連結照繁中站原樣
         if n in TC_LINKS:
             parts = []
             for lab, url in TC_LINKS[n]:
                 if url == "#tcs":
-                    url = f"https://zhhomestuck.github.io/p/{n:06d}tc.html"
-                parts.append(f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(lab)}</a>')
+                    parts.append(f'<a href="{base}/p/{n:06d}tc.html">{esc(lab)}</a>')
+                else:
+                    parts.append(f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(lab)}</a>')
             if n == 7327:
                 parts = [f"({x})" for x in parts]
             text = '<div class="tclinks">' + "<br>".join(parts) + '</div>'
@@ -939,6 +951,21 @@ def build():
 {js}{RELOAD_JS}"""
         (OUT / "p" / f"{n:06d}.html").write_text(
             layout(site, f'{pg["title"]} - {site["title"]}', inner, base, raw=True, body_class=body_class, sep_img=tooth),
+            encoding="utf-8",
+        )
+
+    # 繁中站「NNNNNNtc.html」文字版頁面（Flash 遊戲的指令與回應、點選說明），照繁中站放成本站自己的頁面
+    for n, tcs in sorted((int(k), v) for k, v in TC_SPECIAL.items()):
+        if n not in by_num:
+            continue
+        credit = esc(tcs.get("credit", "")) or "文本由繁中站翻譯"
+        inner = (
+            f'<article class="story tcpage"><h1>{esc(by_num[n]["title"])}</h1>'
+            f'<p class="tcs-c">{credit}</p><div class="tcs-i">{tcs["html"]}</div>'
+            f'<p class="tcs-back"><a href="{base}/p/{n:06d}.html">← 回到第 {n} 頁</a></p></article>'
+        )
+        (OUT / "p" / f"{n:06d}tc.html").write_text(
+            layout(site, f'{by_num[n]["title"]}（文字版） - {site["title"]}', inner, base, raw=True, sep_img=tooth),
             encoding="utf-8",
         )
 
