@@ -163,7 +163,8 @@ body.a6a6{background:#042300}
 .plain p{margin:0 0 16px}.plain p:last-child{margin-bottom:0}
 .nextlink{margin:16px 24px;font:24px/32px Verdana,"Microsoft JhengHei",sans-serif}
 .nextlink span{color:#000}
-.tcs{margin:16px 28px;font:14px/1.6 Verdana,"Microsoft JhengHei",sans-serif;border:1px dashed gray;padding:4px 8px;text-align:left}
+.tclinks{text-align:center;margin:10px 28px 0;font:14px/1.45 Verdana,"Microsoft JhengHei",sans-serif}.tclinks a{color:#00e;text-decoration:underline}
+.tcs{margin:12px 28px;font:14px/1.6 Verdana,"Microsoft JhengHei",sans-serif;border:1px dashed gray;padding:4px 8px;text-align:left}
 .tcs>summary{cursor:pointer;font-weight:700}
 .tcs-c{margin:6px 0;color:#666}
 .tcs-i{text-align:left}
@@ -665,6 +666,19 @@ def build():
     TC_SPECIAL = {}
     if (ROOT / "tc_special.json").exists():
         TC_SPECIAL = json.loads((ROOT / "tc_special.json").read_text(encoding="utf-8"))
+        TC_LINKS = {  # 繁中站（zhhomestuck.github.io）這 11 頁 Flash 下方的連結：(文字, 網址)；"#tcs" = 本頁的繁中站文字版
+        2153: [("純文字版本", "#tcs")],
+        3258: [("地圖", "https://zhhsmedia.jumpingcrab.com/images/storyfiles/hs2/scraps/gate1map.jpg"), ("攻略/純文字版本", "#tcs")],
+        4692: [("攻略/純文字版本", "#tcs")],
+        4979: [("攻略/純文字版本", "#tcs"), ("官方Youtube影片", "https://youtu.be/wCLyyxYN9GI")],
+        5221: [("攻略/純文字版本", "#tcs"), ("官方Youtube影片", "https://youtu.be/q6WRBZMgtog")],
+        5338: [("攻略/純文字版本", "#tcs"), ("官方Youtube影片", "https://youtu.be/1dedXfksqoE")],
+        5595: [("攻略/純文字版本", "#tcs"), ("官方Youtube影片", "https://youtu.be/X1DloKe2jFs")],
+        5660: [("純文字版本", "#tcs"), ("官方Youtube影片", "https://youtu.be/7UxgXl5Fzn0/")],
+        6720: [("攻略/純文字版本", "#tcs"), ("官方Youtube影片", "https://youtu.be/zchsb3m6Tdk")],
+        6725: [("攻略/純文字版本", "#tcs"), ("官方Youtube影片", "https://youtu.be/60Q0dwQUYL8/")],
+        7327: [("純文字版本", "#tcs"), ("官方Youtube影片", "https://youtu.be/nZ1VoJp3x-A")],
+    }
     LOGV = {}
     LOG_SPECIAL = {"/GAMEOVER": 8801, "/shes8ack": 9305}
     log_tags = re.compile(r"^(?:\s*\[[^\]]*\])*\s*")
@@ -768,10 +782,21 @@ def build():
         foot = '<div class="footrow">' + left + foot + '</div>' + SAVE_JS
         text = body_html(pg["body"], colors)
         tcs = TC_SPECIAL.get(str(n))
+        # 11 個繁中站特殊頁：Flash 下方的連結照繁中站的版面（置中、藍底線、緊湊），
+        # 「純文字版本」連到本頁下方的繁中站文字版（點了會自動展開），YouTube 連結照繁中站原樣
+        if tcs and n in TC_LINKS:
+            parts = []
+            for lab, url in TC_LINKS[n]:
+                ext = '' if url == "#tcs" else ' target="_blank" rel="noopener"'
+                oc = ' onclick="var d=document.getElementById(\'tcs\');if(d)d.open=true"' if url == "#tcs" else ''
+                parts.append(f'<a href="{esc(url)}"{ext}{oc}>{esc(lab)}</a>')
+            if n == 7327:
+                parts = [f"({x})" for x in parts]
+            text = '<div class="tclinks">' + "<br>".join(parts) + '</div>'
         if tcs:
             credit = esc(tcs.get("credit", "")) or "文本由繁中站翻譯"
             text += (
-                '<details class="tcs"><summary>繁中站的文字版（Flash 內文）</summary>'
+                '<details class="tcs" id="tcs"><summary>繁中站的文字版（Flash 內文）</summary>'
                 f'<p class="tcs-c">{credit}</p><div class="tcs-i">{tcs["html"]}</div></details>'
             )
         # 來源連結：優先用 sources.csv（gen_mapping.py 產生），
