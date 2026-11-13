@@ -140,8 +140,9 @@ body.a6a6{background:#042300}
 .nextlink{margin:16px 24px;font:24px/32px Verdana,"Microsoft JhengHei",sans-serif}
 .nextlink span{color:#000}
 .story-foot{margin:16px 28px 0;font:12px/1.6 Verdana,"Microsoft JhengHei",sans-serif}
-.savebar{display:flex;justify-content:flex-end;position:relative;margin:0 24px;font:700 11px/16px Verdana,"Microsoft JhengHei",sans-serif}
-.savebar.first{justify-content:flex-start}
+.footrow{display:flex;align-items:flex-end;justify-content:space-between;margin:0 24px}.footrow .startover{list-style:none;margin:0;padding:0;display:flex;font:700 11px/16px Verdana,"Microsoft JhengHei",sans-serif}.footrow .startover li{padding:0 4px}.footrow .startover li+li:before{content:"|";margin-right:8px;font-weight:400}.footrow a{color:#0000ee;text-decoration:underline}
+.savebar{display:flex;justify-content:flex-end;position:relative;margin:0 0 0 auto;font:700 11px/16px Verdana,"Microsoft JhengHei",sans-serif}
+.savebar.first{justify-content:flex-start;margin:0}
 .savebar ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap}
 .savebar li{padding:0 4px}
 .savebar li+li:before{content:"|";margin-right:8px;font-weight:400}
@@ -553,6 +554,32 @@ def build():
     pages = [p for p in all_pages if p.get("hidden", "").lower() != "true"]
     hidden_pages = [p for p in all_pages if p.get("hidden", "").lower() == "true"]
     by_num = {p["page"]: p for p in all_pages}
+
+    # 官方紀錄資料（fetch_log.py 產生）：紀錄頁與各頁「> 下一頁」連結共用同一套文字規則
+    LOGV = {}
+    LOG_SPECIAL = {"/GAMEOVER": 8801, "/shes8ack": 9305}
+    log_tags = re.compile(r"^(?:\s*\[[^\]]*\])*\s*")
+    lo = ROOT / "log_official.json"
+    if lo.exists():
+        for _id, d, v, link in json.loads(lo.read_text(encoding="utf-8")):
+            mm = re.fullmatch(r"/(\d{6})", link)
+            num = int(mm.group(1)) if mm else LOG_SPECIAL.get(link)
+            if num is not None:
+                LOGV[num] = (d, v, link)
+
+    def log_label(num):
+        """標記（[S]、[A6A6I5]）與 ==> 箭頭照官方；英文句子換成本站的繁中標題。沒有官方資料時回傳 None。"""
+        if num not in LOGV:
+            return None
+        v = LOGV[num][1]
+        inner_v = v[1:-1] if len(v) >= 2 and v[0] == '"' and v[-1] == '"' else v
+        prefix = log_tags.match(inner_v).group(0)
+        rest = inner_v[len(prefix):]
+        if re.search(r"[A-Za-z0-9\u4e00-\u9fff]", rest) and num in by_num:
+            zh = log_tags.sub("", by_num[num]["title"]).strip()
+            if zh and not re.match(r"^(第\s*\d+\s*頁|測試頁)", zh):
+                rest = zh
+        return prefix + rest
     nums = [p["page"] for p in all_pages]
     if len(nums) != len(set(nums)):
         dup = [n for n, c in Counter(nums).items() if c > 1]
@@ -581,7 +608,7 @@ def build():
 
         def tlink(t, label=None):
             if t in by_num:
-                return f'{base}/p/{t:06d}.html', label or by_num[t]["title"]
+                return f'{base}/p/{t:06d}.html', label or log_label(t) or by_num[t]["title"]
             if t < 7959:
                 return f"https://zhhomestuck.github.io/p/{t:06d}", label or f"繁中站第 {t} 頁 ↗"
             return None, None
@@ -604,8 +631,15 @@ def build():
             '<li><button type="button" data-act="auto">自動存檔！</button><span class="tip" data-tip="2" id="autotip">(?)</span></li>'
             '<li><button type="button" data-act="load">讀檔</button></li>'
             '<li><button type="button" data-act="del">刪除遊戲資料</button></li>'
-            '</ul></div>' + SAVE_JS
+            '</ul></div>'
         )
+        left = ""
+        if not first_cls:
+            li = f'<li><a href="{base}/p/{pages[0]["page"]:06d}.html">首頁</a></li>' if pages else ""
+            if pu:
+                li += f'<li><a href="{pu}">上一頁</a></li>'
+            left = f'<ul class="startover">{li}</ul>' if li else ""
+        foot = '<div class="footrow">' + left + foot + '</div>' + SAVE_JS
         text = body_html(pg["body"], colors)
         # 來源連結：優先用 sources.csv（gen_mapping.py 產生），
         # 沒有的話只有 front matter 寫了 official: 官方頁碼 才顯示官方連結，避免頁碼對錯
@@ -806,26 +840,14 @@ def build():
             for k in range(int(c)):
                 dates[int(st) + k] = f"{d[2:4]}/{d[4:6]}/{d[0:2]}"
     items = []
-    lo = ROOT / "log_official.json"
-    if lo.exists():
-        # 官方紀錄（fetch_log.py 產生）：日期、[S] 之類的標記與 ==> 箭頭照官方；英文句子改用本站的繁中標題；全部連到本站，引號改為「」
-        SPECIAL = {"/GAMEOVER": 8801, "/shes8ack": 9305}
-        TAGS = re.compile(r"^(?:\s*\[[^\]]*\])*\s*")
+    if LOGV:
+        # 日期照官方；文字規則見 log_label；全部連到本站，引號改為「」
         for _id, d, v, link in json.loads(lo.read_text(encoding="utf-8")):
             mm = re.fullmatch(r"/(\d{6})", link)
-            num = int(mm.group(1)) if mm else SPECIAL.get(link)
-            if num in by_num:
-                href = f"{base}/p/{num:06d}.html"
-            else:
-                href = "https://www.homestuck.com" + link
-            inner_v = v[1:-1] if len(v) >= 2 and v[0] == '"' and v[-1] == '"' else v
-            prefix = TAGS.match(inner_v).group(0)
-            rest = inner_v[len(prefix):]
-            if re.search(r"[A-Za-z0-9\u4e00-\u9fff]", rest) and num in by_num:
-                zh = TAGS.sub("", by_num[num]["title"]).strip()
-                if zh and not re.match(r"^(第\s*\d+\s*頁|測試頁)", zh):
-                    rest = zh
-            items.append(f'<li><span>{d} - <a href="{esc(href)}">「{esc(prefix + rest)}」</a></span></li>')
+            num = int(mm.group(1)) if mm else LOG_SPECIAL.get(link)
+            href = f"{base}/p/{num:06d}.html" if num in by_num else "https://www.homestuck.com" + link
+            txt = log_label(num) if num is not None else v[1:-1]
+            items.append(f'<li><span>{d} - <a href="{esc(href)}">「{esc(txt)}」</a></span></li>')
     for p in ([] if items else pages):
         d = dates.get(p["page"], "")
         items.append(
