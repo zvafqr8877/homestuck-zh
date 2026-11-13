@@ -806,7 +806,17 @@ def build():
             for k in range(int(c)):
                 dates[int(st) + k] = f"{d[2:4]}/{d[4:6]}/{d[0:2]}"
     items = []
-    for p in pages:
+    lo = ROOT / "log_official.json"
+    if lo.exists():
+        # 官方紀錄原文（fetch_log.py 產生）：日期與連結文字都與官方完全一致，連結優先指向本站頁面
+        for _id, d, v, link in json.loads(lo.read_text(encoding="utf-8")):
+            mm = re.fullmatch(r"/(\d{6})", link)
+            if mm and int(mm.group(1)) in by_num:
+                href = f"{base}/p/{mm.group(1)}.html"
+            else:
+                href = "https://www.homestuck.com" + link
+            items.append(f'<li><span>{d} - <a href="{esc(href)}">{esc(v)}</a></span></li>')
+    for p in ([] if items else pages):
         d = dates.get(p["page"], "")
         items.append(
             f'<li><span>{d + " - " if d else ""}<a href="{base}/p/{p["page"]:06d}.html">'
