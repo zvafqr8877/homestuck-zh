@@ -176,7 +176,7 @@ article.story.tcpage{display:block;padding:12px 0 18px;font:15px Courier,Verdana
 .tcs-back{margin-top:18px}
 .tclinks{text-align:center;margin:10px 28px 0;font:14px/1.45 Verdana,"Microsoft JhengHei",sans-serif}.tclinks a{color:#00e;text-decoration:underline}
 .story-foot{margin:0 28px;font:12px/1.6 Verdana,"Microsoft JhengHei",sans-serif}
-.footrow{display:flex;align-items:flex-end;justify-content:space-between;margin:0 -4px}.footrow .startover{list-style:"|" outside;margin:0;padding:0;display:flex;font:700 10px/12px Verdana,"Microsoft JhengHei",sans-serif}.footrow .startover li{padding:0 3px;margin-right:0}.footrow .startover li:first-child,.savebar li:first-child{list-style:none}.footrow a{color:#0000ee;text-decoration:underline}
+.footrow{display:flex;align-items:flex-end;justify-content:space-between;margin:0 -4px}.footrow .startover{list-style:none;margin:0 0 0 4px;padding:0;display:flex;font:700 10px/12px Verdana,"Microsoft JhengHei",sans-serif}.footrow .startover li{padding:0;margin:0 4px 0 0;list-style:none}.footrow .startover li+li::before{content:"|";margin-right:4px}.savebar li:first-child{list-style:none}.footrow a{color:#0000ee;text-decoration:underline}
 .savebar{display:flex;justify-content:flex-end;position:relative;margin:0 0 0 auto;font:700 10px/12px Verdana,"Microsoft JhengHei",sans-serif}
 .savebar.first{justify-content:flex-start;margin:0}
 .savebar ul{list-style:"|" outside;margin:0;padding:0;display:flex;flex-wrap:wrap}
