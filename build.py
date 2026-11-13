@@ -176,7 +176,7 @@ article.story.tcpage{display:block;padding:12px 0 18px;font:15px Courier,Verdana
 .tcs-back{margin-top:18px}
 .tclinks{text-align:center;margin:10px 28px 0;font:14px/1.45 Verdana,"Microsoft JhengHei",sans-serif}.tclinks a{color:#00e;text-decoration:underline}
 .story-foot{margin:0 28px;font:12px/1.6 Verdana,"Microsoft JhengHei",sans-serif}
-.footrow{display:flex;align-items:flex-end;justify-content:space-between;margin:0 -4px}.footrow .startover{list-style:"|" outside;margin:0;padding:0;display:flex;font:700 10px/12px Verdana,"Microsoft JhengHei",sans-serif}.footrow .startover li{padding:0 4px;margin-right:4px}.footrow .startover li:first-child,.savebar li:first-child{list-style:none}.footrow a{color:#0000ee;text-decoration:underline}
+.footrow{display:flex;align-items:flex-end;justify-content:space-between;margin:0 -4px}.footrow .startover{list-style:"|" outside;margin:0;padding:0;display:flex;font:700 10px/12px Verdana,"Microsoft JhengHei",sans-serif}.footrow .startover li{padding:0 3px;margin-right:0}.footrow .startover li:first-child,.savebar li:first-child{list-style:none}.footrow a{color:#0000ee;text-decoration:underline}
 .savebar{display:flex;justify-content:flex-end;position:relative;margin:0 0 0 auto;font:700 10px/12px Verdana,"Microsoft JhengHei",sans-serif}
 .savebar.first{justify-content:flex-start;margin:0}
 .savebar ul{list-style:"|" outside;margin:0;padding:0;display:flex;flex-wrap:wrap}
@@ -782,21 +782,17 @@ def build():
             li = f'<li><a href="{base}/p/{pages[0]["page"]:06d}.html">首頁</a></li>' if pages else ""
             if pu:
                 li += f'<li><a href="{pu}">上一頁</a></li>'
+            # 11 個繁中站特殊頁：「攻略/純文字版本」「官方Youtube影片」放在「上一頁」旁邊，格式相同
+            for lab, url in TC_LINKS.get(n, []):
+                if url == "#tcs":
+                    li += f'<li><a href="{base}/p/{n:06d}tc.html" target="_blank" rel="noopener">{esc(lab)}</a></li>'
+                else:
+                    li += f'<li><a href="{esc(url)}" target="_blank" rel="noopener">{esc(lab)}</a></li>'
             left = f'<ul class="startover">{li}</ul>' if li else ""
         foot = '<div class="footrow">' + left + foot + '</div>' + SAVE_JS
         text = body_html(pg["body"], colors)
-        # 11 個繁中站特殊頁：Flash 下方的連結照繁中站的版面（置中、藍底線、緊湊），
-        # 「純文字版本」連到本站自己的 p/NNNNNNtc.html（內容取自繁中站），YouTube 連結照繁中站原樣
         if n in TC_LINKS:
-            parts = []
-            for lab, url in TC_LINKS[n]:
-                if url == "#tcs":
-                    parts.append(f'<a href="{base}/p/{n:06d}tc.html" target="_blank" rel="noopener">{esc(lab)}</a>')
-                else:
-                    parts.append(f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(lab)}</a>')
-            if n == 7327:
-                parts = [f"({x})" for x in parts]
-            text = '<div class="tclinks">' + "<br>".join(parts) + '</div>'
+            text = ""  # 這 11 頁的 md 內文只有繁中站的連結，已改放在最下面「上一頁」旁邊
         # 來源連結：優先用 sources.csv（gen_mapping.py 產生），
         # 沒有的話只有 front matter 寫了 official: 官方頁碼 才顯示官方連結，避免頁碼對錯
         key = int(pg["official"]) if pg.get("official", "").isdigit() else n
