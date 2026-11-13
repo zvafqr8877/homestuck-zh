@@ -163,8 +163,10 @@ body.a6a6{background:#042300}
 .plain p{margin:0 0 16px}.plain p:last-child{margin-bottom:0}
 .nextlink{margin:16px 24px;font:24px/32px Verdana,"Microsoft JhengHei",sans-serif}
 .nextlink span{color:#000}
-.tcpage{padding:12px 28px;font:14px/1.7 Verdana,"Microsoft JhengHei",sans-serif;text-align:left}
-.tcpage h1{text-align:center}
+.tcpage{padding:12px 20px 18px;font:15px Courier,Verdana,monospace;text-align:left;color:#000}
+.tcpage h1{text-align:center;font:700 28px Courier,Verdana,monospace;margin:6px 0 18px;color:#000}
+.tcpage .tcs-i{line-height:normal}
+.tcpage a{color:#00e}
 .tcs-c{margin:6px 0;color:#666}
 .tcs-i{text-align:left}
 .tcs-d{margin:6px 0;border:1px dashed gray;padding:2px 6px}
@@ -788,7 +790,7 @@ def build():
             parts = []
             for lab, url in TC_LINKS[n]:
                 if url == "#tcs":
-                    parts.append(f'<a href="{base}/p/{n:06d}tc.html">{esc(lab)}</a>')
+                    parts.append(f'<a href="{base}/p/{n:06d}tc.html" target="_blank" rel="noopener">{esc(lab)}</a>')
                 else:
                     parts.append(f'<a href="{esc(url)}" target="_blank" rel="noopener">{esc(lab)}</a>')
             if n == 7327:
@@ -958,14 +960,14 @@ def build():
     for n, tcs in sorted((int(k), v) for k, v in TC_SPECIAL.items()):
         if n not in by_num:
             continue
-        credit = esc(tcs.get("credit", "")) or "文本由繁中站翻譯"
+        # 版面照繁中站：標題「005338TC」（Courier 粗體 28px 置中）、內文 Courier 15px、靠左
         inner = (
-            f'<article class="story tcpage"><h1>{esc(by_num[n]["title"])}</h1>'
-            f'<p class="tcs-c">{credit}</p><div class="tcs-i">{tcs["html"]}</div>'
-            f'<p class="tcs-back"><a href="{base}/p/{n:06d}.html">← 回到第 {n} 頁</a></p></article>'
+            f'<article class="story tcpage"><h1>{n:06d}TC</h1>'
+            f'<div class="tcs-i">{tcs["html"]}</div>'
+            '</article>'
         )
         (OUT / "p" / f"{n:06d}tc.html").write_text(
-            layout(site, f'{by_num[n]["title"]}（文字版） - {site["title"]}', inner, base, raw=True, sep_img=tooth),
+            layout(site, f'{n:06d}TC - {site["title"]}', inner, base, raw=True, sep_img=tooth),
             encoding="utf-8",
         )
 
