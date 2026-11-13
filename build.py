@@ -219,8 +219,6 @@ RUFFLE_JS = r"""
   window.RufflePlayer.config = {
     allowScriptAccess: true, wmode: "transparent", letterbox: "on", autoplay: "on", splashScreen: false,
     unmuteOverlay: "visible", scale: "showall", upgradeToHttps: true,
-    fontSources: [base + "/assets/ruffle/homestuck-fonts.swf", base + "/assets/ruffle/courier-new-pixel.swf"],
-    defaultFonts: {sans: ["Arial"], serif: ["Times New Roman"], typewriter: ["Courier New"]},
     // 格式和官方站一致：[ "/正規表示式/", "取代成" ]
     urlRewriteRules: [
       ["/^http:\\/\\/www\\.mspaintadventures\\.com\\/\\?s=6&p=(\\d+)/", base + "/p/$1.html"],
@@ -234,6 +232,12 @@ RUFFLE_JS = r"""
       ["/^http:\\/\\/www\\.timelesschaos\\.com\\/transferFiles\\/618heircut.mp3/", "https://storage.homestuck.com/story/homestuck/media/audio/005221/618heircut.mp3"]
     ]
   };
+  // 英文原版 Flash 用官方的像素字型；繁中站翻譯過的 Flash（assets/zh/）要用 Ruffle 預設字型，
+  // 否則字型被換成沒有中文字的像素字型，中文會消失（和繁中站的設定一致）
+  if (!document.querySelector('.flash[data-swf*="/assets/zh/"]')) {
+    window.RufflePlayer.config.fontSources = [base + "/assets/ruffle/homestuck-fonts.swf", base + "/assets/ruffle/courier-new-pixel.swf"];
+    window.RufflePlayer.config.defaultFonts = {sans: ["Arial"], serif: ["Times New Roman"], typewriter: ["Courier New"]};
+  }
 })();
 </script>
 <script src="https://unpkg.com/@ruffle-rs/ruffle"></script>
