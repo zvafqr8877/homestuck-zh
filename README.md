@@ -34,10 +34,11 @@
 
 1. 參考網站：
    - 繁中站：https://zhhomestuck.github.io/
+     - 使用範圍：官方第 1901 頁到第 7964 頁（繁中站的頁碼與官方相同；至 A6I5，含 7959–7964）
      - 原始碼：https://github.com/zhhomestuck/zhhomestuck.github.io
    - 簡中站：https://linzhiyi622.github.io/
-     - 使用範圍：簡中第 6059 頁到第 8130 頁，對應官方第 7959 頁到第 10030 頁（官方頁碼 = 簡中頁碼 + 1900）
-     - 起點：https://linzhiyi622.github.io/homestuckjz.GitHub.io/6059.html
+     - 使用範圍：簡中第 6065 頁到第 8130 頁，對應官方第 7965 頁到第 10030 頁（官方頁碼 = 簡中頁碼 + 1900）；官方 7959–7964 改用繁中站的譯文
+     - 起點：https://linzhiyi622.github.io/homestuckjz.GitHub.io/6065.html
      - 終點：https://linzhiyi622.github.io/homestuckjz.GitHub.io/8130.html
      - 原始碼：https://github.com/linzhiyi622/homestuckjz.GitHub.io
    - The Unofficial Homestuck Collection：https://uhca.carrd.co/
